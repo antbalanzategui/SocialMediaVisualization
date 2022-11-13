@@ -1,6 +1,6 @@
 package prj5;
 
-public class Engagement {
+public class Engagement implements Comparable {
     
     private int numLikes;
     private int numPosts;
@@ -29,5 +29,10 @@ public class Engagement {
     }
     public int getNumViews() {
         return numViews;
+    }
+    
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
