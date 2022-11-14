@@ -80,12 +80,39 @@ public class InfluencerTest extends TestCase {
      * Tests equals
      */
     public void testEquals() {
-        
+        assertFalse(inf.equals(null));
+        assertTrue(inf.equals(inf));
+        assertFalse(inf.equals(eng));
+        assertTrue(inf.equals(inf));
+        Influencer inf2 = new Influencer("Test", "Channel", "Brazil", "Topic", eng);
+        assertTrue(inf.equals(inf2));
+        Engagement[] engg2 = new Engagement[5];
+        inf2 = new Influencer("Test", "Channel", "Brazil", "Topic", engg2);
+        assertFalse(inf.equals(inf2));
+        Engagement[] engg3 = new Engagement[3];
+        engg3[2] = eng1;
+        engg3[1] = eng2;
+        engg3[0] = eng3;
+        inf2 = new Influencer("Test", "Channel", "Brazil", "Topic", engg3);
+        assertFalse(inf2.equals(inf));
+        inf2 = new Influencer("T", "Channel", "Brazil", "Topic", eng);
+        assertFalse(inf.equals(inf2));
+        inf2 = new Influencer("Test", "C", "Brazil", "Topic", eng);
+        assertFalse(inf.equals(inf2));
+        inf2 = new Influencer("Test", "Channel", "B", "Topic", eng);
+        assertFalse(inf.equals(inf2));
+        inf2 = new Influencer("Test", "Channel", "Brazil", "T", eng);
+        assertFalse(inf.equals(inf2));
     }
     /**
      * Tests toString
      */
     public void testToString() {
-        
+        eng = new Engagement[1];
+        eng[0] = eng1;
+        inf = new Influencer("Test", "Channel", "Brazil", "Topic", eng);
+        assertEquals("Username: Test, Channel Name: Channel, Country: Brazil, "
+            + "Main Topic: Topic, Month: JANUARY, Number of Likes: 5, Number of Posts: 6, "
+            + "Number of Followers: 4, Number of Comments: 3, Number of Views: 5", inf.toString());
     }
 }
