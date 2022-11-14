@@ -52,5 +52,20 @@ public class EngagementTest extends TestCase {
         assertEquals(eng2.getReachEngagementRate(), 2012.0, 0.0001);
     }
     
+    public void testEquals() {
+        
+    }
+    
+    public void testToString() {
+        
+    }
+    
+    public void testCompareTradEngagementRate() {
+        
+    }
+    
+    public void testCompareReachEngagementRate() {
+        
+    }
 
 }
