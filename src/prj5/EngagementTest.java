@@ -25,15 +25,15 @@ public class EngagementTest extends TestCase {
      * Sets up objects that will be used
      */
     public void setUp() {
-        eng1 = new Engagement("Jan", 7, 9, 8, 100, 5);
-        eng2 = new Engagement("Feb", 6, 9, 80, 1000, 50);
+        eng1 = new Engagement(MonthEnum.JANUARY, 7, 9, 8, 100, 5);
+        eng2 = new Engagement(MonthEnum.FEBRUARY , 6, 9, 80, 1000, 50);
     }
     /**
      * Tests getMonth
      */
     public void testGetMonth() {
-        assertEquals(eng1.getMonth(), "Jan");
-        assertEquals(eng2.getMonth(), "Feb");
+        assertEquals(eng1.getMonth(), MonthEnum.JANUARY);
+        assertEquals(eng2.getMonth(), MonthEnum.FEBRUARY);
     }
     /**
      * Tests getNumLikes
@@ -93,24 +93,24 @@ public class EngagementTest extends TestCase {
         assertTrue(eng1.equals(eng1));
         assertFalse(eng1.equals("Do"));
         assertFalse(eng1.equals(eng2));
-        Engagement eng3 = new Engagement("Jan", 7, 9, 8, 100, 5);
+        Engagement eng3 = new Engagement(MonthEnum.JANUARY, 7, 9, 8, 100, 5);
         assertTrue(eng1.equals(eng3));
-        eng3 = new Engagement("Jan", 7, 8, 8, 100, 5);
+        eng3 = new Engagement(MonthEnum.JANUARY, 7, 8, 8, 100, 5);
         assertFalse(eng1.equals(eng3));
-        eng3 = new Engagement("Jan", 7, 9, 9, 100, 5);
+        eng3 = new Engagement(MonthEnum.JANUARY, 7, 9, 9, 100, 5);
         assertFalse(eng1.equals(eng3));
-        eng3 = new Engagement("Jan", 7, 9, 8, 101, 5);
+        eng3 = new Engagement(MonthEnum.JANUARY, 7, 9, 8, 101, 5);
         assertFalse(eng1.equals(eng3));
-        eng3 = new Engagement("Jan", 7, 9, 8, 100, 6);
+        eng3 = new Engagement(MonthEnum.JANUARY, 7, 9, 8, 100, 6);
         assertFalse(eng1.equals(eng3));
-        eng3 = new Engagement("Feb", 7, 9, 8, 100, 5);
+        eng3 = new Engagement(MonthEnum.FEBRUARY, 7, 9, 8, 100, 5);
         assertFalse(eng1.equals(eng3));
     }
     /**
      * Tests toString
      */
     public void testToString() {
-        assertEquals("Month: Jan, Number of Likes: 7, Number of Posts: 9,"
+        assertEquals("Month: JANUARY, Number of Likes: 7, Number of Posts: 9,"
             + " Number of Followers: 8, "
             + "Number of Comments: 100, Number of Views: 5", eng1.toString());
     }
