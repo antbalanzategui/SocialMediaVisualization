@@ -1,7 +1,8 @@
 package prj5;
 
 /**
- * Implementation of the Influencer class
+ * Implementation of the Influencer class, to later
+ * be stored within linked list
  * 
  *Virginia Tech Honor Code Pledge:
  *As a Hokie, I will conduct myself with honor and integrity at all times.
