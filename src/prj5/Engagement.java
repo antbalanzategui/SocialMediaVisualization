@@ -18,7 +18,7 @@ import java.text.DecimalFormat;
 
 public class Engagement {
     
-    private String month;
+    private MonthEnum month;
     private int numLikes;
     private int numPosts;
     private int numFollowers;
@@ -46,7 +46,7 @@ public class Engagement {
      * @param views
      * number of views
      */
-    public Engagement(String mon, int likes, int posts, int followers, int comments, int views) {
+    public Engagement(MonthEnum mon, int likes, int posts, int followers, int comments, int views) {
         this.month = mon;
         this.numLikes = likes;
         this.numPosts = posts;
@@ -59,7 +59,7 @@ public class Engagement {
      * 
      * @return String of month
      */
-    public String getMonth() {
+    public MonthEnum getMonth() {
         return month;
     }
     /**
