@@ -36,16 +36,12 @@ public class Influencer {
      * 
      * @param mTop
      * mainTopic of influencer
-     * 
-     * @param eng
-     * engagemenets of influencer
      */
-    public Influencer(String user, String cName, String con, String mTop, Engagement[] eng) {
+    public Influencer(String user, String cName, String con, String mTop) {
         this.username = user;
         this.channelName = cName;
         this.country = con;
         this.mainTopic = mTop;
-        this.engagements = eng;
     }
     /**
      * Getter for username
@@ -78,6 +74,15 @@ public class Influencer {
      */
     public String getMainTopic() {
         return mainTopic;
+    }
+    /**
+     * Setter for engagements
+     *
+     * @param engagements the engagement data for influencer.
+     */
+    public void setEngagements(Engagement[] engagements){
+
+        this.engagements = engagements;
     }
     /**
      * Getter for engagements

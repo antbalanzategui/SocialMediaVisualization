@@ -35,7 +35,8 @@ public class InfluencerTest extends TestCase {
         eng[0] = eng1;
         eng[1] = eng2;
         eng[2] = eng3;
-        inf = new Influencer("Test", "Channel", "Brazil", "Topic", eng);
+        inf = new Influencer("Test", "Channel", "Brazil", "Topic");
+        inf.setEngagements(eng);
     }
     /**
      * Tests getUsername
@@ -84,24 +85,31 @@ public class InfluencerTest extends TestCase {
         assertTrue(inf.equals(inf));
         assertFalse(inf.equals(eng));
         assertTrue(inf.equals(inf));
-        Influencer inf2 = new Influencer("Test", "Channel", "Brazil", "Topic", eng);
+        Influencer inf2 = new Influencer("Test", "Channel", "Brazil", "Topic");
+        inf2.setEngagements(eng);
         assertTrue(inf.equals(inf2));
         Engagement[] engg2 = new Engagement[5];
-        inf2 = new Influencer("Test", "Channel", "Brazil", "Topic", engg2);
+        inf2 = new Influencer("Test", "Channel", "Brazil", "Topic");
+        inf2.setEngagements(engg2);
         assertFalse(inf.equals(inf2));
         Engagement[] engg3 = new Engagement[3];
         engg3[2] = eng1;
         engg3[1] = eng2;
         engg3[0] = eng3;
-        inf2 = new Influencer("Test", "Channel", "Brazil", "Topic", engg3);
+        inf2 = new Influencer("Test", "Channel", "Brazil", "Topic");
+        inf2.setEngagements(engg3);
         assertFalse(inf2.equals(inf));
-        inf2 = new Influencer("T", "Channel", "Brazil", "Topic", eng);
+        inf2 = new Influencer("T", "Channel", "Brazil", "Topic");
+        inf2.setEngagements(eng);
         assertFalse(inf.equals(inf2));
-        inf2 = new Influencer("Test", "C", "Brazil", "Topic", eng);
+        inf2 = new Influencer("Test", "C", "Brazil", "Topic");
+        inf2.setEngagements(eng);
         assertFalse(inf.equals(inf2));
-        inf2 = new Influencer("Test", "Channel", "B", "Topic", eng);
+        inf2 = new Influencer("Test", "Channel", "B", "Topic");
+        inf2.setEngagements(eng);
         assertFalse(inf.equals(inf2));
-        inf2 = new Influencer("Test", "Channel", "Brazil", "T", eng);
+        inf2 = new Influencer("Test", "Channel", "Brazil", "T");
+        inf2.setEngagements(eng);
         assertFalse(inf.equals(inf2));
     }
     /**
@@ -110,7 +118,8 @@ public class InfluencerTest extends TestCase {
     public void testToString() {
         eng = new Engagement[1];
         eng[0] = eng1;
-        inf = new Influencer("Test", "Channel", "Brazil", "Topic", eng);
+        inf = new Influencer("Test", "Channel", "Brazil", "Topic");
+        inf.setEngagements(eng);
         assertEquals("Username: Test, Channel Name: Channel, Country: Brazil, "
             + "Main Topic: Topic, Month: JANUARY, Number of Likes: 5, Number of Posts: 6, "
             + "Number of Followers: 4, Number of Comments: 3, Number of Views: 5", inf.toString());
