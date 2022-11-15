@@ -5,6 +5,12 @@ import list.ListInterface;
 @SuppressWarnings("hiding")
 public class DLinkedList<Influencer> implements ListInterface<Influencer> {
 
+    //find the index of an influencer
+    public int getIndex(Influencer influencer){
+
+        return -1;
+    }
+
     @Override
     public void add(Influencer arg0) {
         
@@ -20,6 +26,7 @@ public class DLinkedList<Influencer> implements ListInterface<Influencer> {
         
     }
 
+    //RETURN TRUE IF USERNAME MATCHES (not .equals) - Lukyan
     @Override
     public boolean contains(Influencer arg0) {
         return false;
