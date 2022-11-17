@@ -14,7 +14,7 @@ import list.ListInterface;
  * Class: DLNode
  *
  * @param <Influencer> the Influencer parameter
- * @author Lukyan Sukhachevskyi (lukyan)
+ * @author Nana Yaw Barimah Oteng (nanyawo21)
  * @version 2022.11.14
  */
 public class DLinkedList<Influencer> implements ListInterface<Influencer> {
