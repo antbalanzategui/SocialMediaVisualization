@@ -20,7 +20,7 @@ import java.util.Scanner;
  */
 public class DataManipulator {
 
-    private final DLinkedList<Influencer> list;
+    private final DLinkedList list;
 
 
     /**
@@ -36,11 +36,11 @@ public class DataManipulator {
     }
 
 
-    private DLinkedList<Influencer> readFile(String fileName)
+    private DLinkedList readFile(String fileName)
         throws FileNotFoundException {
 
         //create the list to store influencers
-        DLinkedList<Influencer> list = new DLinkedList<Influencer>();
+        DLinkedList list = new DLinkedList();
 
         //create the scanner
         //throws FileNotFound

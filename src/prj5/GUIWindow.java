@@ -16,9 +16,9 @@ package prj5;
  */
 public class GUIWindow {
 
-    private DLinkedList <Influencer> list;
+    private DLinkedList list;
 
-    public GUIWindow(DLinkedList<Influencer> list){
+    public GUIWindow(DLinkedList list){
 
         this.list = list;
     }

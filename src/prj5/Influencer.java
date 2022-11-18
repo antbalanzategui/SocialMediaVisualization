@@ -4,10 +4,10 @@ package prj5;
  * Implementation of the Influencer class, to later
  * be stored within linked list
  * 
- *Virginia Tech Honor Code Pledge:
- *As a Hokie, I will conduct myself with honor and integrity at all times.
- *I will not lie, cheat, or steal, 
- *nor will I accept the actions of those who do.
+ * Virginia Tech Honor Code Pledge:
+ * As a Hokie, I will conduct myself with honor and integrity at all times.
+ * I will not lie, cheat, or steal,
+ * nor will I accept the actions of those who do.
  * 
  * @author Antonio Balanzategui, antbalanzategui
  * 
@@ -15,27 +15,27 @@ package prj5;
  *
  */
 public class Influencer {
-    
+
     private String username;
     private String channelName;
     private String country;
     private String mainTopic;
     private Engagement[] engagements;
-    
+
     /**
      * Constructor for the Influencer class
      * 
      * @param user
-     * username of influencer
+     *            username of influencer
      * 
      * @param cName
-     * channelName of influencer 
+     *            channelName of influencer
      * 
      * @param con
-     * country of influencer
+     *            country of influencer
      * 
      * @param mTop
-     * mainTopic of influencer
+     *            mainTopic of influencer
      */
     public Influencer(String user, String cName, String con, String mTop) {
         this.username = user;
@@ -43,14 +43,18 @@ public class Influencer {
         this.country = con;
         this.mainTopic = mTop;
     }
+
+
     /**
-     * Getter for username
+     * Getter for User name
      * 
-     * @return username
+     * @return user name
      */
     public String getUsername() {
         return username;
     }
+
+
     /**
      * Getter for channelName
      * 
@@ -59,6 +63,8 @@ public class Influencer {
     public String getChannelName() {
         return channelName;
     }
+
+
     /**
      * Getter for country
      * 
@@ -67,6 +73,8 @@ public class Influencer {
     public String getCountry() {
         return country;
     }
+
+
     /**
      * Getter for mainTopic
      * 
@@ -75,15 +83,20 @@ public class Influencer {
     public String getMainTopic() {
         return mainTopic;
     }
+
+
     /**
      * Setter for engagements
      *
-     * @param engagements the engagement data for influencer.
+     * @param engagements
+     *            the engagement data for influencer.
      */
-    public void setEngagements(Engagement[] engagements){
+    public void setEngagements(Engagement[] engagements) {
 
         this.engagements = engagements;
     }
+
+
     /**
      * Getter for engagements
      * 
@@ -92,15 +105,17 @@ public class Influencer {
     public Engagement[] getEngagements() {
         return engagements;
     }
+
+
     /**
-     * Method to find the engagment for a particular month 
+     * Method to find the engagment for a particular month
      * within our engagement array
      * 
      * @param month
-     * month requested 
+     *            month requested
      * 
      * @return the engagement of that particular month
-     * null if month is not found
+     *         null if month is not found
      */
     public Engagement getEngagementForMonth(MonthEnum month) {
         for (int i = 0; i < engagements.length; i++) {
@@ -110,15 +125,17 @@ public class Influencer {
         }
         return null;
     }
+
+
     /**
      * Method to check equality of
      * two influencer objects
      * 
      * @param obj
-     * object of comparison to "this"
+     *            object of comparison to "this"
      * 
      * @return true if equal,
-     * false otherwise
+     *         false otherwise
      * 
      */
     @Override
@@ -139,31 +156,32 @@ public class Influencer {
                     return false;
                 }
             }
-            return (username.equals(inf.username) &&
-                channelName.equals(inf.channelName) &&
-                country.equals(inf.country) &&
-                mainTopic.equals(inf.mainTopic));
+            return (username.equals(inf.username) && channelName.equals(
+                inf.channelName) && country.equals(inf.country) && mainTopic
+                    .equals(inf.mainTopic));
         }
         else {
             return false;
         }
     }
+
+
     /**
-     * Method to display data of influencer 
+     * Method to display data of influencer
      * object as a string
      * 
      * @return String of influencer object
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Username: "+username+", ");
-        sb.append("Channel Name: "+channelName+", ");
-        sb.append("Country: "+country+", ");
-        sb.append("Main Topic: "+mainTopic+", ");
+        sb.append("Username: " + username + ", ");
+        sb.append("Channel Name: " + channelName + ", ");
+        sb.append("Country: " + country + ", ");
+        sb.append("Main Topic: " + mainTopic + ", ");
         for (int i = 0; i < this.engagements.length; i++) {
             sb.append(engagements[i].toString());
         }
-        return sb.toString();  
+        return sb.toString();
     }
 
 }

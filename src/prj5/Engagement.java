@@ -5,10 +5,10 @@ import java.text.DecimalFormat;
 /**
  * Class to hold data of Influencers for a certain month
  * 
- *Virginia Tech Honor Code Pledge:
- *As a Hokie, I will conduct myself with honor and integrity at all times.
- *I will not lie, cheat, or steal, 
- *nor will I accept the actions of those who do.
+ * Virginia Tech Honor Code Pledge:
+ * As a Hokie, I will conduct myself with honor and integrity at all times.
+ * I will not lie, cheat, or steal,
+ * nor will I accept the actions of those who do.
  * 
  * @author Antonio Balanzategui, antbalanzategui
  * 
@@ -17,36 +17,42 @@ import java.text.DecimalFormat;
  */
 
 public class Engagement {
-    
+
     private MonthEnum month;
     private int numLikes;
     private int numPosts;
     private int numFollowers;
     private int numComments;
     private int numViews;
-    
+
     /**
      * Constructor for Class
      * 
      * @param mon
-     * month of engagement
+     *            month of engagement
      * 
      * @param likes
-     * number of likes
+     *            number of likes
      * 
      * @param posts
-     * number of posts
+     *            number of posts
      * 
      * @param followers
-     * number of followers
+     *            number of followers
      * 
      * @param comments
-     * number of comments
+     *            number of comments
      * 
      * @param views
-     * number of views
+     *            number of views
      */
-    public Engagement(MonthEnum mon, int likes, int posts, int followers, int comments, int views) {
+    public Engagement(
+        MonthEnum mon,
+        int likes,
+        int posts,
+        int followers,
+        int comments,
+        int views) {
         this.month = mon;
         this.numLikes = likes;
         this.numPosts = posts;
@@ -54,6 +60,8 @@ public class Engagement {
         this.numComments = comments;
         this.numViews = views;
     }
+
+
     /**
      * Getter for month parameter
      * 
@@ -62,6 +70,8 @@ public class Engagement {
     public MonthEnum getMonth() {
         return month;
     }
+
+
     /**
      * Getter for numLikes
      * 
@@ -70,6 +80,8 @@ public class Engagement {
     public int getNumLikes() {
         return numLikes;
     }
+
+
     /**
      * Getter for numPosts
      * 
@@ -78,6 +90,8 @@ public class Engagement {
     public int getNumPosts() {
         return numPosts;
     }
+
+
     /**
      * Getter for numFollowers
      * 
@@ -86,6 +100,8 @@ public class Engagement {
     public int getNumFollowers() {
         return numFollowers;
     }
+
+
     /**
      * Getter for numComments
      * 
@@ -94,6 +110,8 @@ public class Engagement {
     public int getNumComments() {
         return numComments;
     }
+
+
     /**
      * Getter for numViews
      * 
@@ -102,8 +120,10 @@ public class Engagement {
     public int getNumViews() {
         return numViews;
     }
+
+
     /**
-     * Calculates engagement rate based off of 
+     * Calculates engagement rate based off of
      * number of likes, comments, and followers
      * 
      * @return a percentage rounded to the first decimal
@@ -113,9 +133,12 @@ public class Engagement {
         double nComments = numComments;
         double nFollowers = numFollowers;
         DecimalFormat df = new DecimalFormat("#.#");
-        String engagementRate = df.format(((nLikes + nComments) / nFollowers) * 100);
+        String engagementRate = df.format(((nLikes + nComments) / nFollowers)
+            * 100);
         return (Double.valueOf(engagementRate));
     }
+
+
     /**
      * Calculates engagement rate based off of
      * number of likes, comments, and views
@@ -127,18 +150,21 @@ public class Engagement {
         double nComments = numComments;
         double nViews = numViews;
         DecimalFormat df = new DecimalFormat("#.#");
-        String engagementRate = df.format(((nLikes + nComments) / nViews) * 100);
+        String engagementRate = df.format(((nLikes + nComments) / nViews)
+            * 100);
         return (Double.valueOf(engagementRate));
     }
+
+
     /**
-     * Checks to see whether "this" 
+     * Checks to see whether "this"
      * is equal to another object of Engagement
      * 
      * @param obj
-     * object being compared to "this"
+     *            object being compared to "this"
      * 
-     * @return true if they are equal 
-     * False otherwise
+     * @return true if they are equal
+     *         False otherwise
      */
     @Override
     public boolean equals(Object obj) {
@@ -150,17 +176,18 @@ public class Engagement {
         }
         else if (obj.getClass() == this.getClass()) {
             Engagement eng = (Engagement)obj;
-            return (this.numLikes == eng.getNumLikes() &&
-                this.numPosts == eng.getNumPosts() && 
-                this.numFollowers == eng.getNumFollowers() &&
-                this.numComments == eng.getNumComments() &&
-                this.numViews == eng.getNumViews() &&
-                this.month.equals(eng.getMonth()));   
+            return (this.numLikes == eng.getNumLikes() && this.numPosts == eng
+                .getNumPosts() && this.numFollowers == eng.getNumFollowers()
+                && this.numComments == eng.getNumComments()
+                && this.numViews == eng.getNumViews() && this.month.equals(eng
+                    .getMonth()));
         }
         else {
             return false;
         }
     }
+
+
     /**
      * Method to convert data into a string
      * 
@@ -168,24 +195,26 @@ public class Engagement {
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Month: "+month+", ");
-        sb.append("Number of Likes: "+numLikes+", ");
-        sb.append("Number of Posts: "+numPosts+", ");
-        sb.append("Number of Followers: "+numFollowers+", ");
-        sb.append("Number of Comments: "+numComments+", ");
-        sb.append("Number of Views: "+numViews);
+        sb.append("Month: " + month + ", ");
+        sb.append("Number of Likes: " + numLikes + ", ");
+        sb.append("Number of Posts: " + numPosts + ", ");
+        sb.append("Number of Followers: " + numFollowers + ", ");
+        sb.append("Number of Comments: " + numComments + ", ");
+        sb.append("Number of Views: " + numViews);
         return sb.toString();
     }
+
+
     /**
      * Compares two objects of Engagement class to each other
      * using traditional engagement rate
      * 
      * @param o
-     * object being compared to this
+     *            object being compared to this
      * 
      * @return 1 if "this" rate is greater
-     * -1 if "this" rate is smaller
-     * 0 if both rates are the same
+     *         -1 if "this" rate is smaller
+     *         0 if both rates are the same
      */
     public int compareTradEngagementRate(Engagement o) {
         if (this.getTradEngagementRate() > o.getTradEngagementRate()) {
@@ -198,16 +227,18 @@ public class Engagement {
             return 0;
         }
     }
+
+
     /**
      * Compares two objects of Engagement class to each other
      * using reach engagement rate
      * 
      * @param o
-     * object being compared to this
+     *            object being compared to this
      * 
      * @return 1 if "this" rate is greater
-     * -1 if "this" rate is smaller
-     * 0 if both rates are the same
+     *         -1 if "this" rate is smaller
+     *         0 if both rates are the same
      */
     public int compareReachEngagementRate(Engagement o) {
         if (this.getReachEngagementRate() > o.getReachEngagementRate()) {
