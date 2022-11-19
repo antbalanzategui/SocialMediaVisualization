@@ -120,6 +120,15 @@ public class Engagement {
     public int getNumViews() {
         return numViews;
     }
+    
+    /**
+     * Getter for total Engagement
+     * 
+     * @return number of views
+     */
+    public int getTotalEngagement() {
+        return this.numComments + this.numLikes;
+    }
 
 
     /**

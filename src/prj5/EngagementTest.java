@@ -5,10 +5,10 @@ import student.TestCase;
 /**
  * Class to test all methods within Engagement class
  * 
- *Virginia Tech Honor Code Pledge:
- *As a Hokie, I will conduct myself with honor and integrity at all times.
- *I will not lie, cheat, or steal, 
- *nor will I accept the actions of those who do.
+ * Virginia Tech Honor Code Pledge:
+ * As a Hokie, I will conduct myself with honor and integrity at all times.
+ * I will not lie, cheat, or steal,
+ * nor will I accept the actions of those who do.
  * 
  * @author Antonio Balanzategui, antbalanzategui
  * 
@@ -17,17 +17,19 @@ import student.TestCase;
  */
 
 public class EngagementTest extends TestCase {
-    
+
     private Engagement eng1;
     private Engagement eng2;
-    
+
     /**
      * Sets up objects that will be used
      */
     public void setUp() {
         eng1 = new Engagement(MonthEnum.JANUARY, 7, 9, 8, 100, 5);
-        eng2 = new Engagement(MonthEnum.FEBRUARY , 6, 9, 80, 1000, 50);
+        eng2 = new Engagement(MonthEnum.FEBRUARY, 6, 9, 80, 1000, 50);
     }
+
+
     /**
      * Tests getMonth
      */
@@ -35,6 +37,15 @@ public class EngagementTest extends TestCase {
         assertEquals(eng1.getMonth(), MonthEnum.JANUARY);
         assertEquals(eng2.getMonth(), MonthEnum.FEBRUARY);
     }
+    
+    /**
+     * Tests totalEngagement();
+     */
+    public void testTotalEngagement() {
+        assertEquals(eng1.getTotalEngagement(), 107);
+    }
+
+
     /**
      * Tests getNumLikes
      */
@@ -42,6 +53,8 @@ public class EngagementTest extends TestCase {
         assertEquals(eng1.getNumLikes(), 7);
         assertEquals(eng2.getNumLikes(), 6);
     }
+
+
     /**
      * Tests getNumPosts
      */
@@ -49,14 +62,18 @@ public class EngagementTest extends TestCase {
         assertEquals(eng1.getNumPosts(), 9);
         assertEquals(eng2.getNumPosts(), 9);
     }
+
+
     /**
      * Tests getNumFollowers
      */
     public void testGetNumFollowers() {
         assertEquals(eng1.getNumFollowers(), 8);
         assertEquals(eng2.getNumFollowers(), 80);
-        
+
     }
+
+
     /**
      * Tests getNumComments
      */
@@ -64,6 +81,8 @@ public class EngagementTest extends TestCase {
         assertEquals(eng1.getNumComments(), 100);
         assertEquals(eng2.getNumComments(), 1000);
     }
+
+
     /**
      * Tests getNumViews
      */
@@ -71,6 +90,8 @@ public class EngagementTest extends TestCase {
         assertEquals(eng1.getNumViews(), 5);
         assertEquals(eng2.getNumViews(), 50);
     }
+
+
     /**
      * Tests getTradEngagementRate
      */
@@ -78,6 +99,8 @@ public class EngagementTest extends TestCase {
         assertEquals(eng1.getTradEngagementRate(), 1337.5, 0.0001);
         assertEquals(eng2.getTradEngagementRate(), 1257.5, 0.0001);
     }
+
+
     /**
      * Tests getReachEngagementRate
      */
@@ -85,6 +108,8 @@ public class EngagementTest extends TestCase {
         assertEquals(eng1.getReachEngagementRate(), 2140.0, 0.0001);
         assertEquals(eng2.getReachEngagementRate(), 2012.0, 0.0001);
     }
+
+
     /**
      * Tests equals
      */
@@ -106,6 +131,8 @@ public class EngagementTest extends TestCase {
         eng3 = new Engagement(MonthEnum.FEBRUARY, 7, 9, 8, 100, 5);
         assertFalse(eng1.equals(eng3));
     }
+
+
     /**
      * Tests toString
      */
@@ -114,6 +141,8 @@ public class EngagementTest extends TestCase {
             + " Number of Followers: 8, "
             + "Number of Comments: 100, Number of Views: 5", eng1.toString());
     }
+
+
     /**
      * Tests compareTradEngagementRate
      */
@@ -122,6 +151,8 @@ public class EngagementTest extends TestCase {
         assertEquals(-1, eng2.compareTradEngagementRate(eng1));
         assertEquals(0, eng1.compareTradEngagementRate(eng1));
     }
+
+
     /**
      * Tests compareReachEngagementRate
      */

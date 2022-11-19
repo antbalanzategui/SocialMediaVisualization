@@ -5,10 +5,10 @@ import student.TestCase;
 /**
  * Test class for Influencer
  * 
- *Virginia Tech Honor Code Pledge:
- *As a Hokie, I will conduct myself with honor and integrity at all times.
- *I will not lie, cheat, or steal, 
- *nor will I accept the actions of those who do.
+ * Virginia Tech Honor Code Pledge:
+ * As a Hokie, I will conduct myself with honor and integrity at all times.
+ * I will not lie, cheat, or steal,
+ * nor will I accept the actions of those who do.
  * 
  * @author Antonio Balanzategui, antbalanzategui
  * 
@@ -17,13 +17,13 @@ import student.TestCase;
  */
 
 public class InfluencerTest extends TestCase {
-    
+
     private Influencer inf;
     private Engagement[] eng;
     private Engagement eng1;
     private Engagement eng2;
     private Engagement eng3;
-    
+
     /**
      * Sets up
      */
@@ -38,30 +38,40 @@ public class InfluencerTest extends TestCase {
         inf = new Influencer("Test", "Channel", "Brazil", "Topic");
         inf.setEngagements(eng);
     }
+
+
     /**
      * Tests getUsername
      */
     public void testGetUsername() {
         assertEquals(inf.getUsername(), "Test");
     }
+
+
     /**
      * Tets getChannelName
      */
     public void testGetChannelName() {
         assertEquals(inf.getChannelName(), "Channel");
     }
+
+
     /**
      * Tests getCountry
      */
     public void testGetCountry() {
         assertEquals(inf.getCountry(), "Brazil");
     }
+
+
     /**
      * Tests getMainTopic
      */
     public void testGetMainTopic() {
         assertEquals(inf.getMainTopic(), "Topic");
     }
+
+
     /**
      * Tests getEngagements
      */
@@ -70,6 +80,8 @@ public class InfluencerTest extends TestCase {
             assertTrue(eng[i].equals(inf.getEngagements()[i]));
         }
     }
+
+
     /**
      * Tests getEngagementForMonth
      */
@@ -77,6 +89,8 @@ public class InfluencerTest extends TestCase {
         assertTrue(eng1.equals(inf.getEngagementForMonth(MonthEnum.JANUARY)));
         assertNull(inf.getEngagementForMonth(MonthEnum.FIRSTQUART));
     }
+
+
     /**
      * Tests equals
      */
@@ -112,6 +126,8 @@ public class InfluencerTest extends TestCase {
         inf2.setEngagements(eng);
         assertFalse(inf.equals(inf2));
     }
+
+
     /**
      * Tests toString
      */
@@ -121,7 +137,23 @@ public class InfluencerTest extends TestCase {
         inf = new Influencer("Test", "Channel", "Brazil", "Topic");
         inf.setEngagements(eng);
         assertEquals("Username: Test, Channel Name: Channel, Country: Brazil, "
-            + "Main Topic: Topic, Month: JANUARY, Number of Likes: 5, Number of Posts: 6, "
-            + "Number of Followers: 4, Number of Comments: 3, Number of Views: 5", inf.toString());
+            + "Main Topic: Topic, Month: JANUARY, Number of Likes: 5, "
+            + "Number of " + "Posts: 6, "
+            + "Number of Followers: 4, Number of Comments: 3, Number of "
+            + "Views: 5", inf.toString());
+    }
+
+
+    /**
+     * Tests compareTo()
+     */
+    public void testCompareTo() {
+        Influencer inf1 = new Influencer("Test1", "Channel1", "Brazil1",
+            "Topic1");
+        Engagement[] engArr = { eng2, eng3 };
+        inf1.setEngagements(engArr);
+        assertTrue(inf.compareTo(inf1) > 0);
+        assertEquals(0.0, inf.compareTo(inf), 0.01);
+
     }
 }

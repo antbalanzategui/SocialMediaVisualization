@@ -9,19 +9,14 @@
 package prj5;
 
 // Import Statements
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 import list.ListInterface;
 
 /**
  * Project: socialmediavisualization
  * Class: DLNode
  *
- * @param <Influencer>
- *            the Influencer parameter
  * @author Nana Yaw Barimah Oteng (nanyawo21)
  * @version 2022.11.14
- * @param <T>
  */
 public class DLinkedList implements ListInterface<Influencer> {
     // Fields----------------------------------------------------------------
@@ -84,11 +79,14 @@ public class DLinkedList implements ListInterface<Influencer> {
      * Function should not be implemented.
      * 
      * @return returns null. Function should not be implemented.
-     * @param arg1 is an influencer
-     * @param arg0 is the index
+     * @param influencer
+     *            is an influencer
+     * @param index
+     *            is the index
      */
     @Override
-    public Influencer replace(int arg0, Influencer arg1) {
+    public Influencer replace(int index, Influencer influencer) {
+        
         return null;
     }
 
@@ -97,28 +95,31 @@ public class DLinkedList implements ListInterface<Influencer> {
      * Returns true if the list contains the influencer.
      * 
      * @return a boolean value as to whether there is an influencer in the list
-     *          with the same channel name as the influencer parameter.
-     * @param is the influencer being checked.  
+     *         with the same channel name as the influencer parameter.
+     * @param influencer
+     *            is
+     *            the influencer being checked.
      */
     @Override
     public boolean contains(Influencer influencer) {
-        if (influencer == null ) {
+        if (influencer == null) {
             return false;
         }
-        
+
         if (isEmpty()) {
             return false;
         }
-        
+
         DLNode<Influencer> curr = head;
         while (curr != null) {
-            if (curr.getData().equals(influencer)) {
+            if (curr.getData().getChannelName().equals(influencer
+                .getChannelName())) {
                 return true;
             }
             curr = curr.getNext();
         }
         return false;
-        
+
     }
 
 
@@ -143,8 +144,11 @@ public class DLinkedList implements ListInterface<Influencer> {
 
     /**
      * Returns the Influencer at the specified index of the list.
+     * 
      * @return returns an influencer at a specified index.
-     * @param is the index at which an influencer is being returned.
+     * @param index
+     *            is
+     *            the index at which an influencer is being returned.
      */
     @Override
     public Influencer getEntry(int index) {
@@ -154,11 +158,15 @@ public class DLinkedList implements ListInterface<Influencer> {
 
     /**
      * This adds an influencer at the end of the list.
-     * @param is the influencer being added.
+     * 
+     * @param influencer
+     *            is
+     *            the influencer being added.
      */
     @Override
     public void add(Influencer influencer) {
-        DLNode<Influencer> newNode = new DLNode<Influencer>(tail,influencer, null);
+        DLNode<Influencer> newNode = new DLNode<Influencer>(tail, influencer,
+            null);
         newNode.setData(influencer);
         newNode.setPrevious(tail);
         newNode.setNext(null);
@@ -174,12 +182,14 @@ public class DLinkedList implements ListInterface<Influencer> {
         size++;
     }
 
-    
 
     /**
      * Adds an Influencer at specified index
-     * @param index is the index where the influencer is being added.
-     * @param influencer is the influencer being added.
+     * 
+     * @param index
+     *            is the index where the influencer is being added.
+     * @param influencer
+     *            is the influencer being added.
      */
     @Override
     public void add(int index, Influencer influencer) {
@@ -191,14 +201,16 @@ public class DLinkedList implements ListInterface<Influencer> {
     /**
      * Finds the index of an influencer.
      * 
-     * @param influencer is the influencer whose index is being searched.
+     * @param influencer
+     *            is the influencer whose index is being searched.
      * @return the index at which the specified influencer is stored.
      */
     public int getIndex(Influencer influencer) {
         int index = 0;
         DLNode<Influencer> currNode = head;
         while (currNode != null) {
-            if (influencer.equals(currNode.getData())) {
+            if (influencer.getChannelName().equals(currNode.getData()
+                .getChannelName())) {
                 return index;
             }
             index++;
@@ -211,25 +223,14 @@ public class DLinkedList implements ListInterface<Influencer> {
 
     /**
      * removes an Influencer at a specified index.
-     * @param index is the index at which an influencer is being removed.
+     * 
+     * @param index
+     *            is the index at which an influencer is being removed.
      * @return returns the removed influencer.
      */
     public Influencer remove(int index) {
-        if (head == null || index <= 0) {
-            return null;
-        }
-        if (index >= size) {
-            return null;
-        }
-        
-        DLNode<Influencer> curr = head;
-        
-        for (int i=1; i < index; i++) {
-            curr = curr.getNext();
-        }
-        return curr.getData();
-        
-        
+        tail.getPrevious();
+        return null;
 
     }
 
@@ -237,8 +238,10 @@ public class DLinkedList implements ListInterface<Influencer> {
     /**
      * Returns true or false as two whether two DLLists are equal.
      * 
-     * @param obj is the object being checked for equality.
-     * @return returns a boolean value as to whether two LinkedLists have the same objects.
+     * @param obj
+     *            is the object being checked for equality.
+     * @return returns a boolean value as to whether two LinkedLists have the
+     *         same objects.
      */
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -258,33 +261,117 @@ public class DLinkedList implements ListInterface<Influencer> {
                 if (!currNode.getData().equals(otherNode.getData())) {
                     return false;
                 }
+                currNode = currNode.getNext();
             }
 
+        }
+        else {
+            return false;
         }
         return true;
     }
 
 
+    /**
+     * Sorts by engagement.
+     */
     public void sortByEngagement() {
+        if (getLength() > 1) {
+            DLNode<Influencer> unsortedPart = head.getNext();
+            DLNode<Influencer> sortedPart = head;
+            sortedPart.setNext(null);
 
-    }
-
-
-    public void sortByName() {
+            while (unsortedPart != null) {
+                DLNode<Influencer> nodeToInsert = unsortedPart;
+                unsortedPart = unsortedPart.getNext();
+                engInsertIntoSorted(nodeToInsert);
+            }
+        }
 
     }
 
 
     /**
-     * Iterator method creates Iterator object
-     *
-     * @return new Iterator object
+     * Sorts by name.
      */
-    public Iterator<Influencer> iterator() {
-        return new LListIterator();
+    public void sortByName() {
+        if (getLength() > 1) {
+            DLNode<Influencer> unsortedPart = head.getNext();
+            DLNode<Influencer> sortedPart = head;
+            sortedPart.setNext(null);
+
+            while (unsortedPart != null) {
+                DLNode<Influencer> nodeToInsert = unsortedPart;
+                unsortedPart = unsortedPart.getNext();
+                nameInsertIntoSorted(nodeToInsert);
+            }
+        }
+
     }
 
 
+    /**
+     * Helper method to help sort by engagement.
+     * 
+     * @param nodeToInsert
+     *            is the insertion node.
+     */
+    private void engInsertIntoSorted(DLNode<Influencer> nodeToInsert) {
+        Influencer influencer = nodeToInsert.getData();
+        DLNode<Influencer> currNode = head;
+        DLNode<Influencer> previousNode = null;
+
+        while ((currNode != null) && (influencer.compareTo(currNode
+            .getData()) < 0)) {
+            previousNode = currNode;
+            currNode = currNode.getNext();
+        }
+
+        if (previousNode != null) {
+            previousNode.setNext(nodeToInsert);
+            nodeToInsert.setNext(currNode);
+        }
+        else {
+            nodeToInsert.setNext(head);
+            head = nodeToInsert;
+        }
+    }
+
+
+    /**
+     * Helper method to insert a node into its proper location in a sorted
+     * linked chain.
+     * 
+     * @param nodeToInsert :
+     *            node to add to sorted section of list
+     */
+    private void nameInsertIntoSorted(DLNode<Influencer> nodeToInsert) {
+        Influencer influencer = nodeToInsert.getData();
+        DLNode<Influencer> currNode = head;
+        DLNode<Influencer> previousNode = null;
+
+        while ((currNode != null) && (influencer.getChannelName()
+            .compareToIgnoreCase(currNode.getData().getChannelName()) > 0)) {
+            previousNode = currNode;
+            currNode = currNode.getNext();
+        }
+
+        if (previousNode != null) {
+            previousNode.setNext(nodeToInsert);
+            nodeToInsert.setNext(currNode);
+        }
+        else {
+            nodeToInsert.setNext(head);
+            head = nodeToInsert;
+        }
+    }
+
+
+    /**
+     * Returns an array.
+     * 
+     * @return returns an array of lnfluencers of this list.
+     */
     @Override
     public Object[] toArray() {
         Object[] array = new Object[this.size];
@@ -298,84 +385,6 @@ public class DLinkedList implements ListInterface<Influencer> {
         }
 
         return array;
-    }
-
-    private class LListIterator implements Iterator<Influencer> {
-        private DLNode<Influencer> prev;
-        private DLNode<Influencer> curr;
-        private DLNode<Influencer> next;
-        private boolean newCurr;
-
-        /**
-         * Creates a new DLListIterator
-         */
-        public LListIterator() {
-            prev = null;
-            curr = null;
-            next = head;
-            newCurr = false;
-        }
-
-
-        /**
-         * Checks if there are more elements in the list
-         *
-         * @return true if there are more elements in the list
-         */
-        @Override
-        public boolean hasNext() {
-            return (next != null);
-        }
-
-
-        /**
-         * Gets the next value in the list
-         *
-         * @return the next value
-         * @throws NoSuchElementException
-         *             if there are no nodes left in the list
-         */
-        @Override
-        public Influencer next() {
-            prev = curr;
-            curr = next;
-            next = next.getNext();
-            if (curr == null) {
-                throw new NoSuchElementException("No nodes left in the list.");
-            }
-            newCurr = true;
-            return curr.getData();
-        }
-
-
-        /**
-         * Removes the last object returned with next() from the list
-         *
-         * @throws IllegalStateException
-         *             if next has not been called yet
-         *             and if the element has already been removed
-         */
-        @Override
-        public void remove() {
-            if (next == head) {
-                throw new IllegalStateException(
-                    "Next has not been called yet.");
-            }
-            else if (!newCurr) {
-                throw new IllegalStateException(
-                    "The Element has already been removed.");
-            }
-            else if (curr == head) {
-                head = next;
-                curr = null;
-            }
-            else {
-                prev.setNext(curr.getNext());
-                curr = prev;
-            }
-            size--;
-            newCurr = false;
-        }
     }
 
 }

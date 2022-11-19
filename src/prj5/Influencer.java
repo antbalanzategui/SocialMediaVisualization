@@ -128,6 +128,71 @@ public class Influencer {
 
 
     /**
+     * Returns 1,0,-1
+     * @param other
+     *            is the other influencer
+     * @return returns 1,0,-1 dependin on the engagement of the other
+     *         influencer.
+     */
+    public double compareTo(Influencer other) {
+        int janTotalEng = 0;
+        int janTotalViews = 0;
+        int janotherTotalEng = 0;
+        int janOtherTotalViews = 0;
+
+        int marTotalEng = this.getEngagementForMonth(MonthEnum.MARCH)
+            .getTotalEngagement();
+        int marotherTotalEng = other.getEngagementForMonth(MonthEnum.MARCH)
+            .getTotalEngagement();
+
+        int febTotalEng = this.getEngagementForMonth(MonthEnum.FEBRUARY)
+            .getTotalEngagement();
+        int febotherTotalEng = other.getEngagementForMonth(MonthEnum.FEBRUARY)
+            .getTotalEngagement();
+
+        if (this.getEngagementForMonth(MonthEnum.JANUARY) != null) {
+            janTotalEng = this.getEngagementForMonth(MonthEnum.JANUARY)
+                .getTotalEngagement();
+        }
+        if (other.getEngagementForMonth(MonthEnum.JANUARY) != null) {
+            janotherTotalEng = other.getEngagementForMonth(MonthEnum.JANUARY)
+                .getTotalEngagement();
+        }
+
+        int marTotalViews = this.getEngagementForMonth(MonthEnum.MARCH)
+            .getNumViews();
+        int marOtherTotalViews = other.getEngagementForMonth(MonthEnum.MARCH)
+            .getNumViews();
+
+        int febTotalViews = this.getEngagementForMonth(MonthEnum.FEBRUARY)
+            .getNumViews();
+        int febOtherTotalViews = other.getEngagementForMonth(MonthEnum.FEBRUARY)
+            .getNumViews();
+
+        if (this.getEngagementForMonth(MonthEnum.JANUARY) != null) {
+            janTotalViews = this.getEngagementForMonth(MonthEnum.JANUARY)
+                .getNumViews();
+        }
+        if (other.getEngagementForMonth(MonthEnum.JANUARY) != null) {
+            janOtherTotalViews = other.getEngagementForMonth(MonthEnum.JANUARY)
+                .getNumViews();
+        }
+
+        double myTotalEng = marTotalEng + febTotalEng + janTotalEng;
+        double otherTotalEng = marotherTotalEng + febotherTotalEng
+            + janotherTotalEng;
+
+        double myTotalViews = marTotalViews + febTotalViews + janTotalViews;
+        double otherTotalViews = marOtherTotalViews + febOtherTotalViews
+            + janOtherTotalViews;
+        double tradRate = (myTotalEng / myTotalViews) * 100;
+        double otherTradRate = (otherTotalEng / otherTotalViews) * 100;
+
+        return tradRate - otherTradRate;
+    }
+
+
+    /**
      * Method to check equality of
      * two influencer objects
      * 
