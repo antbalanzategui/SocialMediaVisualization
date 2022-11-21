@@ -22,13 +22,12 @@ public class DataReader {
 
     private DLinkedList list;
 
+
     /**
      * Instantiates a new Data reader.
      *
-     * @param fileName
-     *            the file name
-     * @throws FileNotFoundException
-     *             the file not found exception
+     * @param fileName the file name
+     * @throws FileNotFoundException the file not found exception
      */
     public DataReader(String fileName) throws FileNotFoundException {
 
@@ -40,7 +39,7 @@ public class DataReader {
 
     /**
      * Returns the list of influencers.
-     * 
+     *
      * @return Returns the list of influencers.
      */
     public DLinkedList getList() {
@@ -69,15 +68,17 @@ public class DataReader {
             if (getMonth(elements[0]) != null) {
 
                 // create the influencer for that line
-                Influencer influencer = new Influencer(elements[1], elements[2],
-                    elements[3], elements[4]);
+                Influencer influencer =
+                    new Influencer(elements[1], elements[2], elements[3],
+                        elements[4]);
 
                 // create engagement for that line
                 Engagement engagement = new Engagement(getMonth(elements[0]),
-                    Integer.parseInt(elements[5]), Integer.parseInt(
-                        elements[6]), Integer.parseInt(elements[7]), Integer
-                            .parseInt(elements[8]), Integer.parseInt(
-                                elements[9]));
+                    Integer.parseInt(elements[5]),
+                    Integer.parseInt(elements[6]),
+                    Integer.parseInt(elements[7]),
+                    Integer.parseInt(elements[8]),
+                    Integer.parseInt(elements[9]));
 
                 // if its a new influencer...
                 if (newInfluencer(influencer)) {
@@ -89,8 +90,8 @@ public class DataReader {
                     this.list = newList;
                 }
                 else { // if its an influencer that already exists
-                    Influencer origInfluencer = newList.getEntry(newList
-                        .getIndex(influencer));
+                    Influencer origInfluencer =
+                        newList.getEntry(newList.getIndex(influencer));
 
                     // expand the capacity of the old influencer array
                     int newLen = origInfluencer.getEngagements().length + 1;
@@ -99,8 +100,8 @@ public class DataReader {
                     Engagement[] newEngagements = new Engagement[newLen];
 
                     // add the old entries to the new array
-                    for (int i = 0; i < origInfluencer
-                        .getEngagements().length; i++) {
+                    for (int i = 0;
+                         i < origInfluencer.getEngagements().length; i++) {
 
                         newEngagements[i] = origInfluencer.getEngagements()[i];
                     }
@@ -141,9 +142,24 @@ public class DataReader {
                 return MonthEnum.MARCH;
             case "April":
                 return MonthEnum.APRIL;
+            case "May":
+                return MonthEnum.MAY;
+            case "June":
+                return MonthEnum.JUNE;
+            case "July":
+                return MonthEnum.JULY;
+            case "August":
+                return MonthEnum.AUGUST;
+            case "September":
+                return MonthEnum.SEPTEMBER;
+            case "October":
+                return MonthEnum.OCTOBER;
+            case "November":
+                return MonthEnum.NOVEMBER;
+            case "December":
+                return MonthEnum.DECEMBER;
             default:
                 return null;
-
         }
     }
 }
