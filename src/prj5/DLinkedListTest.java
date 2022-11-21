@@ -9,7 +9,7 @@ import student.TestCase;
  * @version 2022.11.18
  *
  */
-public class DlinkedListTest extends TestCase {
+public class DLinkedListTest extends TestCase {
     // Fields------------------------------------
     private DLinkedList list;
     private Influencer inf;
