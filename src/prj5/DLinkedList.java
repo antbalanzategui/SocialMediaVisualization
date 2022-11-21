@@ -387,4 +387,33 @@ public class DLinkedList implements ListInterface<Influencer> {
         return array;
     }
 
+
+    /**
+     * Returns a string representation of the list.
+     *
+     * @return returns the influencer list string.
+     */
+    @Override
+    public String toString(){
+
+        if (isEmpty()){
+
+            return "[]";
+        }
+        StringBuilder str = new StringBuilder("[");
+
+        DLNode<Influencer> current = head;
+        str.append(current.getData().toString());
+
+        while(current.getNext() != null){
+
+            str.append(", ");
+            str.append(current.getNext().getData().toString());
+            current = current.getNext();
+        }
+
+        str.append("]");
+
+        return str.toString();
+    }
 }

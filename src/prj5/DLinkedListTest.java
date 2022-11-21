@@ -1,13 +1,14 @@
 package prj5;
 
 import java.util.Arrays;
+
 import student.TestCase;
 
 /**
  * Test Class for Doubly Linked List.
+ *
  * @author Nana Yaw Barimah Oteng
  * @version 2022.11.18
- *
  */
 public class DLinkedListTest extends TestCase {
     // Fields------------------------------------
@@ -16,6 +17,7 @@ public class DLinkedListTest extends TestCase {
     private Influencer inf1;
     private Influencer inf2;
     private Influencer inf3;
+
 
     /**
      * Sets up test method.
@@ -238,13 +240,28 @@ public class DLinkedListTest extends TestCase {
     /**
      * Tests sortbyEngagement().
      */
-    public void testtoArray() {
+    public void testToArray() {
         DLinkedList list1 = new DLinkedList();
         list1.sortByName();
         list.add(inf);
         list.add(inf1);
-        assertEquals("[" + inf.toString() + ", " + inf1.toString() + "]", Arrays
-            .toString(list.toArray()));
+        assertEquals("[" + inf.toString() + ", " + inf1.toString() + "]",
+            Arrays.toString(list.toArray()));
     }
 
+
+    /**
+     * Tests toString().
+     */
+    public void testToString() {
+
+        //test empty list
+        assertEquals("[]", list.toString());
+
+        //test non empty list
+        list.add(inf);
+        list.add(inf1);
+        String str = "[" + inf.toString() + ", " + inf1.toString() + "]";
+        assertEquals(str, list.toString());
+    }
 }
