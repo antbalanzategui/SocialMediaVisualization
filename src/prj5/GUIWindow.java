@@ -7,10 +7,13 @@
 
 package prj5;
 
+import cs2.*;
 import cs2.Button;
 import cs2.Shape;
 import cs2.Window;
-import cs2.WindowSide;
+
+import java.awt.*;
+import java.util.Random;
 
 /**
  * Project: P5 Social Media Visualization
@@ -22,11 +25,10 @@ import cs2.WindowSide;
 public class GUIWindow {
 
     private final Window window;
-    private final int WINDOW_X = 960;
-    private final int WINDOW_Y = 540;
 
     private DLinkedList list;
 
+    private MonthEnum month;
     private Shape monthLbl;
     private Shape engagementTypeLbl;
     private Shape sortTypeLbl;
@@ -36,26 +38,27 @@ public class GUIWindow {
 
         //create a window
         window = new Window("Social Media Visualization");
-        window.setSize(WINDOW_X, WINDOW_Y);
+        window.setSize(960, 540);
 
         //initialize the list
         this.list = list;
 
         //*************** create buttons *******************\\
-        //Quit Button
-        Button quitBtn = new Button("Quit");
-        quitBtn.onClick(this, "clickedQuit");
-        window.addButton(quitBtn, WindowSide.NORTH);
+
+        //Sort By Channel Button
+        Button sortNameBtn = new Button("Sort by Channel Name");
+        sortNameBtn.onClick(this, "clickedSort");
+        window.addButton(sortNameBtn, WindowSide.NORTH);
 
         //Sort By Engagement Button
         Button sortEngBtn = new Button("Sort by Engagement Rate");
         sortEngBtn.onClick(this, "clickedSort");
         window.addButton(sortEngBtn, WindowSide.NORTH);
 
-        //Sort By Channel Button
-        Button sortNameBtn = new Button("Sort by Channel Name");
-        sortNameBtn.onClick(this, "clickedSort");
-        window.addButton(sortNameBtn, WindowSide.NORTH);
+        //Quit Button
+        Button quitBtn = new Button("Quit");
+        quitBtn.onClick(this, "clickedQuit");
+        window.addButton(quitBtn, WindowSide.NORTH);
 
         //January Button
         Button janBtn = new Button("January");
@@ -87,6 +90,58 @@ public class GUIWindow {
         reachEngBtn.onClick(this, "clickedEngagementCalc");
         window.addButton(reachEngBtn, WindowSide.WEST);
         //**************************************************\\
+
+
+        month = MonthEnum.JANUARY;
+    }
+
+                            //data month     trad or reach      //eng or name
+    private void visualize(MonthEnum month, String engType, String sortType){
+
+        if(sortType.equals("Sort by Engagement Rate")){
+
+            list.sortByEngagement();
+        }else{
+
+            list.sortByName();
+        }
+
+        double engagement = -1.0;
+
+        for(int i = 0; i < list.getLength(); i++) {
+
+            if(engType.equals("Traditional Engagement Rate")) {
+
+                engagement = list.getEntry(i).getEngagementForMonth(month).getTradEngagementRate();
+            }else{
+
+                engagement = list.getEntry(i).getEngagementForMonth(month).getReachEngagementRate();
+            }
+
+            int winX = window.getGraphPanelWidth();
+            int winY = window.getGraphPanelHeight();
+
+            final int BAR_SCALE = 20;
+            final int BAR_WIDTH = 40;
+
+            Shape bar = new Shape(60 + i * ((winX / 4) / list.getLength()), winY * 2 / 3, BAR_WIDTH, (int)(engagement * BAR_SCALE), getColor());
+        }
+    }
+
+    private Color getColor() {
+
+        int r = (int)(Math.random()*256);
+        int g = (int)(Math.random()*256);
+        int b = (int)(Math.random()*256);
+        double luma = (0.2126 * r) + (0.7152 * g) + (0.0722 * b);
+
+        while (luma < 75) {
+            r = (int)(Math.random()*256);
+            g = (int)(Math.random()*256);
+            b = (int)(Math.random()*256);
+            luma = (0.2126 * r) + (0.7152 * g) + (0.0722 * b);
+        }
+        return new Color(r, g, b);
     }
 
 
