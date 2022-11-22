@@ -35,6 +35,8 @@ public class DataReaderTest extends TestCase {
 
     /**
      * Test get list.
+     *
+     * No assertions. For debug purposes.
      */
     public void testGetList() {
 
