@@ -29,9 +29,12 @@ public class GUIWindow {
     private DLinkedList list;
 
     private MonthEnum month;
-    private Shape monthLbl;
-    private Shape engagementTypeLbl;
-    private Shape sortTypeLbl;
+    private String engType;
+    private String sortType;
+
+    private TextShape monthLbl;
+    private TextShape engTypeLbl;
+    private TextShape sortTypeLbl;
 
 
     public GUIWindow(DLinkedList list) {
@@ -42,6 +45,19 @@ public class GUIWindow {
 
         //initialize the list
         this.list = list;
+
+        //setDefault
+        month = MonthEnum.FIRSTQUART;
+        monthLbl = new TextShape(10, 10, "First Quarter (Jan - March)");
+        window.addShape(monthLbl);
+
+        sortType = "Sort by Engagement Rate";
+        sortTypeLbl = new TextShape(10, 25, "Sort by Engagement Rate");
+        window.addShape(sortTypeLbl);
+
+        engType = "Traditional Engagement Rate";
+        engTypeLbl = new TextShape(10, 40, "Traditional Engagement Rate");
+        window.addShape(engTypeLbl);
 
         //*************** create buttons *******************\\
 
@@ -90,13 +106,13 @@ public class GUIWindow {
         reachEngBtn.onClick(this, "clickedEngagementCalc");
         window.addButton(reachEngBtn, WindowSide.WEST);
         //**************************************************\\
-
-
-        month = MonthEnum.JANUARY;
     }
 
-                            //data month     trad or reach      //eng or name
-    private void visualize(MonthEnum month, String engType, String sortType){
+
+    private void visualize(){
+
+        window.removeAllShapes();
+        drawLabels();
 
         if(sortType.equals("Sort by Engagement Rate")){
 
@@ -106,26 +122,43 @@ public class GUIWindow {
             list.sortByName();
         }
 
-        double engagement = -1.0;
+        int winX = window.getGraphPanelWidth();
+        int winY = window.getGraphPanelHeight();
+
+        double engagementRate = 0.0;
 
         for(int i = 0; i < list.getLength(); i++) {
 
-            if(engType.equals("Traditional Engagement Rate")) {
+            Influencer influencer = list.getEntry(i);
+            Engagement engagementForMonth = influencer.getEngagementForMonth(month);
 
-                engagement = list.getEntry(i).getEngagementForMonth(month).getTradEngagementRate();
-            }else{
+            if(engagementForMonth != null){
 
-                engagement = list.getEntry(i).getEngagementForMonth(month).getReachEngagementRate();
+                if(engType.equals("Traditional Engagement Rate")) {
+
+                    engagementRate = engagementForMonth.getTradEngagementRate();
+                }else{
+
+                    engagementRate = engagementForMonth.getReachEngagementRate();
+                }
             }
 
-            int winX = window.getGraphPanelWidth();
-            int winY = window.getGraphPanelHeight();
+            int barHeight = (int)(((double)(winY - 50) / 100) *  engagementRate);
+            int barWidth = 40;
+            int barX = 60 + (i * ((winX / 4) / list.getLength() + 20)); //good
+            int barY = winY - (barHeight + 40);
 
-            final int BAR_SCALE = 20;
-            final int BAR_WIDTH = 40;
 
-            Shape bar = new Shape(60 + i * ((winX / 4) / list.getLength()), winY * 2 / 3, BAR_WIDTH, (int)(engagement * BAR_SCALE), getColor());
+            Shape bar = new Shape(barX, barY, barWidth, barHeight, getColor());
+            window.addShape(bar);
         }
+    }
+
+    private void drawLabels(){
+
+        window.addShape(monthLbl);
+        window.addShape(engTypeLbl);
+        window.addShape(sortTypeLbl);
     }
 
     private Color getColor() {
@@ -164,17 +197,9 @@ public class GUIWindow {
      */
     public void clickedSort(Button button) {
 
-        switch (button.getTitle()) {
-
-            case "Sort by Engagement Rate":
-
-                //TODO: Implement
-                break;
-            case "Sort by Channel Name":
-
-                //TODO: Implement
-                break;
-        }
+        sortType = button.getTitle();
+        sortTypeLbl.setText(sortType);
+        visualize();
     }
 
 
@@ -189,21 +214,24 @@ public class GUIWindow {
 
             case "January":
 
-                //TODO: Implement
+                month = MonthEnum.JANUARY;
                 break;
             case "February":
 
-                //TODO: Implement
+                month = MonthEnum.FEBRUARY;
                 break;
             case "March":
 
-                //TODO: Implement
+                month = MonthEnum.MARCH;
                 break;
             case "First Quarter (Jan - March)":
 
-                //TODO: Implement
+                month = MonthEnum.FIRSTQUART;
                 break;
         }
+
+        monthLbl.setText(button.getTitle());
+        visualize();
     }
 
 
@@ -214,16 +242,8 @@ public class GUIWindow {
      */
     public void clickedEngagementCalc(Button button) {
 
-        switch (button.getTitle()) {
-
-            case "Traditional Engagement Rate":
-
-                //TODO: Implement
-                break;
-            case "Reach Engagement Rate":
-
-                //TODO: Implement
-                break;
-        }
+        engType = button.getTitle();
+        engTypeLbl.setText(engType);
+        visualize();
     }
 }
