@@ -23,6 +23,7 @@ public class DataReaderTest extends TestCase {
     private DataReader reader1;
     private DataReader reader2;
 
+
     /**
      * Initial setUp().
      */
