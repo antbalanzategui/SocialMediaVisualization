@@ -41,6 +41,7 @@ public class DataReaderTest extends TestCase {
      */
     public void testGetList() {
 
+        reader1.getList().sortByName();
         for (Object inf : reader1.getList().toArray()) {
 
             System.out.println(inf.toString());
