@@ -10,12 +10,13 @@ package prj5;
 /**
  * Project: P5 Social Media Visualization
  * Class: Influencer
- * <p>
+ *
  * Implementation of the Influencer class, to later
  * be stored within linked list
  *
  * @author Antonio Balanzategui (antbalanzategui)
  * @author Lukyan Sukhachevskyi (lukyan)
+ * @author Nana Yaw Barimah Oteng (nanayawo21)
  * @version 2022.11.23
  */
 public class Influencer {

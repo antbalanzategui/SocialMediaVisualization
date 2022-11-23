@@ -3,9 +3,8 @@
 // As a Hokie, I will conduct myself with honor and integrity at all times.
 // I will not lie, cheat, or steal, nor will I accept the actions of
 // those who do.
-// -- Lukyan Sukhachevskyi (lukyan)
+// -- Team
 
-//
 package prj5;
 
 // Import Statements
@@ -16,7 +15,8 @@ import list.ListInterface;
  * Project: socialmediavisualization
  * Class: DLNode
  *
- * @author Nana Yaw Barimah Oteng (nanyawo21), Lukyan Sukhachevskyi (lukyan)
+ * @author Nana Yaw Barimah Oteng (nanyawo21)
+ * @author Lukyan Sukhachevskyi (lukyan)
  * @version 2022.11.14
  */
 public class DLinkedList implements ListInterface<Influencer> {

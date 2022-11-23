@@ -1,3 +1,10 @@
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of
+// those who do.
+// -- Team
+
 package prj5;
 
 import java.io.FileNotFoundException;
@@ -6,7 +13,7 @@ import java.text.DecimalFormat;
 /**
  * Project Runner.
  *
- * @author Nana Yaw Barimah Oteng
+ * @author Nana Yaw Barimah Oteng (nanayawo21)
  * @version 2022.11.18
  */
 public class Input {

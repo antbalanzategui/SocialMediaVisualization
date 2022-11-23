@@ -3,7 +3,7 @@
 // As a Hokie, I will conduct myself with honor and integrity at all times.
 // I will not lie, cheat, or steal, nor will I accept the actions of
 // those who do.
-// -- Lukyan Sukhachevskyi (lukyan)
+// -- Team
 
 package prj5;
 
@@ -16,6 +16,7 @@ import java.util.Scanner;
  * Class: DataManipulator
  *
  * @author Lukyan Sukhachevskyi (lukyan)
+ * @author Nana Yaw Barimah Oteng (nanayawo21)
  * @version 2022.11.14
  */
 public class DataReader {

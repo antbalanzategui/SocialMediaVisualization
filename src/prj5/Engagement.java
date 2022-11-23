@@ -1,19 +1,20 @@
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of
+// those who do.
+// -- Team
+
 package prj5;
 
 import java.text.DecimalFormat;
 
 /**
  * Class to hold data of Influencers for a certain month
- * 
- * Virginia Tech Honor Code Pledge:
- * As a Hokie, I will conduct myself with honor and integrity at all times.
- * I will not lie, cheat, or steal,
- * nor will I accept the actions of those who do.
- * 
- * @author Antonio Balanzategui, antbalanzategui
- * 
- * @version 2022.11.13
  *
+ * @author Lukyan Sukhachevskyi (lukyan)
+ * @author Antonio Balanzategui (antbalanzategui)
+ * @version 2022.11.13
  */
 
 public class Engagement {
