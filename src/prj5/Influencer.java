@@ -199,29 +199,48 @@ public class Influencer {
      * false otherwise
      */
     @Override public boolean equals(Object obj) {
+
+        //null check
         if (obj == null) {
+
             return false;
         }
+
+        //self check
         if (this == obj) {
+
             return true;
         }
-        else if (obj.getClass() == this.getClass()) {
-            Influencer inf = (Influencer)obj;
-            if (inf.engagements.length != this.engagements.length) {
-                return false;
-            }
-            for (int i = 0; i < engagements.length; i++) {
-                if (!(engagements[i].equals(inf.engagements[i]))) {
-                    return false;
-                }
-            }
-            return (username.equals(inf.username) && channelName
-                .equals(inf.channelName) && country.equals(inf.country)
-                && mainTopic.equals(inf.mainTopic));
-        }
-        else {
+
+        //type check
+        if (obj.getClass() != this.getClass()) {
+
             return false;
         }
+
+        //cast
+        Influencer inf = (Influencer)obj;
+
+        //engagement array check
+        if (inf.engagements.length != this.engagements.length) {
+
+            return false;
+        }
+
+        //elements in engagement check
+        for (int i = 0; i < engagements.length; i++) {
+
+            if (!(engagements[i].equals(inf.engagements[i]))) {
+
+                return false;
+            }
+        }
+
+        //fields check
+        return (username.equals(inf.username)
+            && channelName.equals(inf.channelName)
+            && country.equals(inf.country)
+            && mainTopic.equals(inf.mainTopic));
     }
 
 
@@ -232,15 +251,16 @@ public class Influencer {
      * @return String of influencer object
      */
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Username: " + username + ", ");
-        sb.append("Channel Name: " + channelName + ", ");
-        sb.append("Country: " + country + ", ");
-        sb.append("Main Topic: " + mainTopic + ", ");
+
+        StringBuilder str = new StringBuilder();
+        str.append("Username: " + username + ", ");
+        str.append("Channel Name: " + channelName + ", ");
+        str.append("Country: " + country + ", ");
+        str.append("Main Topic: " + mainTopic + ", ");
         for (int i = 0; i < this.engagements.length; i++) {
-            sb.append(engagements[i].toString());
+            str.append(engagements[i].toString());
         }
-        return sb.toString();
+        return str.toString();
     }
 
 }
