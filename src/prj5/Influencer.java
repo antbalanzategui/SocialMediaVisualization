@@ -1,54 +1,54 @@
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of
+// those who do.
+// -- Team
+
 package prj5;
 
 /**
+ * Project: P5 Social Media Visualization
+ * Class: Influencer
+ * <p>
  * Implementation of the Influencer class, to later
  * be stored within linked list
- * 
- * Virginia Tech Honor Code Pledge:
- * As a Hokie, I will conduct myself with honor and integrity at all times.
- * I will not lie, cheat, or steal,
- * nor will I accept the actions of those who do.
- * 
- * @author Antonio Balanzategui, antbalanzategui
- * 
- * @version 2022.11.14
  *
+ * @author Antonio Balanzategui (antbalanzategui)
+ * @author Lukyan Sukhachevskyi (lukyan)
+ * @version 2022.11.23
  */
 public class Influencer {
 
-    private String username;
-    private String channelName;
-    private String country;
-    private String mainTopic;
+    private final String username;
+    private final String channelName;
+    private final String country;
+    private final String mainTopic;
     private Engagement[] engagements;
+
 
     /**
      * Constructor for the Influencer class
-     * 
-     * @param user
-     *            username of influencer
-     * 
-     * @param cName
-     *            channelName of influencer
-     * 
-     * @param con
-     *            country of influencer
-     * 
-     * @param mTop
-     *            mainTopic of influencer
+     *
+     * @param username    username of influencer
+     * @param channelName channelName of influencer
+     * @param country     country of influencer
+     * @param mainTopic   mainTopic of influencer
      */
-    public Influencer(String user, String cName, String con, String mTop) {
-        this.username = user;
-        this.channelName = cName;
-        this.country = con;
-        this.mainTopic = mTop;
+    public Influencer(
+        String username, String channelName, String country, String mainTopic) {
+
+        this.username = username;
+        this.channelName = channelName;
+        this.country = country;
+        this.mainTopic = mainTopic;
     }
 
 
     /**
-     * Getter for User name
-     * 
-     * @return user name
+     * Getter for username
+     *
+     * @return username
      */
     public String getUsername() {
         return username;
@@ -57,7 +57,7 @@ public class Influencer {
 
     /**
      * Getter for channelName
-     * 
+     *
      * @return channelName
      */
     public String getChannelName() {
@@ -67,7 +67,7 @@ public class Influencer {
 
     /**
      * Getter for country
-     * 
+     *
      * @return country
      */
     public String getCountry() {
@@ -77,7 +77,7 @@ public class Influencer {
 
     /**
      * Getter for mainTopic
-     * 
+     *
      * @return mainTopic
      */
     public String getMainTopic() {
@@ -86,20 +86,8 @@ public class Influencer {
 
 
     /**
-     * Setter for engagements
-     *
-     * @param engagements
-     *            the engagement data for influencer.
-     */
-    public void setEngagements(Engagement[] engagements) {
-
-        this.engagements = engagements;
-    }
-
-
-    /**
      * Getter for engagements
-     * 
+     *
      * @return engagements
      */
     public Engagement[] getEngagements() {
@@ -108,103 +96,109 @@ public class Influencer {
 
 
     /**
+     * Setter for engagements
+     *
+     * @param engagements the engagement data for influencer.
+     */
+    public void setEngagements(Engagement[] engagements) {
+
+        this.engagements = engagements;
+    }
+
+
+    /**
      * Method to find the engagment for a particular month
      * within our engagement array
-     * 
-     * @param month
-     *            month requested
-     * 
+     *
+     * @param month month requested
      * @return the engagement of that particular month
-     *         null if month is not found
+     * null if month is not found
      */
     public Engagement getEngagementForMonth(MonthEnum month) {
-        for (int i = 0; i < engagements.length; i++) {
-            if (engagements[i].getMonth() == month) {
-                return engagements[i];
+
+        //first quarter case
+        if (month == MonthEnum.FIRSTQUART) {
+
+            return getFirstQuartEngagement();
+        }
+
+        //all other cases
+        for (Engagement engagement : engagements) {
+
+            if (engagement.getMonth() == month) {
+
+                return engagement;
             }
         }
+
+        //null if not found
         return null;
     }
 
 
     /**
+     * Helper method that finds the engagement for the first quarter
+     *
+     * @return the engagement for the first quarter
+     */
+    private Engagement getFirstQuartEngagement() {
+
+        //array representing the total stats of the influencer for first qtr
+        int[] totalStats = { 0, 0, 0, 0, 0 };
+
+        //for each of the first qtr months, sum the stats
+        for (Engagement engagement : engagements) {
+
+            if (engagement.getMonth() == MonthEnum.JANUARY
+                || engagement.getMonth() == MonthEnum.FEBRUARY
+                || engagement.getMonth() == MonthEnum.MARCH) {
+
+                totalStats[0] += engagement.getNumLikes();
+                totalStats[1] += engagement.getNumPosts();
+                totalStats[3] += engagement.getNumComments();
+                totalStats[4] += engagement.getNumViews();
+            }
+
+            if (engagement.getMonth() == MonthEnum.MARCH) {
+
+                //for first qtr followers, its the num of followers at
+                //the end of March
+                totalStats[2] = engagement.getNumFollowers();
+            }
+        }
+
+        return new Engagement(MonthEnum.FIRSTQUART, totalStats[0],
+            totalStats[1], totalStats[2], totalStats[3], totalStats[4]);
+    }
+
+
+    /**
      * Returns 1,0,-1
-     * @param other
-     *            is the other influencer
-     * @return returns 1,0,-1 dependin on the engagement of the other
-     *         influencer.
+     *
+     * @param other is the other influencer
+     * @return returns 1,0,-1 depending on the engagement of the other
+     * influencer.
      */
     public double compareTo(Influencer other) {
-        int janTotalEng = 0;
-        int janTotalViews = 0;
-        int janotherTotalEng = 0;
-        int janOtherTotalViews = 0;
 
-        int marTotalEng = this.getEngagementForMonth(MonthEnum.MARCH)
-            .getTotalEngagement();
-        int marotherTotalEng = other.getEngagementForMonth(MonthEnum.MARCH)
-            .getTotalEngagement();
+        double thisRate =
+            this.getFirstQuartEngagement().getTradEngagementRate();
+        double otherRate =
+            other.getFirstQuartEngagement().getTradEngagementRate();
 
-        int febTotalEng = this.getEngagementForMonth(MonthEnum.FEBRUARY)
-            .getTotalEngagement();
-        int febotherTotalEng = other.getEngagementForMonth(MonthEnum.FEBRUARY)
-            .getTotalEngagement();
-
-        if (this.getEngagementForMonth(MonthEnum.JANUARY) != null) {
-            janTotalEng = this.getEngagementForMonth(MonthEnum.JANUARY)
-                .getTotalEngagement();
-        }
-        if (other.getEngagementForMonth(MonthEnum.JANUARY) != null) {
-            janotherTotalEng = other.getEngagementForMonth(MonthEnum.JANUARY)
-                .getTotalEngagement();
-        }
-
-        int marTotalViews = this.getEngagementForMonth(MonthEnum.MARCH)
-            .getNumViews();
-        int marOtherTotalViews = other.getEngagementForMonth(MonthEnum.MARCH)
-            .getNumViews();
-
-        int febTotalViews = this.getEngagementForMonth(MonthEnum.FEBRUARY)
-            .getNumViews();
-        int febOtherTotalViews = other.getEngagementForMonth(MonthEnum.FEBRUARY)
-            .getNumViews();
-
-        if (this.getEngagementForMonth(MonthEnum.JANUARY) != null) {
-            janTotalViews = this.getEngagementForMonth(MonthEnum.JANUARY)
-                .getNumViews();
-        }
-        if (other.getEngagementForMonth(MonthEnum.JANUARY) != null) {
-            janOtherTotalViews = other.getEngagementForMonth(MonthEnum.JANUARY)
-                .getNumViews();
-        }
-
-        double myTotalEng = marTotalEng + febTotalEng + janTotalEng;
-        double otherTotalEng = marotherTotalEng + febotherTotalEng
-            + janotherTotalEng;
-
-        double myTotalViews = marTotalViews + febTotalViews + janTotalViews;
-        double otherTotalViews = marOtherTotalViews + febOtherTotalViews
-            + janOtherTotalViews;
-        double tradRate = (myTotalEng / myTotalViews) * 100;
-        double otherTradRate = (otherTotalEng / otherTotalViews) * 100;
-
-        return tradRate - otherTradRate;
+        return thisRate - otherRate;
     }
 
 
     /**
      * Method to check equality of
      * two influencer objects
-     * 
-     * @param obj
-     *            object of comparison to "this"
-     * 
+     *
+     * @param obj object of comparison to "this"
      * @return true if equal,
-     *         false otherwise
-     * 
+     * false otherwise
      */
-    @Override
-    public boolean equals(Object obj) {
+    @Override public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
@@ -221,9 +215,9 @@ public class Influencer {
                     return false;
                 }
             }
-            return (username.equals(inf.username) && channelName.equals(
-                inf.channelName) && country.equals(inf.country) && mainTopic
-                    .equals(inf.mainTopic));
+            return (username.equals(inf.username) && channelName
+                .equals(inf.channelName) && country.equals(inf.country)
+                && mainTopic.equals(inf.mainTopic));
         }
         else {
             return false;
@@ -234,7 +228,7 @@ public class Influencer {
     /**
      * Method to display data of influencer
      * object as a string
-     * 
+     *
      * @return String of influencer object
      */
     public String toString() {
