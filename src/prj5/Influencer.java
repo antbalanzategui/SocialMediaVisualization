@@ -30,7 +30,7 @@ public class Influencer {
     /**
      * Constructor for the Influencer class
      *
-     * @param username    username of influencer
+     * @param username    user name of influencer
      * @param channelName channelName of influencer
      * @param country     country of influencer
      * @param mainTopic   mainTopic of influencer
@@ -141,7 +141,7 @@ public class Influencer {
      *
      * @return the engagement for the first quarter
      */
-    private Engagement getFirstQuartEngagement() {
+    public Engagement getFirstQuartEngagement() {
 
         //array representing the total stats of the influencer for first qtr
         int[] totalStats = { 0, 0, 0, 0, 0 };
@@ -149,9 +149,9 @@ public class Influencer {
         //for each of the first qtr months, sum the stats
         for (Engagement engagement : engagements) {
 
-            if (engagement.getMonth() == MonthEnum.JANUARY
-                || engagement.getMonth() == MonthEnum.FEBRUARY
-                || engagement.getMonth() == MonthEnum.MARCH) {
+            if (engagement.getMonth().equals(MonthEnum.MARCH)
+                || engagement.getMonth().equals(MonthEnum.FEBRUARY)
+                || engagement.getMonth().equals(MonthEnum.JANUARY)) {
 
                 totalStats[0] += engagement.getNumLikes();
                 totalStats[1] += engagement.getNumPosts();

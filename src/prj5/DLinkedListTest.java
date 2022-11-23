@@ -18,7 +18,6 @@ public class DLinkedListTest extends TestCase {
     private Influencer inf2;
     private Influencer inf3;
 
-
     /**
      * Sets up test method.
      */
@@ -105,8 +104,15 @@ public class DLinkedListTest extends TestCase {
      * Tests replace().
      */
     public void testReplace() {
-        assertNull(list.replace(1, inf));
+        list.add(inf);
+        list.add(inf1);
+        list.add(inf2);
+        assertEquals(inf1, list.getEntry(1));
+        
+        list.replace(1, inf3);
+        assertEquals(inf3, list.getEntry(1));
     }
+    
 
 
     /**
@@ -245,8 +251,8 @@ public class DLinkedListTest extends TestCase {
         list1.sortByName();
         list.add(inf);
         list.add(inf1);
-        assertEquals("[" + inf.toString() + ", " + inf1.toString() + "]",
-            Arrays.toString(list.toArray()));
+        assertEquals("[" + inf.toString() + ", " + inf1.toString() + "]", Arrays
+            .toString(list.toArray()));
     }
 
 
@@ -255,10 +261,10 @@ public class DLinkedListTest extends TestCase {
      */
     public void testToString() {
 
-        //test empty list
+        // test empty list
         assertEquals("[]", list.toString());
 
-        //test non empty list
+        // test non empty list
         list.add(inf);
         list.add(inf1);
         String str = "[" + inf.toString() + ", " + inf1.toString() + "]";

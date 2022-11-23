@@ -83,11 +83,38 @@ public class InfluencerTest extends TestCase {
 
 
     /**
-     * Tests getEngagementForMonth
+     * Tests getEngagementForMonth()
      */
     public void testGetEngagementForMonth() {
         assertTrue(eng1.equals(inf.getEngagementForMonth(MonthEnum.JANUARY)));
-        assertNull(inf.getEngagementForMonth(MonthEnum.FIRSTQUART));
+        assertNotNull(inf.getEngagementForMonth(MonthEnum.FIRSTQUART));
+        assertNull(inf.getEngagementForMonth(MonthEnum.DECEMBER));
+    }
+
+
+    /**
+     * Tests getFirstQuartEngagement()
+     */
+    public void testGetFirstQuartEngagement() {
+        Engagement JanEng = new Engagement(MonthEnum.JANUARY, 5, 6, 4, 3, 5);
+        Engagement FebEng = new Engagement(MonthEnum.FEBRUARY, 5, 8, 4, 3, 6);
+        Engagement MarEng = new Engagement(MonthEnum.MARCH, 6, 6, 4, 1, 5);
+        Engagement[] EngArr = new Engagement[3];
+
+        EngArr[0] = JanEng;
+        EngArr[1] = FebEng;
+        EngArr[2] = MarEng;
+
+        Engagement firstQuartEng = new Engagement(MonthEnum.FIRSTQUART, 16, 20,
+            4, 7, 16);
+
+        Influencer influencer = new Influencer("Test1", "Channel1", "Ghana",
+            "Topic");
+        influencer.setEngagements(EngArr);
+        assertEquals(firstQuartEng, influencer.getFirstQuartEngagement());;
+        assertEquals(575.0, influencer.getFirstQuartEngagement()
+            .getTradEngagementRate(), 0.01);
+
     }
 
 
@@ -154,6 +181,5 @@ public class InfluencerTest extends TestCase {
         inf1.setEngagements(engArr);
         assertTrue(inf.compareTo(inf1) > 0);
         assertEquals(0.0, inf.compareTo(inf), 0.01);
-
     }
 }
