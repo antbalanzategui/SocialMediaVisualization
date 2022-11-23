@@ -1,19 +1,19 @@
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of
+// those who do.
+// -- Team
+
 package prj5;
 
 import student.TestCase;
 
 /**
  * Class to test DLNode class
- * 
- * Virginia Tech Honor Code Pledge:
- * As a Hokie, I will conduct myself with honor and integrity at all times.
- * I will not lie, cheat, or steal,
- * nor will I accept the actions of those who do.
- * 
- * @author Antonio Balanzategui, antbalanzategui
- * 
- * @version 2022.11.18
  *
+ * @author Antonio Balanzategui (antbalanzategui)
+ * @version 2022.11.18
  */
 
 public class DLNodeTest extends TestCase {

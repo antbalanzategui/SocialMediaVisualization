@@ -1,19 +1,19 @@
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of
+// those who do.
+// -- Team
+
 package prj5;
 
 import student.TestCase;
 
 /**
  * Class to test all methods within Engagement class
- * 
- * Virginia Tech Honor Code Pledge:
- * As a Hokie, I will conduct myself with honor and integrity at all times.
- * I will not lie, cheat, or steal,
- * nor will I accept the actions of those who do.
- * 
- * @author Antonio Balanzategui, antbalanzategui
- * 
- * @version 2022.11.13
  *
+ * @author Antonio Balanzategui (antbalanzategui)
+ * @version 2022.11.13
  */
 
 public class EngagementTest extends TestCase {
