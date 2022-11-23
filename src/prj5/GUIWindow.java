@@ -13,7 +13,6 @@ import cs2.Shape;
 import cs2.Window;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * Project: P5 Social Media Visualization
@@ -26,17 +25,22 @@ public class GUIWindow {
 
     private final Window window;
 
-    private DLinkedList list;
+    private final DLinkedList list;
 
     private MonthEnum month;
     private String engType;
     private String sortType;
 
-    private TextShape monthLbl;
-    private TextShape engTypeLbl;
-    private TextShape sortTypeLbl;
+    private final TextShape monthLbl;
+    private final TextShape engTypeLbl;
+    private final TextShape sortTypeLbl;
 
 
+    /**
+     * Instantiates a new window.
+     *
+     * @param list the influencer list.
+     */
     public GUIWindow(DLinkedList list) {
 
         //create a window
@@ -109,15 +113,16 @@ public class GUIWindow {
     }
 
 
-    private void visualize(){
+    private void visualize() {
 
         window.removeAllShapes();
         drawLabels();
 
-        if(sortType.equals("Sort by Engagement Rate")){
+        if (sortType.equals("Sort by Engagement Rate")) {
 
             list.sortByEngagement();
-        }else{
+        }
+        else {
 
             list.sortByName();
         }
@@ -127,51 +132,55 @@ public class GUIWindow {
 
         double engagementRate = 0.0;
 
-        for(int i = 0; i < list.getLength(); i++) {
+        for (int i = 0; i < list.getLength(); i++) {
 
             Influencer influencer = list.getEntry(i);
-            Engagement engagementForMonth = influencer.getEngagementForMonth(month);
+            Engagement engagementForMonth =
+                influencer.getEngagementForMonth(month);
 
-            if(engagementForMonth != null){
+            if (engagementForMonth != null) {
 
-                if(engType.equals("Traditional Engagement Rate")) {
+                if (engType.equals("Traditional Engagement Rate")) {
 
                     engagementRate = engagementForMonth.getTradEngagementRate();
-                }else{
+                }
+                else {
 
-                    engagementRate = engagementForMonth.getReachEngagementRate();
+                    engagementRate =
+                        engagementForMonth.getReachEngagementRate();
                 }
             }
 
-            int barHeight = (int)(((double)(winY - 50) / 100) *  engagementRate);
+            int barHeight = (int)(((double)(winY - 50) / 100) * engagementRate);
             int barWidth = 40;
             int barX = 60 + (i * ((winX / 4) / list.getLength() + 20)); //good
             int barY = winY - (barHeight + 40);
-
 
             Shape bar = new Shape(barX, barY, barWidth, barHeight, getColor());
             window.addShape(bar);
         }
     }
 
-    private void drawLabels(){
+
+    private void drawLabels() {
 
         window.addShape(monthLbl);
         window.addShape(engTypeLbl);
         window.addShape(sortTypeLbl);
     }
 
+
     private Color getColor() {
 
-        int r = (int)(Math.random()*256);
-        int g = (int)(Math.random()*256);
-        int b = (int)(Math.random()*256);
+        int r = (int)(Math.random() * 256);
+        int g = (int)(Math.random() * 256);
+        int b = (int)(Math.random() * 256);
         double luma = (0.2126 * r) + (0.7152 * g) + (0.0722 * b);
 
         while (luma < 75) {
-            r = (int)(Math.random()*256);
-            g = (int)(Math.random()*256);
-            b = (int)(Math.random()*256);
+            r = (int)(Math.random() * 256);
+            g = (int)(Math.random() * 256);
+            b = (int)(Math.random() * 256);
             luma = (0.2126 * r) + (0.7152 * g) + (0.0722 * b);
         }
         return new Color(r, g, b);
