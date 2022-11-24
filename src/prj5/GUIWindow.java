@@ -11,8 +11,10 @@ import cs2.*;
 import cs2.Button;
 import cs2.Shape;
 import cs2.Window;
+import org.w3c.dom.Text;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 
 /**
  * Project: P5 Social Media Visualization
@@ -154,13 +156,23 @@ public class GUIWindow {
             int barHeight = (int)(((double)(winY - 50) / 100) * engagementRate);
             int barWidth = 40;
             int barX = 60 + (i * ((winX / 4) / list.getLength() + 70)); //good
-            int barY = winY - (barHeight + 40);
+            int barY = winY - (barHeight + 60);
 
             Shape bar = new Shape(barX, barY, barWidth, barHeight, getColor());
             window.addShape(bar);
-            TextShape text = new TextShape(barX - 20, 400, " " + influencer.getUsername() + " ");
-            window.addShape(text);
-            
+
+            TextShape userLbl = new TextShape(0, 0, influencer.getUsername());
+            userLbl.setX(barX + (barWidth / 2) - (userLbl.getWidth() / 2));
+            userLbl.setY(barY + barHeight + userLbl.getHeight());
+            window.addShape(userLbl);
+
+            DecimalFormat engFmt = new DecimalFormat("#.#");
+            String engStr = engFmt.format(engagementRate);
+
+            TextShape engLbl = new TextShape(0, 0, engStr);
+            engLbl.setX(userLbl.getX() + (userLbl.getWidth() / 2) - (engLbl.getWidth() / 2));
+            engLbl.setY(barY + barHeight + userLbl.getHeight() + engLbl.getHeight());
+            window.addShape(engLbl);
         }
     }
 
