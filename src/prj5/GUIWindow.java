@@ -153,11 +153,14 @@ public class GUIWindow {
 
             int barHeight = (int)(((double)(winY - 50) / 100) * engagementRate);
             int barWidth = 40;
-            int barX = 60 + (i * ((winX / 4) / list.getLength() + 20)); //good
+            int barX = 60 + (i * ((winX / 4) / list.getLength() + 70)); //good
             int barY = winY - (barHeight + 40);
 
             Shape bar = new Shape(barX, barY, barWidth, barHeight, getColor());
             window.addShape(bar);
+            TextShape text = new TextShape(barX - 20, 400, " " + influencer.getUsername() + " ");
+            window.addShape(text);
+            
         }
     }
 
