@@ -51,7 +51,7 @@ public class DataReader {
     private DLinkedList readFile(String fileName) throws FileNotFoundException {
 
         // create the list to store influencers
-        DLinkedList newList = new DLinkedList();
+        //DLinkedList newList = new DLinkedList();
 
         // create the scanner
         // throws FileNotFound
@@ -87,12 +87,11 @@ public class DataReader {
                     // set their engagement
                     influencer.setEngagements(new Engagement[] { engagement });
                     // add the influencer to the list
-                    newList.add(influencer);
-                    this.list = newList;
+                    this.list.add(influencer);
                 }
                 else { // if its an influencer that already exists
                     Influencer origInfluencer =
-                        newList.getEntry(newList.getIndex(influencer));
+                        this.list.getEntry(this.list.getIndex(influencer));
 
                     // expand the capacity of the old influencer array
                     int newLen = origInfluencer.getEngagements().length + 1;
@@ -114,9 +113,6 @@ public class DataReader {
 
                     // update the engagement array of the influencer
                     origInfluencer.setEngagements(newEngagements);
-
-                    // replace the old influencer with old engagements to new
-                    // list.replace(infIndex, influencer);
                 }
             }
         }
