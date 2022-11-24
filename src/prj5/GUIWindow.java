@@ -29,14 +29,19 @@ public class GUIWindow {
 
     private final DLinkedList list;
 
+    //flags
     private MonthEnum month;
     private String engType;
     private String sortType;
 
+    //labels
     private final TextShape monthLbl;
     private final TextShape engTypeLbl;
     private final TextShape sortTypeLbl;
 
+    //dimensions
+    private final int BAR_WIDTH = 40;
+    private Shape gridShape;
 
     /**
      * Instantiates a new window.
@@ -47,7 +52,6 @@ public class GUIWindow {
 
         //create a window
         window = new Window("Social Media Visualization");
-        window.setSize(960, 540);
 
         //initialize the list
         this.list = list;
@@ -58,11 +62,11 @@ public class GUIWindow {
         window.addShape(monthLbl);
 
         sortType = "Sort by Engagement Rate";
-        sortTypeLbl = new TextShape(10, 25, "Sort by Engagement Rate");
+        sortTypeLbl = new TextShape(10, monthLbl.getY() + monthLbl.getHeight(), "Sort by Engagement Rate");
         window.addShape(sortTypeLbl);
 
         engType = "Traditional Engagement Rate";
-        engTypeLbl = new TextShape(10, 40, "Traditional Engagement Rate");
+        engTypeLbl = new TextShape(10, sortTypeLbl.getY() + sortTypeLbl.getHeight(), "Traditional Engagement Rate");
         window.addShape(engTypeLbl);
 
         //*************** create buttons *******************\\
@@ -112,14 +116,25 @@ public class GUIWindow {
         reachEngBtn.onClick(this, "clickedEngagementCalc");
         window.addButton(reachEngBtn, WindowSide.WEST);
         //**************************************************\\
+
+        gridShape = drawGrid();
+        visualize();
     }
 
 
+    /**
+     * Helper method that uses flags (fields) to decide how to show data on
+     * the screen.
+     */
     private void visualize() {
 
+        //remove the previous data from the screen
         window.removeAllShapes();
+        //redraw the correct labels
         drawLabels();
+        drawGrid();
 
+        //sort decision
         if (sortType.equals("Sort by Engagement Rate")) {
 
             list.sortByEngagement();
@@ -129,11 +144,35 @@ public class GUIWindow {
             list.sortByName();
         }
 
-        int winX = window.getGraphPanelWidth();
-        int winY = window.getGraphPanelHeight();
-
         double engagementRate = 0.0;
+        double maxEngagementRate = 0.0;
+        for (int i = 0; i < list.getLength(); i++) {
 
+            Influencer influencer = list.getEntry(i);
+            Engagement engagementForMonth =
+                influencer.getEngagementForMonth(month);
+
+            if (engagementForMonth != null) {
+
+                if (engType.equals("Traditional Engagement Rate")) {
+
+                    engagementRate = engagementForMonth.getTradEngagementRate();
+                }
+                else {
+
+                    engagementRate =
+                        engagementForMonth.getReachEngagementRate();
+                }
+
+                if(maxEngagementRate < engagementRate){
+
+                    maxEngagementRate = engagementRate;
+                }
+            }
+        }
+
+        //this is a rectangle shape which sets the dimensions for the bars
+        DecimalFormat engFmt = new DecimalFormat("#.#");
         for (int i = 0; i < list.getLength(); i++) {
 
             Influencer influencer = list.getEntry(i);
@@ -153,29 +192,103 @@ public class GUIWindow {
                 }
             }
 
-            int barHeight = (int)(((double)(winY - 50) / 100) * engagementRate);
-            int barWidth = 40;
-            int barX = 60 + (i * ((winX / 4) / list.getLength() + 70)); //good
-            int barY = winY - (barHeight + 60);
+            double range = drawScale(maxEngagementRate);
 
-            Shape bar = new Shape(barX, barY, barWidth, barHeight, getColor());
+            int barHeight = (int)((engagementRate / range) * ((double)gridShape.getHeight()));
+            int barX = gridShape.getX() + BAR_WIDTH + (i * (gridShape.getWidth() / list.getLength())); //good
+            int barY = gridShape.getY() + gridShape.getHeight() - barHeight;
+
+            Shape bar = new Shape(barX, barY, BAR_WIDTH, barHeight, getColor());
             window.addShape(bar);
+            window.moveToFront(bar);
 
             TextShape userLbl = new TextShape(0, 0, influencer.getUsername());
-            userLbl.setX(barX + (barWidth / 2) - (userLbl.getWidth() / 2));
-            userLbl.setY(barY + barHeight + userLbl.getHeight());
+            userLbl.setX(barX + (BAR_WIDTH / 2) - (userLbl.getWidth() / 2));
+            userLbl.setY(barY + barHeight + (userLbl.getHeight() / 2));
             window.addShape(userLbl);
 
-            DecimalFormat engFmt = new DecimalFormat("#.#");
             String engStr = engFmt.format(engagementRate);
 
             TextShape engLbl = new TextShape(0, 0, engStr);
             engLbl.setX(userLbl.getX() + (userLbl.getWidth() / 2) - (engLbl.getWidth() / 2));
-            engLbl.setY(barY + barHeight + userLbl.getHeight() + engLbl.getHeight());
+            engLbl.setY(barY + barHeight + userLbl.getHeight() + (engLbl.getHeight() / 2));
             window.addShape(engLbl);
         }
     }
 
+    private double drawScale(double maxEngagementRate){
+
+        //decimal formatter
+        DecimalFormat engFmt = new DecimalFormat("#.#");
+
+        //counter for the grid line
+        int count = 8;
+        //for each position of the grid line i
+        for (int i = gridShape.getY(); i <= gridShape.getY() + gridShape.getHeight(); i += 50) {
+
+            //get each value for the grid line starting at the rounded number
+            double lblVal = (Math.ceil(maxEngagementRate / 10.0) * 10.0 / 8.0) * count;
+            count--;
+
+
+            TextShape gridLineLbl = new TextShape(0, 0, engFmt.format(lblVal));
+            gridLineLbl.setX(gridShape.getX() - 15 - gridLineLbl.getWidth());
+            gridLineLbl.setY(i - (gridLineLbl.getHeight() / 2));
+            window.addShape(gridLineLbl);
+        }
+
+        return (Math.ceil(maxEngagementRate / 10.0) * 10.0 / 8.0) * 8;
+    }
+
+    private Shape drawGrid(){
+
+        int numBars = list.getLength();
+
+        //colors
+        Color gridColor = new Color(0, 0, 0);
+        Color gridLineColor = new Color(206, 206, 206);
+
+        //grid
+        int gridHeight = 400;
+        int gridWidth = numBars * (BAR_WIDTH * 3);
+
+        int upperBound = engTypeLbl.getY() + engTypeLbl.getHeight() + 10;
+        int leftBound = (int)((((double)gridWidth) / 0.80 - ((double)gridWidth)) / 2);
+
+        int lnW = 5; //line width
+
+        //line array (for ease of drawing)
+        Shape[] gridLines = new Shape[2];
+        gridLines[0] = new Shape(leftBound, upperBound, lnW, gridHeight);  //y
+        gridLines[1] = new Shape(leftBound, upperBound + gridHeight, gridWidth, lnW); //x
+
+        //draw the lines
+        for (Shape line : gridLines) {
+
+            line.setBackgroundColor(gridColor);
+            line.setForegroundColor(gridColor);
+            window.addShape(line);
+            window.moveToBack(line);
+        }
+
+        //draw the gridLines
+        lnW = 2;
+        for (int i = 0; i <= gridHeight; i += 50) {
+
+            Shape gridLine = new Shape(leftBound - 10, upperBound + i, gridWidth + 10, lnW, gridLineColor);
+            window.addShape(gridLine);
+            window.moveToBack(gridLine);
+        }
+
+        //determine window size based on graph
+        //last ints account for buttons
+        int windowW = (leftBound * 2) + gridWidth + 211;
+        int windowH = 50 + upperBound + gridHeight + 107; //50p is padding under
+        window.setSize(windowW, windowH);
+
+        //return the dimensions of the grid
+        return new Shape(leftBound, upperBound, gridWidth, gridHeight);
+    }
 
     private void drawLabels() {
 
