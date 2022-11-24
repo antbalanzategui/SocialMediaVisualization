@@ -88,11 +88,11 @@ public class DLinkedList implements ListInterface<Influencer> {
      */
     @Override
     public Influencer replace(int index, Influencer influencer) {
+
         DLNode<Influencer> oldNode = this.getNodeAtIndex(index);
         Influencer oldInfluencer = oldNode.getData();
         oldNode.setData(influencer);
         return oldInfluencer;
-
     }
 
 
