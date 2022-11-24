@@ -168,6 +168,9 @@ public class GUIWindow {
 
             DecimalFormat engFmt = new DecimalFormat("#.#");
             String engStr = engFmt.format(engagementRate);
+            if (engagementRate == 0) {
+                engStr = "N/A";
+            }
 
             TextShape engLbl = new TextShape(0, 0, engStr);
             engLbl.setX(userLbl.getX() + (userLbl.getWidth() / 2) - (engLbl.getWidth() / 2));
