@@ -117,7 +117,9 @@ public class GUIWindow {
         window.addButton(reachEngBtn, WindowSide.WEST);
         //**************************************************\\
 
+        //this is a rectangle shape which sets the dimensions for the bars
         gridShape = drawGrid();
+        //initial visualization
         visualize();
     }
 
@@ -132,6 +134,7 @@ public class GUIWindow {
         window.removeAllShapes();
         //redraw the correct labels
         drawLabels();
+        //redraw the grid
         drawGrid();
 
         //sort decision
@@ -146,6 +149,8 @@ public class GUIWindow {
 
         double engagementRate = 0.0;
         double maxEngagementRate = 0.0;
+
+        //for loop determines max engagement rate based on sort type
         for (int i = 0; i < list.getLength(); i++) {
 
             Influencer influencer = list.getEntry(i);
@@ -171,7 +176,8 @@ public class GUIWindow {
             }
         }
 
-        //this is a rectangle shape which sets the dimensions for the bars
+        //for loop determines and draws the scale of the grid
+        //adds the bars to the grid based on scale
         DecimalFormat engFmt = new DecimalFormat("#.#");
         for (int i = 0; i < list.getLength(); i++) {
 
@@ -179,6 +185,7 @@ public class GUIWindow {
             Engagement engagementForMonth =
                 influencer.getEngagementForMonth(month);
 
+            //Engagement type decision for each influencer
             if (engagementForMonth != null) {
 
                 if (engType.equals("Traditional Engagement Rate")) {
@@ -194,6 +201,7 @@ public class GUIWindow {
 
             double range = drawScale(maxEngagementRate);
 
+            //scales the bars to the scale
             int barHeight = (int)((engagementRate / range) * ((double)gridShape.getHeight()));
             int barX = gridShape.getX() + BAR_WIDTH + (i * (gridShape.getWidth() / list.getLength())); //good
             int barY = gridShape.getY() + gridShape.getHeight() - barHeight;
@@ -226,11 +234,12 @@ public class GUIWindow {
         //for each position of the grid line i
         for (int i = gridShape.getY(); i <= gridShape.getY() + gridShape.getHeight(); i += 50) {
 
-            //get each value for the grid line starting at the rounded number
+            //get each value for the grid line starting at the rounded up max
+            //engagement value
             double lblVal = (Math.ceil(maxEngagementRate / 10.0) * 10.0 / 8.0) * count;
             count--;
 
-
+            //create the label at correct positions
             TextShape gridLineLbl = new TextShape(0, 0, engFmt.format(lblVal));
             gridLineLbl.setX(gridShape.getX() - 15 - gridLineLbl.getWidth());
             gridLineLbl.setY(i - (gridLineLbl.getHeight() / 2));
