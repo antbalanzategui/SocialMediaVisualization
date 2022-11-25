@@ -11,7 +11,6 @@ import cs2.*;
 import cs2.Button;
 import cs2.Shape;
 import cs2.Window;
-import org.w3c.dom.Text;
 
 import java.awt.*;
 import java.text.DecimalFormat;
