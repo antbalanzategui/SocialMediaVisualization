@@ -139,6 +139,9 @@ public class Engagement {
      * @return a percentage rounded to the first decimal
      */
     public double getTradEngagementRate() {
+        if (numFollowers == 0) {
+            return 0;
+        }
         double nLikes = numLikes;
         double nComments = numComments;
         double nFollowers = numFollowers;
@@ -156,6 +159,9 @@ public class Engagement {
      * @return a percentage rounded to the first decimal
      */
     public double getReachEngagementRate() {
+        if (numViews == 0) {
+            return 0;
+        }
         double nLikes = numLikes;
         double nComments = numComments;
         double nViews = numViews;
