@@ -275,10 +275,83 @@ public class DLinkedList implements ListInterface<Influencer> {
         }
         return true;
     }
+    
+    public void sortByReachEngagement(MonthEnum month) {
+        if (getLength() > 1) {
+            DLNode<Influencer> unsortedPart = head.getNext();
+            DLNode<Influencer> sortedPart = head;
+            sortedPart.setNext(null);
+
+            while (unsortedPart != null) {
+                DLNode<Influencer> nodeToInsert = unsortedPart;
+                unsortedPart = unsortedPart.getNext();
+                engInsertIntoReachSorted(nodeToInsert, month);
+            }
+        }
+    }
+    
+    private void engInsertIntoReachSorted(DLNode<Influencer> nodeToInsert, MonthEnum month) {
+        Influencer influencer = nodeToInsert.getData();
+        DLNode<Influencer> currNode = head;
+        DLNode<Influencer> previousNode = null;
+
+        while ((currNode != null) && (influencer.getEngagementForMonth(month).
+            compareReachEngagementRate(currNode.getData().getEngagementForMonth(month)) > 0)) {
+            previousNode = currNode;
+            currNode = currNode.getNext();
+        }
+
+        if (previousNode != null) {
+            previousNode.setNext(nodeToInsert);
+            nodeToInsert.setNext(currNode);
+        }
+        else {
+            nodeToInsert.setNext(head);
+            head = nodeToInsert;
+        }
+    }
+    
+    
+    
+    public void sortByTradEngagement(MonthEnum month) {
+        if (getLength() > 1) {
+            DLNode<Influencer> unsortedPart = head.getNext();
+            DLNode<Influencer> sortedPart = head;
+            sortedPart.setNext(null);
+
+            while (unsortedPart != null) {
+                DLNode<Influencer> nodeToInsert = unsortedPart;
+                unsortedPart = unsortedPart.getNext();
+                engInsertIntoTradSorted(nodeToInsert, month);
+            }
+        }
+    }
+    
+    private void engInsertIntoTradSorted(DLNode<Influencer> nodeToInsert, MonthEnum month) {
+        Influencer influencer = nodeToInsert.getData();
+        DLNode<Influencer> currNode = head;
+        DLNode<Influencer> previousNode = null;
+
+        while ((currNode != null) && (influencer.getEngagementForMonth(month).
+            compareTradEngagementRate(currNode.getData().getEngagementForMonth(month)) > 0)) {
+            previousNode = currNode;
+            currNode = currNode.getNext();
+        }
+
+        if (previousNode != null) {
+            previousNode.setNext(nodeToInsert);
+            nodeToInsert.setNext(currNode);
+        }
+        else {
+            nodeToInsert.setNext(head);
+            head = nodeToInsert;
+        }
+    }
 
 
     /**
      * Sorts by engagement.
+     * TRADITIONAL FOR FIRSTQUART
      */
     public void sortByEngagement() {
         if (getLength() > 1) {
