@@ -139,7 +139,12 @@ public class GUIWindow {
         //sort decision
         if (sortType.equals("Sort by Engagement Rate")) {
 
-            list.sortByEngagement();
+            if (engType.equals("Traditional Engagement Rate")) {
+                list.sortByTradEngagement(month);
+            }
+            else {
+                list.sortByReachEngagement(month);
+            }
         }
         else {
 
