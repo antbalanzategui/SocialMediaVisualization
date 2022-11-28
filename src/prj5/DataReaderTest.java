@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 /**
  * Project: socialmediavisualization
  * Class: DataReaderTest
+ * TestClass for DataReader.
  *
  * @author Lukyan Sukhachevskyi (lukyan)
  * @version 2022.11.21
@@ -26,6 +27,7 @@ public class DataReaderTest extends TestCase {
 
     /**
      * Initial setUp().
+     * Sets up before every method.
      */
     public void setUp() throws FileNotFoundException {
 
