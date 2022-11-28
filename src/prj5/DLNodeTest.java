@@ -18,22 +18,21 @@ import student.TestCase;
 
 public class DLNodeTest extends TestCase {
 
-    private DLNode dn1;
-    private DLNode dn2;
-    private DLNode dn3;
+    private DLNode<String> dn1;
+    private DLNode<String> dn2;
+    private DLNode<String> dn3;
     
     /**
      * Sets up
      */
-    @SuppressWarnings("unchecked")
     public void setUp() {
         
-        dn1 = new DLNode("Do");
-        dn2 = new DLNode("Yo");
-        dn3 = new DLNode(dn1, "Fo", dn2); 
+        dn1 = new DLNode<String>("Do");
+        dn2 = new DLNode<String>("Yo");
+        dn3 = new DLNode<String>(dn1, "Fo", dn2); 
     }
     /**
-     * Tests getData
+     * Tests getData()
      */
     public void testGetData() {
         assertEquals(dn1.getData(), "Do");
@@ -41,14 +40,14 @@ public class DLNodeTest extends TestCase {
         assertEquals(dn3.getData(), "Fo");
     }
     /**
-     * Tests setData
+     * Tests setData()
      */
     public void testSetData() {
         dn1.setData("Test");
         assertEquals(dn1.getData(), "Test");
     }
     /**
-     * Tests getNext
+     * Tests getNext()
      */
     public void testGetNext() {
         assertNull(dn1.getNext());
@@ -56,7 +55,7 @@ public class DLNodeTest extends TestCase {
         assertEquals(dn3.getNext(), dn2);
     }
     /**
-     * Tests setNext
+     * Tests setNext()
      */
     public void testSetNext() {
         dn1.setNext(dn2);
@@ -65,7 +64,7 @@ public class DLNodeTest extends TestCase {
         assertEquals(dn3.getNext(), dn1);
     }
     /**
-     * Tests getPrevious
+     * Tests getPrevious()
      */
     public void testGetPrevious() {
         assertNull(dn1.getPrevious());
@@ -73,7 +72,7 @@ public class DLNodeTest extends TestCase {
         assertEquals(dn3.getPrevious(), dn1);
     }
     /**
-     * Tests setPrevious
+     * Tests setPrevious()
      */
     public void testSetPrevious() {
         dn1.setPrevious(dn2);

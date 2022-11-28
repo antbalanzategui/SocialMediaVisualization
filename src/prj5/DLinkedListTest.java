@@ -8,13 +8,14 @@
 package prj5;
 
 import java.util.Arrays;
-
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import student.TestCase;
 
 /**
  * Test Class for Doubly Linked List.
  *
- * @author Nana Yaw Barimah Oteng
+ * @author Nana Yaw Barimah Oteng (nanayawo21)
  * @version 2022.11.18
  */
 public class DLinkedListTest extends TestCase {
@@ -51,7 +52,7 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests add() method
+     * Tests that add() method adds an Influencer to the list.
      */
     public void testAdd() {
         assertEquals(0, list.getLength());
@@ -78,7 +79,7 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests clear();
+     * Tests that clear resets the entire list.
      */
     public void testClear() {
         assertEquals(0, list.getLength());
@@ -98,7 +99,8 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests isEmpty().
+     * Tests isEmpty() returns true when there's nothing in the list. Otherwise,
+     * it returns false.
      */
     public void testIsEmpty() {
         assertTrue(list.isEmpty());
@@ -108,22 +110,21 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests replace().
+     * Tests replace() replaces an influencer in the list.
      */
     public void testReplace() {
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
         assertEquals(inf1, list.getEntry(1));
-        
+
         list.replace(1, inf3);
         assertEquals(inf3, list.getEntry(1));
     }
-    
 
 
     /**
-     * Tests contains().
+     * Tests contains() checks if an influencer is contained in the list.
      */
     public void testContains() {
         assertFalse(list.contains(inf));
@@ -143,7 +144,7 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests getEntry().
+     * Tests getEntry() returns an influencer at a specified index.
      */
     public void testGetEntry() {
         list.add(inf);
@@ -176,7 +177,7 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests getIndex().
+     * Tests getIndex() returns an influencer at a specified index.
      */
     public void testGetIndex() {
         list.add(inf);
@@ -193,20 +194,24 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests remove().
+     * Tests remove() removes an influencer at a specified index.
      */
     public void testRemove() {
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
 
-        assertNull(list.remove(1));
+        assertEquals(inf1, list.remove(1));
+        assertEquals("[" + inf.toString() + ", " + inf2.toString() + "]", list
+            .toString());
+        assertEquals(2, list.getLength());
 
     }
 
 
     /**
-     * Tests equals().
+     * Tests equals() returns boolean value depending on whether or not two
+     * lists are equal.
      */
     public void testEquals() {
         DLinkedList list1 = new DLinkedList();
@@ -225,7 +230,7 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests sortByName().
+     * Tests sortByName() sorts lists by name.
      */
     public void testSortByName() {
         list.add(inf);
@@ -237,7 +242,7 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests sortbyEngagement().
+     * Tests sortbyEngagement() sorts lists by engagement.
      */
     public void testSortByEngagement() {
         DLinkedList list1 = new DLinkedList();
@@ -251,7 +256,7 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests sortbyEngagement().
+     * Tests toArray() returns an array version of the list.
      */
     public void testToArray() {
         DLinkedList list1 = new DLinkedList();
@@ -264,7 +269,7 @@ public class DLinkedListTest extends TestCase {
 
 
     /**
-     * Tests toString().
+     * Tests toString() returns an string version of the list.
      */
     public void testToString() {
 
@@ -276,5 +281,34 @@ public class DLinkedListTest extends TestCase {
         list.add(inf1);
         String str = "[" + inf.toString() + ", " + inf1.toString() + "]";
         assertEquals(str, list.toString());
+    }
+    
+    /**
+     * Tests that the iterator traverses the list appropriately. If next is called when 
+     * the iterator is at the end of the list, a NoSuchElementException is thrown.
+     */
+    public void testIterator() {
+        list.add(inf);
+        list.add(inf1);
+        list.add(inf2);
+        Iterator<Influencer> iter = list.iterator();
+        
+        assertTrue(iter.hasNext());
+        assertEquals(inf, iter.next());
+        assertTrue(iter.hasNext());
+        assertEquals(inf1, iter.next());
+        assertTrue(iter.hasNext());
+        assertEquals(inf2, iter.next());
+        assertFalse(iter.hasNext());
+        
+        NoSuchElementException exception = null;
+        
+        try {
+            iter.next();
+        }
+        catch (NoSuchElementException e) {
+            exception = e;      
+        }
+        assertNotNull(exception);
     }
 }

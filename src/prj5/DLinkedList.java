@@ -7,6 +7,9 @@
 
 package prj5;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 // Import Statements
 
 import list.ListInterface;
@@ -14,6 +17,7 @@ import list.ListInterface;
 /**
  * Project: socialmediavisualization
  * Class: DLNode
+ * Linked List class to store influencers.
  *
  * @author Nana Yaw Barimah Oteng (nanyawo21)
  * @author Lukyan Sukhachevskyi (lukyan)
@@ -57,7 +61,7 @@ public class DLinkedList implements ListInterface<Influencer> {
     /**
      * Checks if the array is empty
      *
-     * @return true if the array is empty
+     * @return true if the array is empty. Otherwise, return false.
      */
     @Override
     public boolean isEmpty() {
@@ -132,7 +136,8 @@ public class DLinkedList implements ListInterface<Influencer> {
      * gets the node at that index
      *
      * @param index
-     * @return node at index
+     *            is the index at which a node is being returned.
+     * @return returns node at index.
      */
     private DLNode<Influencer> getNodeAtIndex(int index) {
         if (index < 0 || size <= index) {
@@ -189,7 +194,8 @@ public class DLinkedList implements ListInterface<Influencer> {
 
 
     /**
-     * Adds an Influencer at specified index
+     * Throws an IndexOutOfBoundsEception() because this method is not used in
+     * our project, but it is required to implement the List Interface.
      *
      * @param index
      *            is the index where the influencer is being added.
@@ -234,8 +240,11 @@ public class DLinkedList implements ListInterface<Influencer> {
      * @return returns the removed influencer.
      */
     public Influencer remove(int index) {
-        tail.getPrevious();
-        return null;
+        DLNode<Influencer> nodeToBeRemoved = getNodeAtIndex(index);
+        nodeToBeRemoved.getPrevious().setNext(nodeToBeRemoved.getNext());
+        nodeToBeRemoved.getNext().setPrevious(nodeToBeRemoved.getPrevious());
+        size--;
+        return nodeToBeRemoved.getData();
 
     }
 
@@ -311,6 +320,7 @@ public class DLinkedList implements ListInterface<Influencer> {
                 nameInsertIntoSorted(nodeToInsert);
             }
         }
+        
 
     }
 
@@ -421,5 +431,67 @@ public class DLinkedList implements ListInterface<Influencer> {
         str.append("]");
 
         return str.toString();
+    }
+
+
+    /**
+     * Iterator method creates Iterator object
+     *
+     * @return new Iterator object
+     */
+    public Iterator<Influencer> iterator() {
+        return new DLListIterator();
+    }
+
+    /**
+     * Private List Iterator to traverse the Linked list.
+     * Iterator does not use a remove() method, because the DLinked List implements a remove() method.
+     * 
+     * 
+     * @author Nana Yaw Barimah Oteng(nanayawo21)
+     * @version 2021.11.27
+     *
+     */
+    private class DLListIterator implements Iterator<Influencer> {
+        private DLNode<Influencer> next;
+        private boolean newCurr;
+
+        /**
+         * Creates a new DLListIterator
+         */
+        public DLListIterator() {
+            next = head;
+            newCurr = false;
+        }
+
+
+        /**
+         * Checks if there are more elements in the list
+         *
+         * @return true if there are more elements in the list
+         */
+        @Override
+        public boolean hasNext() {
+            return (next != null);
+        }
+
+
+        /**
+         * Gets the next value in the list
+         *
+         * @return the next value
+         * @throws NoSuchElementException
+         *             if there are no nodes left in the list
+         */
+        @Override
+        public Influencer next() {
+            if (next == null) {
+                throw new NoSuchElementException("No nodes left in the list.");
+            }
+            Influencer value = next.getData();
+            next = next.getNext();
+            newCurr = true;
+            return value;
+        }
     }
 }
