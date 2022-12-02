@@ -14,6 +14,7 @@ import cs2.Window;
 
 import java.awt.*;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 
 /**
  * Project: P5 Social Media Visualization
@@ -26,7 +27,7 @@ public class GUIWindow {
 
     private final Window window;
 
-    private final DLinkedList list;
+    private final LinkedList list;
 
     //flags
     private MonthEnum month;
@@ -47,7 +48,7 @@ public class GUIWindow {
      *
      * @param list the influencer list.
      */
-    public GUIWindow(DLinkedList list) {
+    public GUIWindow(LinkedList list) {
 
         //create a window
         window = new Window("Social Media Visualization");
@@ -137,23 +138,20 @@ public class GUIWindow {
         drawGrid();
 
         //sort decision
+
         if (sortType.equals("Sort by Engagement Rate")) {
 
-            if (engType.equals("Traditional Engagement Rate")) {
-                list.sortByTradEngagement(month);
-            }
-            else {
-                list.sortByReachEngagement(month);
-            }
+            list.sort(new CompareByEngagementRate(month, engType));
         }
         else {
 
-            list.sortByName();
+            list.sort(new CompareByChannelName());
         }
 
         double engagementRate = 0.0;
         double maxEngagementRate = 0.0;
 
+        //System.out.println(Arrays.toString(list.toArray()));
         //for loop determines max engagement rate based on sort type
         for (int i = 0; i < list.getLength(); i++) {
 
