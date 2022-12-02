@@ -143,22 +143,22 @@ public class EngagementTest extends TestCase {
     }
 
 
-    /**
-     * Tests compareTradEngagementRate
-     */
-    public void testCompareTradEngagementRate() {
-        assertEquals(1, eng1.compareTradEngagementRate(eng2));
-        assertEquals(-1, eng2.compareTradEngagementRate(eng1));
-        assertEquals(0, eng1.compareTradEngagementRate(eng1));
-    }
+//    /**
+//     * Tests compareTradEngagementRate
+//     */
+//    public void testCompareTradEngagementRate() {
+//        assertEquals(1, eng1.compareTradEngagementRate(eng2));
+//        assertEquals(-1, eng2.compareTradEngagementRate(eng1));
+//        assertEquals(0, eng1.compareTradEngagementRate(eng1));
+//    }
 
 
-    /**
-     * Tests compareReachEngagementRate
-     */
-    public void testCompareReachEngagementRate() {
-        assertEquals(1, eng1.compareReachEngagementRate(eng2));
-        assertEquals(-1, eng2.compareReachEngagementRate(eng1));
-        assertEquals(0, eng1.compareReachEngagementRate(eng1));
-    }
+//    /**
+//     * Tests compareReachEngagementRate
+//     */
+//    public void testCompareReachEngagementRate() {
+//        assertEquals(1, eng1.compareReachEngagementRate(eng2));
+//        assertEquals(-1, eng2.compareReachEngagementRate(eng1));
+//        assertEquals(0, eng1.compareReachEngagementRate(eng1));
+//    }
 }
