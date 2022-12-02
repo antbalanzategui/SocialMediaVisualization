@@ -36,9 +36,9 @@ public class Input {
             man = new DataReader(args[0]);
         }else{
 
-            man = new DataReader("SampleInput2_2022.csv");
+            man = new DataReader("SampleInput1_2022.csv");
         }
-        man.getList().sortByName();
+        man.getList().sort(new CompareByChannelName());
 
         for (int i = 0; i < man.getList().toArray().length; i++) {
             double followers = man.getList().getEntry(i).getEngagementForMonth(
@@ -66,7 +66,7 @@ public class Input {
          * System.out.println(man.getList().getEntry(0).getEngagementForMonth(
          * MonthEnum.MARCH));
          */
-        man.getList().sortByEngagement();
+        man.getList().sort(new CompareByEngagementRate(MonthEnum.FIRSTQUART, "Reach Engagement Rate"));
         for (int i = 0; i < man.getList().toArray().length; i++) {
 
             System.out.println(man.getList().getEntry(i).getChannelName());
