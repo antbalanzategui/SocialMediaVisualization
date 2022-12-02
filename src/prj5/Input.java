@@ -31,9 +31,12 @@ public class Input {
      * @throws FileNotFoundException
      */
     public static void main(String[] args) throws FileNotFoundException {
-        DataReader man = new DataReader("SampleInput1_2022.csv");
+        DataReader man;
         if (args.length == 1) {
             man = new DataReader(args[0]);
+        }else{
+
+            man = new DataReader("SampleInput1_2022.csv");
         }
         man.getList().sortByName();
 
