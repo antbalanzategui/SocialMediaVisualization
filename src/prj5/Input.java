@@ -36,7 +36,7 @@ public class Input {
             man = new DataReader(args[0]);
         }else{
 
-            man = new DataReader("SampleInput1_2022.csv");
+            man = new DataReader("SampleInput2_2022.csv");
         }
         man.getList().sortByName();
 

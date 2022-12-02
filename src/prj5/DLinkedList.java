@@ -417,10 +417,17 @@ public class DLinkedList implements ListInterface<Influencer> {
 
         if (previousNode != null) {
             previousNode.setNext(nodeToInsert);
+            nodeToInsert.setPrevious(previousNode);
             nodeToInsert.setNext(currNode);
+
+            if (currNode != null) {
+                currNode.setPrevious(nodeToInsert);
+            }
+
         }
         else {
             nodeToInsert.setNext(head);
+            head.setPrevious(nodeToInsert);
             head = nodeToInsert;
         }
     }
@@ -447,10 +454,17 @@ public class DLinkedList implements ListInterface<Influencer> {
 
         if (previousNode != null) {
             previousNode.setNext(nodeToInsert);
+            nodeToInsert.setPrevious(previousNode);
             nodeToInsert.setNext(currNode);
+
+            if (currNode != null) {
+                currNode.setPrevious(nodeToInsert);
+            }
+
         }
         else {
             nodeToInsert.setNext(head);
+            head.setPrevious(nodeToInsert);
             head = nodeToInsert;
         }
     }
@@ -518,7 +532,7 @@ public class DLinkedList implements ListInterface<Influencer> {
 
     /**
      * Private List Iterator to traverse the Linked list.
-     * Iterator does not use a remove() method, because the DLinked List implements a remove() method.
+     * Iterator does not use a remove() method, because the DLinkedList implements a remove() method.
      * 
      * 
      * @author Nana Yaw Barimah Oteng(nanayawo21)
