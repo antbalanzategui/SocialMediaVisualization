@@ -9,17 +9,16 @@ package prj5;
 
 /**
  * Project: socialmediavisualization
- * Class: DLNode
+ * Class: Node
  *
  * @param <T> the type parameter
  * @author Lukyan Sukhachevskyi (lukyan)
  * @version 2022.11.14
  */
-public class DLNode<T> {
+public class Node<T> {
 
     private T data;
-    private DLNode<T> next;
-    private DLNode<T> previous;
+    private Node<T> next;
 
 
     /**
@@ -27,22 +26,20 @@ public class DLNode<T> {
      *
      * @param data the data
      */
-    public DLNode(T data) {
+    public Node(T data) {
 
-        this(null, data, null);
+        this(data, null);
     }
 
 
     /**
      * Instantiates a new Doubly Linked Node.
      *
-     * @param previous the previous node
      * @param data     the data
      * @param next     the next node
      */
-    public DLNode(DLNode<T> previous, T data, DLNode<T> next) {
+    public Node(T data, Node<T> next) {
 
-        this.previous = previous;
         this.data = data;
         this.next = next;
     }
@@ -75,7 +72,7 @@ public class DLNode<T> {
      *
      * @return the doubly linked node
      */
-    public DLNode<T> getNext() {
+    public Node<T> getNext() {
 
         return next;
     }
@@ -86,30 +83,8 @@ public class DLNode<T> {
      *
      * @param next the next node
      */
-    public void setNext(DLNode<T> next) {
+    public void setNext(Node<T> next) {
 
         this.next = next;
-    }
-
-
-    /**
-     * Get previous doubly linked node.
-     *
-     * @return the previous doubly linked node
-     */
-    public DLNode<T> getPrevious() {
-
-        return previous;
-    }
-
-
-    /**
-     * Set previous doubly linked node.
-     *
-     * @param previous the previous node
-     */
-    public void setPrevious(DLNode<T> previous) {
-
-        this.previous = previous;
     }
 }
