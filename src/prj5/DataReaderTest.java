@@ -43,7 +43,7 @@ public class DataReaderTest extends TestCase {
      */
     public void testGetList() {
 
-        reader1.getList().sortByName();
+        reader1.getList().sort(new CompareByChannelName());
         for (Object inf : reader1.getList().toArray()) {
 
             System.out.println(inf.toString());

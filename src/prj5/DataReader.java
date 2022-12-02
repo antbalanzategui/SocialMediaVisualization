@@ -23,7 +23,7 @@ import java.util.Scanner;
  */
 public class DataReader {
 
-    private DLinkedList list;
+    private LinkedList list;
 
     /**
      * Instantiates a new Data reader.
@@ -36,7 +36,7 @@ public class DataReader {
      */
     public DataReader(String fileName) throws FileNotFoundException {
 
-        list = new DLinkedList();
+        list = new LinkedList();
         list = readFile(fileName);
         new GUIWindow(list);
     }
@@ -47,7 +47,7 @@ public class DataReader {
      *
      * @return Returns the list of influencers.
      */
-    public DLinkedList getList() {
+    public LinkedList getList() {
         return list;
     }
 
@@ -66,7 +66,7 @@ public class DataReader {
      * @return returns the linked list of influencers.
      * 
      */
-    private DLinkedList readFile(String fileName) throws FileNotFoundException {
+    private LinkedList readFile(String fileName) throws FileNotFoundException {
 
         // create the list to store influencers
         // DLinkedList newList = new DLinkedList();
