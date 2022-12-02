@@ -18,9 +18,9 @@ import student.TestCase;
  * @author Nana Yaw Barimah Oteng (nanayawo21)
  * @version 2022.11.18
  */
-public class DLinkedListTest extends TestCase {
+public class LinkedListTest extends TestCase {
     // Fields------------------------------------
-    private DLinkedList list;
+    private LinkedList list;
     private Influencer inf;
     private Influencer inf1;
     private Influencer inf2;
@@ -30,7 +30,7 @@ public class DLinkedListTest extends TestCase {
      * Sets up test method.
      */
     public void setUp() {
-        list = new DLinkedList();
+        list = new LinkedList();
         inf = new Influencer("Test", "Channel", "Brazil", "Topic");
         inf1 = new Influencer("Test1", "Channel1", "Ghana", "Topic1");
         inf2 = new Influencer("Test2", "Channel2", "America", "Topic2");
@@ -214,8 +214,8 @@ public class DLinkedListTest extends TestCase {
      * lists are equal.
      */
     public void testEquals() {
-        DLinkedList list1 = new DLinkedList();
-        DLinkedList list2 = new DLinkedList();
+        LinkedList list1 = new LinkedList();
+        LinkedList list2 = new LinkedList();
         list.add(inf);
         list.add(inf);
         list1.add(inf1);
@@ -236,7 +236,7 @@ public class DLinkedListTest extends TestCase {
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
-        list.sortByName();
+        list.sort(new CompareByChannelName());
         assertTrue(list.getEntry(0).equals(inf));
     }
 
@@ -245,12 +245,12 @@ public class DLinkedListTest extends TestCase {
      * Tests sortbyEngagement() sorts lists by engagement.
      */
     public void testSortByEngagement() {
-        DLinkedList list1 = new DLinkedList();
-        list1.sortByEngagement();
+        LinkedList list1 = new LinkedList();
+        list1.sort(new CompareByEngagementRate(MonthEnum.FIRSTQUART, "Traditional Engagement Rate"));
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
-        list.sortByEngagement();
+        list.sort(new CompareByEngagementRate(MonthEnum.FIRSTQUART, "Traditional Engagement Rate"));
         assertTrue(list.getEntry(0).equals(inf2));
     }
 
@@ -259,8 +259,8 @@ public class DLinkedListTest extends TestCase {
      * Tests toArray() returns an array version of the list.
      */
     public void testToArray() {
-        DLinkedList list1 = new DLinkedList();
-        list1.sortByName();
+        LinkedList list1 = new LinkedList();
+        list1.sort(new CompareByChannelName());
         list.add(inf);
         list.add(inf1);
         assertEquals("[" + inf.toString() + ", " + inf1.toString() + "]", Arrays
