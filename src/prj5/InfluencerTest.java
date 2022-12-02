@@ -172,15 +172,15 @@ public class InfluencerTest extends TestCase {
     }
 
 
-    /**
-     * Tests compareTo()
-     */
-    public void testCompareTo() {
-        Influencer inf1 = new Influencer("Test1", "Channel1", "Brazil1",
-            "Topic1");
-        Engagement[] engArr = { eng2, eng3 };
-        inf1.setEngagements(engArr);
-        assertTrue(inf.compareTo(inf1) > 0);
-        assertEquals(0.0, inf.compareTo(inf), 0.01);
-    }
+//    /**
+//     * Tests compareTo()
+//     */
+//    public void testCompareTo() {
+//        Influencer inf1 = new Influencer("Test1", "Channel1", "Brazil1",
+//            "Topic1");
+//        Engagement[] engArr = { eng2, eng3 };
+//        inf1.setEngagements(engArr);
+//        assertTrue(inf.compareTo(inf1) > 0);
+//        assertEquals(0.0, inf.compareTo(inf), 0.01);
+//    }
 }

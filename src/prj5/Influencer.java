@@ -173,23 +173,16 @@ public class Influencer {
     }
 
 
-    /**
-     * Returns 1,0,-1
-     *
-     * @param other is the other influencer
-     * @return returns 1,0,-1 depending on the engagement of the other
-     * influencer.
-     */
-    public double compareTo(Influencer other) {
+    public double getEngagementRate(MonthEnum month, String engType){
 
-        double thisRate =
-            this.getFirstQuartEngagement().getTradEngagementRate();
-        double otherRate =
-            other.getFirstQuartEngagement().getTradEngagementRate();
+        if(engType.equals("Traditional Engagement Rate")){
 
-        return thisRate - otherRate;
+            return this.getEngagementForMonth(month).getTradEngagementRate();
+        }else{
+
+            return this.getEngagementForMonth(month).getReachEngagementRate();
+        }
     }
-
 
     /**
      * Method to check equality of
