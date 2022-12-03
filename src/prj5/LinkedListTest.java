@@ -144,6 +144,65 @@ public class LinkedListTest extends TestCase {
 
 
     /**
+     * Tests remove() removes an influencer at a specified index.
+     */
+    public void testRemove() {
+        list.add(inf);
+        list.add(inf1);
+        list.add(inf2);
+
+        assertEquals(inf1, list.remove(1));
+        assertEquals("[" + inf.toString() + ", " + inf2.toString() + "]", list
+            .toString());
+        assertEquals(2, list.getLength());
+        
+        list.clear();
+        list.add(inf);
+        list.add(inf1);
+        list.add(inf2);
+        
+        assertEquals(inf, list.remove(0));
+        list.add(inf3);
+        assertEquals(inf3, list.remove(2));
+        
+        
+        
+        
+
+    }
+
+
+    /**
+     * Tests remove() removes an influencer at a specified index.
+     */
+    public void testRemoveExceptions() {
+        list.add(inf);
+        list.add(inf1);
+        list.add(inf2);
+        
+        IndexOutOfBoundsException exception = null;
+        IndexOutOfBoundsException exception1 = null;
+        
+        try {
+            list.remove(4);
+        }
+        catch(IndexOutOfBoundsException e) {
+            exception = e;
+        }
+        assertNotNull(exception);
+        
+        try {
+            list.remove(-1);
+        }
+        catch(IndexOutOfBoundsException e) {
+            exception1 = e;
+        }
+        assertNotNull(exception1);
+
+    }
+
+
+    /**
      * Tests getEntry() returns an influencer at a specified index.
      */
     public void testGetEntry() {
@@ -194,22 +253,6 @@ public class LinkedListTest extends TestCase {
 
 
     /**
-     * Tests remove() removes an influencer at a specified index.
-     */
-    public void testRemove() {
-        list.add(inf);
-        list.add(inf1);
-        list.add(inf2);
-
-        assertEquals(inf1, list.remove(1));
-        assertEquals("[" + inf.toString() + ", " + inf2.toString() + "]", list
-            .toString());
-        assertEquals(2, list.getLength());
-
-    }
-
-
-    /**
      * Tests equals() returns boolean value depending on whether or not two
      * lists are equal.
      */
@@ -236,9 +279,22 @@ public class LinkedListTest extends TestCase {
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
+        list.add(inf3);
+        list.add(new Influencer("Test", "America", "Brazil", "Topic"));
+        list.add(new Influencer("Test", "Baseball", "Brazil", "Topic"));
+        
+        list.sort(new CompareByChannelName());
+
+        assertTrue(list.getEntry(0).equals(inf3));
+        
+        list.clear();
         list.sort(new CompareByChannelName());
         
+        list.clear();
+        list.add(inf);
+        list.sort(new CompareByChannelName());
         assertTrue(list.getEntry(0).equals(inf));
+       
     }
 
 
@@ -247,11 +303,15 @@ public class LinkedListTest extends TestCase {
      */
     public void testSortByEngagement() {
         LinkedList list1 = new LinkedList();
-        list1.sort(new CompareByEngagementRate(MonthEnum.FIRSTQUART, "Traditional Engagement Rate"));
+        list1.sort(new CompareByEngagementRate(MonthEnum.FIRSTQUART,
+            "Traditional Engagement Rate"));
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
-        list.sort(new CompareByEngagementRate(MonthEnum.FIRSTQUART, "Traditional Engagement Rate"));
+        
+        list.sort(new CompareByEngagementRate(MonthEnum.FIRSTQUART,
+            "Traditional Engagement Rate"));
+        
         assertTrue(list.getEntry(0).equals(inf2));
     }
 
@@ -283,17 +343,20 @@ public class LinkedListTest extends TestCase {
         String str = "[" + inf.toString() + ", " + inf1.toString() + "]";
         assertEquals(str, list.toString());
     }
-    
+
+
     /**
-     * Tests that the iterator traverses the list appropriately. If next is called when 
-     * the iterator is at the end of the list, a NoSuchElementException is thrown.
+     * Tests that the iterator traverses the list appropriately. If next is
+     * called when
+     * the iterator is at the end of the list, a NoSuchElementException is
+     * thrown.
      */
     public void testIterator() {
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
         Iterator<Influencer> iter = list.iterator();
-        
+
         assertTrue(iter.hasNext());
         assertEquals(inf, iter.next());
         assertTrue(iter.hasNext());
@@ -301,14 +364,14 @@ public class LinkedListTest extends TestCase {
         assertTrue(iter.hasNext());
         assertEquals(inf2, iter.next());
         assertFalse(iter.hasNext());
-        
+
         NoSuchElementException exception = null;
-        
+
         try {
             iter.next();
         }
         catch (NoSuchElementException e) {
-            exception = e;      
+            exception = e;
         }
         assertNotNull(exception);
     }

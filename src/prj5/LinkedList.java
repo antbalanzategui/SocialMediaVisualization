@@ -249,7 +249,6 @@ public class LinkedList
                 + " out of bounds");
         }
 
-<<<<<<< HEAD
         Influencer removeNode = null;
         
         Node<Influencer> current = head;
@@ -261,36 +260,22 @@ public class LinkedList
         }
         
         int currentIndex = 0;
-
-        while (current.getNext() != null) {
-            if ((currentIndex + 1) == index) {
-                removeNode = current.getNext().getData();
-                Node<Influencer> newNext = current.getNext().getNext();
-                current.setNext(newNext);
-                size--;
-                return removeNode;
-=======
-            while (current.getNext() != null) {
+            while (current != null) {
+                
                 if ((currentIndex + 1) == index) {
+                    removeNode = current.getNext().getData();                   
                     Node<Influencer> newNext = current.getNext().getNext();
                     current.setNext(newNext);
                     size--;
-                    return current.getData();
                 }
                 currentIndex++;
                 current = current.getNext();
->>>>>>> 1dbcb4b23e636ede9268932b8b413ee7d922b413
             }
-            current = current.getNext();
-            currentIndex++;
-        }
-
-        // if the element was never found, this also handles empty case
-        throw new IndexOutOfBoundsException("Index " + index
-            + " out of bounds");
+            return removeNode;
 
 
     }
+
 
 
     /**
