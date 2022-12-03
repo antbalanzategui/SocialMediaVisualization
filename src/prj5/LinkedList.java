@@ -10,6 +10,7 @@ package prj5;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import linkedlist.SinglyLinkedList.Node;
 
 // Import Statements
 
@@ -24,7 +25,8 @@ import list.ListInterface;
  * @author Lukyan Sukhachevskyi (lukyan)
  * @version 2022.11.14
  */
-public class LinkedList implements ListInterface<Influencer> {
+public class LinkedList
+    implements Iterable<Influencer>, ListInterface<Influencer> {
     // Fields----------------------------------------------------------------
     private Node<Influencer> head;
     private Node<Influencer> tail;
@@ -117,16 +119,19 @@ public class LinkedList implements ListInterface<Influencer> {
             return false;
         }
 
-        Node<Influencer> curr = head;
-        while (curr != null) {
-            if (curr.getData().getChannelName().equals(influencer
+        Iterator<Influencer> iter = this.iterator();
+
+        while (iter.hasNext()) {
+            Influencer iterInfluencer = iter.next();
+
+            if (iterInfluencer.getChannelName().equals(influencer
                 .getChannelName())) {
+
                 return true;
+
             }
-            curr = curr.getNext();
         }
         return false;
-
     }
 
 
@@ -143,6 +148,7 @@ public class LinkedList implements ListInterface<Influencer> {
                 + index);
         }
         Node<Influencer> current = head;
+
         for (int i = 0; i < index; i++) {
             current = current.getNext();
         }
@@ -172,13 +178,13 @@ public class LinkedList implements ListInterface<Influencer> {
      *            the influencer being added.
      */
     @Override
-    public void add(Influencer newEntry)
-    {
+    public void add(Influencer newEntry) {
         Node<Influencer> newNode = new Node<Influencer>(newEntry);
         if (isEmpty()) {
 
             head = tail = newNode;
-        }else {
+        }
+        else {
             tail.setNext(newNode);
         }
         tail = newNode;
@@ -211,14 +217,19 @@ public class LinkedList implements ListInterface<Influencer> {
      */
     public int getIndex(Influencer influencer) {
         int index = 0;
-        Node<Influencer> currNode = head;
-        while (currNode != null) {
-            if (influencer.getChannelName().equals(currNode.getData()
+
+        Iterator<Influencer> iter = this.iterator();
+
+        while (iter.hasNext()) {
+            Influencer iterInfluencer = iter.next();
+
+            if (iterInfluencer.getChannelName().equals(influencer
                 .getChannelName())) {
+
                 return index;
+
             }
             index++;
-            currNode = currNode.getNext();
         }
         return -1;
     }
@@ -232,36 +243,28 @@ public class LinkedList implements ListInterface<Influencer> {
      * @return returns the removed influencer.
      */
     public Influencer remove(int index) {
-
-        Influencer result = null; // Return value
-        if ((index >= 1) && (index <= size))
-        {
-            assert !isEmpty();
-            if (index == 1) // Case 1: Remove first entry
-            {
-                result = head.getData(); // Save entry to be removed
-                head = head.getNext();
-                if (size == 1) {
-                    tail = null; // Solitary entry was removed
-                }
-            }
-            else // Case 2: Not first entry
-            {
-                Node<Influencer> nodeBefore = getNodeAtIndex(index - 1);
-                Node<Influencer> nodeToRemove = nodeBefore.getNext();
-                Node<Influencer> nodeAfter = nodeToRemove.getNext();
-                nodeBefore.setNext(nodeAfter);
-                result = nodeToRemove.getData(); // Save entry to be removed
-                if (index == size) {
-                    tail = nodeBefore; // Last node was removed
-                }
-            } // end if
-            size--;
+        // if the index is invalid
+        if (index < 0 || head == null) {
+            throw new IndexOutOfBoundsException("Index is out of bounds");
         }
-        else
-            throw new IndexOutOfBoundsException(
-                "Illegal position given to remove operation.");
-        return result;
+        else {
+            Node<Influencer> current = head;
+            int currentIndex = 0;
+
+            while (current.getNext() != null) {
+                if ((currentIndex + 1) == index) {
+                    Node<Influencer> newNext = current.getNext().getNext();
+                    current.setNext(newNext);
+                    size--;
+                    return true;
+                }
+                currentIndex++;
+                current = current.getNext();
+            }
+
+            // if the element was never found, this also handles empty case
+            throw new IndexOutOfBoundsException("Index is out of bounds");
+        }
 
     }
 
@@ -302,18 +305,16 @@ public class LinkedList implements ListInterface<Influencer> {
         return true;
     }
 
-    public void sort(Comparator<Influencer> c)
-    {
+
+    public void sort(Comparator<Influencer> c) {
         // If zero or one item is in the chain, there is nothing to do
-        if (getLength() > 1)
-        {
+        if (getLength() > 1) {
             assert head != null;
             // Break chain into 2 pieces: sorted and unsorted
             Node<Influencer> unsortedPart = head.getNext();
             assert unsortedPart != null;
             head.setNext(null);
-            while (unsortedPart != null)
-            {
+            while (unsortedPart != null) {
                 Node<Influencer> nodeToInsert = unsortedPart;
                 unsortedPart = unsortedPart.getNext();
                 insertInOrder(c, nodeToInsert);
@@ -321,21 +322,22 @@ public class LinkedList implements ListInterface<Influencer> {
         } // end if
     } // end insertionSort
 
-    private void insertInOrder(Comparator<Influencer> c, Node<Influencer> nodeToInsert)
-    {
+
+    private void insertInOrder(
+        Comparator<Influencer> c,
+        Node<Influencer> nodeToInsert) {
         Influencer inf = nodeToInsert.getData();
         Node<Influencer> currentNode = head;
         Node<Influencer> previousNode = null;
         // Locate insertion point
-        while ( (currentNode != null) &&
-            (c.compare(inf, currentNode.getData()) < 0) )
-        {
+        while ((currentNode != null) && (c.compare(inf, currentNode
+            .getData()) < 0)) {
             previousNode = currentNode;
             currentNode = currentNode.getNext();
         } // end while
-        // Make the insertion
-        if (previousNode != null)
-        { // Insert between previousNode and currentNode
+          // Make the insertion
+        if (previousNode != null) { // Insert between previousNode and
+                                    // currentNode
             previousNode.setNext(nodeToInsert);
             nodeToInsert.setNext(currentNode);
         }
@@ -404,26 +406,27 @@ public class LinkedList implements ListInterface<Influencer> {
      * @return new Iterator object
      */
     public Iterator<Influencer> iterator() {
-        return new DLListIterator();
+        return new ListIterator();
     }
 
     /**
      * Private List Iterator to traverse the Linked list.
-     * Iterator does not use a remove() method, because the DLinkedList implements a remove() method.
+     * Iterator does not use a remove() method, because the DLinkedList
+     * implements a remove() method.
      *
      *
      * @author Nana Yaw Barimah Oteng(nanayawo21)
      * @version 2021.11.27
      *
      */
-    private class DLListIterator implements Iterator<Influencer> {
+    private class ListIterator implements Iterator<Influencer> {
         private Node<Influencer> next;
         private boolean newCurr;
 
         /**
          * Creates a new DLListIterator
          */
-        public DLListIterator() {
+        public ListIterator() {
             next = head;
             newCurr = false;
         }
