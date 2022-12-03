@@ -122,7 +122,8 @@ public class Engagement {
     public double getTradEngagementRate() {
 
         if (numFollowers == 0) {
-            return 0.0;
+
+            return -1.0;
         }
 
         DecimalFormat df = new DecimalFormat("#.#");
@@ -141,7 +142,8 @@ public class Engagement {
     public double getReachEngagementRate() {
 
         if (numViews == 0) {
-            return 0.0;
+
+            return -1.0;
         }
 
         DecimalFormat df = new DecimalFormat("#.#");

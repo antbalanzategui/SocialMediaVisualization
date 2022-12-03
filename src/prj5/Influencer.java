@@ -182,6 +182,11 @@ public class Influencer {
      */
     public double getEngagementRate(MonthEnum month, String engType) {
 
+        if(this.getEngagementForMonth(month) == null){
+
+            return 0;
+        }
+
         if (engType.equals("Traditional Engagement Rate")) {
 
             return this.getEngagementForMonth(month).getTradEngagementRate();
