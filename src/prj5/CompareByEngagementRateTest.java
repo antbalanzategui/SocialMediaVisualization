@@ -79,14 +79,14 @@ public class CompareByEngagementRateTest extends TestCase {
      */
     public void testCompareException() {
 
-        NullPointerException exception = null;
-        NullPointerException exception1 = null;
+        IllegalArgumentException exception = null;
+        IllegalArgumentException exception1 = null;
 
         try {
             comp.compare(null, null);
 
         }
-        catch (NullPointerException e) {
+        catch (IllegalArgumentException e) {
             exception = e;
         }
         assertNotNull(exception);
@@ -95,7 +95,7 @@ public class CompareByEngagementRateTest extends TestCase {
             comp.compare(inf, null);
 
         }
-        catch (NullPointerException e) {
+        catch (IllegalArgumentException e) {
             exception1 = e;
         }
         assertNotNull(exception);

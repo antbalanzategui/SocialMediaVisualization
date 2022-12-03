@@ -23,10 +23,8 @@ public class CompareByChannelName implements Comparator<Influencer> {
      * zero, or a positive integer as the first argument is less than, equal
      * to, or greater than the second.
      *
-     * @param o1
-     *            the first object to be compared.
-     * @param o2
-     *            the second object to be compared.
+     * @param o1 the first object to be compared.
+     * @param o2 the second object to be compared.
      * @return a negative integer, zero, or a positive integer as the
      *         first argument is less than, equal to, or greater than the
      *         second.
@@ -39,7 +37,7 @@ public class CompareByChannelName implements Comparator<Influencer> {
 
         if (o1 == null || o2 == null) {
 
-            throw new NullPointerException(
+            throw new IllegalArgumentException(
                 "The object being compared is null.");
         }
 

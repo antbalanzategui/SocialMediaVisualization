@@ -45,7 +45,8 @@ public class LinkedList
      */
     private void init() {
 
-        head = tail = new Node<Influencer>(null);
+        head = new Node<Influencer>(null);
+        tail = head;
         size = 0;
     }
 
@@ -172,7 +173,8 @@ public class LinkedList
         Node<Influencer> newNode = new Node<Influencer>(newEntry);
         if (isEmpty()) {
 
-            head = tail = newNode;
+            head = newNode;
+            tail = head;
         }
         else {
             tail.setNext(newNode);
@@ -303,10 +305,10 @@ public class LinkedList
     public void sort(Comparator<Influencer> c) {
         // If zero or one item is in the chain, there is nothing to do
         if (getLength() > 1) {
-            assert head != null;
+
             // Break chain into 2 pieces: sorted and unsorted
             Node<Influencer> unsortedPart = head.getNext();
-            assert unsortedPart != null;
+
             head.setNext(null);
             while (unsortedPart != null) {
                 Node<Influencer> nodeToInsert = unsortedPart;

@@ -22,6 +22,12 @@ public class CompareByEngagementRate implements Comparator<Influencer> {
     private final String engType;
 
 
+    /**
+     * Constructor for CompareByEngagementRate Comparator
+     *
+     * @param month the month of engagement
+     * @param engType the type of engagement
+     */
     public CompareByEngagementRate(MonthEnum month, String engType) {
 
         this.month = month;
@@ -46,7 +52,7 @@ public class CompareByEngagementRate implements Comparator<Influencer> {
 
         if (o1 == null || o2 == null) {
 
-            throw new NullPointerException(
+            throw new IllegalArgumentException(
                 "The object being compared is null.");
         }
 
