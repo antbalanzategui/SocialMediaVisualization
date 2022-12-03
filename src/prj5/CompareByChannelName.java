@@ -10,8 +10,8 @@ package prj5;
 import java.util.Comparator;
 
 /**
- * Project: socialmediavisualization
- * Class: SortByName
+ * Project: P5 Social Media Visualization
+ * Class: CompareByChannelName
  *
  * @author Lukyan Sukhachevskyi (lukyan)
  * @version 2022.12.02

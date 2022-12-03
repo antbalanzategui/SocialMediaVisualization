@@ -8,23 +8,16 @@
 package prj5;
 
 /**
- * Enum representing months of the year + first quarter
+ * Project: P5 Social Media Visualization
+ * Enum: MonthEnum
+ *
+ * Enumeration representing months.
  *
  * @author Lukyan Sukhachevskyi (lukyan)
  * @version 2022.11.23
  */
 public enum MonthEnum {
-    JANUARY,
-    FEBRUARY,
-    MARCH,
-    APRIL,
-    MAY,
-    JUNE,
-    JULY,
-    AUGUST,
-    SEPTEMBER,
-    OCTOBER,
-    NOVEMBER,
-    DECEMBER,
-    FIRSTQUART
+
+    JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY,
+    AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER, FIRSTQUART
 }

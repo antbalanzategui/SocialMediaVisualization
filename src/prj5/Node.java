@@ -8,11 +8,12 @@
 package prj5;
 
 /**
- * Project: socialmediavisualization
+ * Project: P5 Social Media Visualization
  * Class: Node
  *
- * @param <T>
- *            the type parameter
+ * Class which is used to make LinkedList class.
+ *
+ * @param <T> the type parameter
  * @author Lukyan Sukhachevskyi (lukyan)
  * @version 2022.11.14
  */
@@ -21,11 +22,11 @@ public class Node<T> {
     private T data;
     private Node<T> next;
 
+
     /**
      * Instantiates a new default Doubly Linked Node.
      *
-     * @param data
-     *            the data
+     * @param data the data
      */
     public Node(T data) {
 
@@ -36,10 +37,8 @@ public class Node<T> {
     /**
      * Instantiates a new Doubly Linked Node.
      *
-     * @param data
-     *            the data
-     * @param next
-     *            the next node
+     * @param data the data
+     * @param next the next node
      */
     public Node(T data, Node<T> next) {
 
@@ -62,8 +61,7 @@ public class Node<T> {
     /**
      * Set data.
      *
-     * @param data
-     *            the data
+     * @param data the data
      */
     public void setData(T data) {
 
@@ -85,8 +83,7 @@ public class Node<T> {
     /**
      * Set next doubly linked node.
      *
-     * @param next
-     *            the next node
+     * @param next the next node
      */
     public void setNext(Node<T> next) {
 

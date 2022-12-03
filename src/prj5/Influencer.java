@@ -27,23 +27,17 @@ public class Influencer {
     private final String mainTopic;
     private Engagement[] engagements;
 
+
     /**
      * Constructor for the Influencer class
      *
-     * @param username
-     *            user name of influencer
-     * @param channelName
-     *            channelName of influencer
-     * @param country
-     *            country of influencer
-     * @param mainTopic
-     *            mainTopic of influencer
+     * @param username    user name of influencer
+     * @param channelName channelName of influencer
+     * @param country     country of influencer
+     * @param mainTopic   mainTopic of influencer
      */
     public Influencer(
-        String username,
-        String channelName,
-        String country,
-        String mainTopic) {
+        String username, String channelName, String country, String mainTopic) {
 
         this.username = username;
         this.channelName = channelName;
@@ -58,6 +52,7 @@ public class Influencer {
      * @return username
      */
     public String getUsername() {
+
         return username;
     }
 
@@ -68,6 +63,7 @@ public class Influencer {
      * @return channelName
      */
     public String getChannelName() {
+
         return channelName;
     }
 
@@ -78,6 +74,7 @@ public class Influencer {
      * @return country
      */
     public String getCountry() {
+
         return country;
     }
 
@@ -88,6 +85,7 @@ public class Influencer {
      * @return mainTopic
      */
     public String getMainTopic() {
+
         return mainTopic;
     }
 
@@ -98,6 +96,7 @@ public class Influencer {
      * @return engagements
      */
     public Engagement[] getEngagements() {
+
         return engagements;
     }
 
@@ -105,8 +104,7 @@ public class Influencer {
     /**
      * Setter for engagements
      *
-     * @param engagements
-     *            the engagement data for influencer.
+     * @param engagements the engagement data for influencer.
      */
     public void setEngagements(Engagement[] engagements) {
 
@@ -118,10 +116,9 @@ public class Influencer {
      * Method to find the engagment for a particular month
      * within our engagement array
      *
-     * @param month
-     *            month requested
+     * @param month month requested
      * @return the engagement of that particular month
-     *         null if month is not found
+     * null if month is not found
      */
     public Engagement getEngagementForMonth(MonthEnum month) {
 
@@ -160,7 +157,7 @@ public class Influencer {
 
             if (engagement.getMonth().equals(MonthEnum.MARCH) || engagement
                 .getMonth().equals(MonthEnum.FEBRUARY) || engagement.getMonth()
-                    .equals(MonthEnum.JANUARY)) {
+                .equals(MonthEnum.JANUARY)) {
 
                 totalStats[0] += engagement.getNumLikes();
                 totalStats[1] += engagement.getNumPosts();
@@ -184,10 +181,8 @@ public class Influencer {
     /**
      * Method used to get a specified type of engagement rate.
      *
-     * @param month
-     *            the month of the engagement
-     * @param engType
-     *            the type of the engagement (Traditional or Reach)
+     * @param month   the month of the engagement
+     * @param engType the type of the engagement (Traditional or Reach)
      * @return the specified engagement rate calculation for that month
      */
     public double getEngagementRate(MonthEnum month, String engType) {
@@ -211,13 +206,11 @@ public class Influencer {
     /**
      * Method to check equality of two influencer objects
      *
-     * @param obj
-     *            object of comparison to "this"
+     * @param obj object of comparison to "this"
      * @return true if equal,
-     *         false otherwise
+     * false otherwise
      */
-    @Override
-    public boolean equals(Object obj) {
+    @Override public boolean equals(Object obj) {
 
         // null check
         if (obj == null) {
@@ -256,15 +249,14 @@ public class Influencer {
         }
 
         // fields check
-        return (username.equals(inf.username) && channelName.equals(
-            inf.channelName) && country.equals(inf.country) && mainTopic.equals(
-                inf.mainTopic));
+        return (username.equals(inf.username) && channelName
+            .equals(inf.channelName) && country.equals(inf.country) && mainTopic
+            .equals(inf.mainTopic));
     }
 
 
     /**
-     * Method to display data of influencer
-     * object as a string
+     * Method to display data of influencer object as a string
      *
      * @return String of influencer object
      */

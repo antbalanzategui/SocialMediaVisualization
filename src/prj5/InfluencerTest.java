@@ -10,7 +10,10 @@ package prj5;
 import student.TestCase;
 
 /**
- * Test class for Influencer
+ * Project: P5 Social Media Visualization
+ * Class: InfluencerTest
+ *
+ * Tests the Influencer Class
  *
  * @author Antonio Balanzategui (antbalanzategui)
  * @author Nana Yaw Barimah Oteng (nanayawo21)
@@ -24,6 +27,7 @@ public class InfluencerTest extends TestCase {
     private Engagement eng1;
     private Engagement eng2;
     private Engagement eng3;
+
 
     /**
      * Sets up
@@ -110,8 +114,8 @@ public class InfluencerTest extends TestCase {
 
         // firstQuarter case
         Engagement frstQrtEng = inf.getEngagementForMonth(MonthEnum.FIRSTQUART);
-        Engagement expected = new Engagement(MonthEnum.FIRSTQUART, 16, 20, 4, 7,
-            16);
+        Engagement expected =
+            new Engagement(MonthEnum.FIRSTQUART, 16, 20, 4, 7, 16);
         assertTrue(expected.equals(frstQrtEng));
 
         // all other cases
@@ -182,12 +186,14 @@ public class InfluencerTest extends TestCase {
      * Tests getEngagementRate(), to ensure it returns appropriate values.
      */
     public void testGetEngagementRate() {
+
         assertEquals(0.00, inf.getEngagementRate(MonthEnum.APRIL,
             "Traditional Engagement Rate"), 0.01);
         assertEquals(200.0, inf.getEngagementRate(MonthEnum.FEBRUARY,
             "Traditional Engagement Rate"), 0.01);
-        assertEquals(160, inf.getEngagementRate(MonthEnum.JANUARY,
-            "Reach Engagement Rate"), 0.01);
+        assertEquals(160,
+            inf.getEngagementRate(MonthEnum.JANUARY, "Reach Engagement Rate"),
+            0.01);
     }
 
 

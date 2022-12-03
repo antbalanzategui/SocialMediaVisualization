@@ -7,29 +7,35 @@
 
 package prj5;
 
+import student.TestCase;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import student.TestCase;
 
 /**
- * Test Class for Doubly Linked List.
+ * Project: P5 Social Media Visualization
+ * Class: LinkedListTest
+ *
+ * Tests the LinkedList Class
  *
  * @author Nana Yaw Barimah Oteng (nanayawo21)
- * @version 2022.11.18
+ * @version 2022.12.02
  */
 public class LinkedListTest extends TestCase {
-    // Fields------------------------------------
+
     private LinkedList list;
     private Influencer inf;
     private Influencer inf1;
     private Influencer inf2;
     private Influencer inf3;
 
+
     /**
      * Sets up test method.
      */
     public void setUp() {
+
         list = new LinkedList();
         inf = new Influencer("Test", "Attack", "Brazil", "Topic");
         inf1 = new Influencer("Test1", "Banana", "Ghana", "Topic1");
@@ -39,15 +45,12 @@ public class LinkedListTest extends TestCase {
         Engagement eng1 = new Engagement(MonthEnum.JANUARY, 5, 6, 4, 3, 5);
         Engagement eng2 = new Engagement(MonthEnum.FEBRUARY, 5, 8, 4, 3, 6);
         Engagement eng3 = new Engagement(MonthEnum.MARCH, 6, 6, 4, 1, 5);
-        Engagement[] eng = new Engagement[3];
-        eng[0] = eng1;
-        eng[1] = eng2;
-        eng[2] = eng3;
+        Engagement[] eng = new Engagement[] { eng1, eng2, eng3 };
+
         inf.setEngagements(eng);
         inf1.setEngagements(eng);
         inf2.setEngagements(eng);
         inf3.setEngagements(eng);
-
     }
 
 
@@ -55,6 +58,7 @@ public class LinkedListTest extends TestCase {
      * Tests that add() method adds an Influencer to the list.
      */
     public void testAdd() {
+
         assertEquals(0, list.getLength());
 
         list.add(inf);
@@ -74,7 +78,6 @@ public class LinkedListTest extends TestCase {
             exception = e;
         }
         assertNotNull(exception);
-
     }
 
 
@@ -82,6 +85,7 @@ public class LinkedListTest extends TestCase {
      * Tests that clear resets the entire list.
      */
     public void testClear() {
+
         assertEquals(0, list.getLength());
 
         list.add(inf);
@@ -103,6 +107,7 @@ public class LinkedListTest extends TestCase {
      * it returns false.
      */
     public void testIsEmpty() {
+
         assertTrue(list.isEmpty());
         list.add(inf);
         assertFalse(list.isEmpty());
@@ -113,6 +118,7 @@ public class LinkedListTest extends TestCase {
      * Tests replace() replaces an influencer in the list.
      */
     public void testReplace() {
+
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
@@ -127,6 +133,7 @@ public class LinkedListTest extends TestCase {
      * Tests contains() checks if an influencer is contained in the list.
      */
     public void testContains() {
+
         assertFalse(list.contains(inf));
         list.add(inf);
         assertTrue(list.contains(inf));
@@ -139,7 +146,6 @@ public class LinkedListTest extends TestCase {
         list.add(inf2);
         assertTrue(list.contains(inf1));
         assertTrue(list.contains(inf2));
-
     }
 
 
@@ -147,13 +153,14 @@ public class LinkedListTest extends TestCase {
      * Tests remove() removes an influencer at a specified index.
      */
     public void testRemove() {
+
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
 
         assertEquals(inf1, list.remove(1));
-        assertEquals("[" + inf.toString() + ", " + inf2.toString() + "]", list
-            .toString());
+        assertEquals("[" + inf.toString() + ", " + inf2.toString() + "]",
+            list.toString());
         assertEquals(2, list.getLength());
 
         list.clear();
@@ -164,7 +171,6 @@ public class LinkedListTest extends TestCase {
         assertEquals(inf, list.remove(0));
         list.add(inf3);
         assertEquals(inf3, list.remove(2));
-
     }
 
 
@@ -172,6 +178,7 @@ public class LinkedListTest extends TestCase {
      * Tests remove() removes an influencer at a specified index.
      */
     public void testRemoveExceptions() {
+
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
@@ -194,7 +201,6 @@ public class LinkedListTest extends TestCase {
             exception1 = e;
         }
         assertNotNull(exception1);
-
     }
 
 
@@ -202,6 +208,7 @@ public class LinkedListTest extends TestCase {
      * Tests getEntry() returns an influencer at a specified index.
      */
     public void testGetEntry() {
+
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
@@ -227,7 +234,6 @@ public class LinkedListTest extends TestCase {
         }
         assertNotNull(exception);
         assertNotNull(exception1);
-
     }
 
 
@@ -235,6 +241,7 @@ public class LinkedListTest extends TestCase {
      * Tests getIndex() returns an influencer at a specified index.
      */
     public void testGetIndex() {
+
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
@@ -244,7 +251,6 @@ public class LinkedListTest extends TestCase {
         assertEquals(2, list.getIndex(inf2));
 
         assertEquals(-1, list.getIndex(inf3));
-
     }
 
 
@@ -253,6 +259,7 @@ public class LinkedListTest extends TestCase {
      * lists are equal.
      */
     public void testEquals() {
+
         LinkedList list1 = new LinkedList();
         LinkedList list2 = new LinkedList();
         list.add(inf);
@@ -264,7 +271,6 @@ public class LinkedListTest extends TestCase {
         assertFalse(list.equals(new Object()));
         assertFalse(list1.equals(list));
         assertFalse(list2.equals(list));
-
     }
 
 
@@ -272,6 +278,7 @@ public class LinkedListTest extends TestCase {
      * Tests sortByName() sorts lists by name.
      */
     public void testSortByName() {
+
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
@@ -290,7 +297,6 @@ public class LinkedListTest extends TestCase {
         list.add(inf);
         list.sort(new CompareByChannelName());
         assertTrue(list.getEntry(0).equals(inf));
-
     }
 
 
@@ -298,6 +304,7 @@ public class LinkedListTest extends TestCase {
      * Tests sortbyEngagement() sorts lists by engagement.
      */
     public void testSortByEngagement() {
+
         LinkedList list1 = new LinkedList();
         list1.sort(new CompareByEngagementRate(MonthEnum.FIRSTQUART,
             "Traditional Engagement Rate"));
@@ -316,12 +323,13 @@ public class LinkedListTest extends TestCase {
      * Tests toArray() returns an array version of the list.
      */
     public void testToArray() {
+
         LinkedList list1 = new LinkedList();
         list1.sort(new CompareByChannelName());
         list.add(inf);
         list.add(inf1);
-        assertEquals("[" + inf.toString() + ", " + inf1.toString() + "]", Arrays
-            .toString(list.toArray()));
+        assertEquals("[" + inf.toString() + ", " + inf1.toString() + "]",
+            Arrays.toString(list.toArray()));
     }
 
 
@@ -348,6 +356,7 @@ public class LinkedListTest extends TestCase {
      * thrown.
      */
     public void testIterator() {
+
         list.add(inf);
         list.add(inf1);
         list.add(inf2);

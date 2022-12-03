@@ -8,37 +8,43 @@
 package prj5;
 
 import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
 
 /**
- * Project Runner.
+ * Project: P5 Social Media Visualization
+ * Class: Input
+ *
+ * Driver class for the program
  *
  * @author Nana Yaw Barimah Oteng (nanayawo21)
- * @version 2022.11.18
+ * @version 2022.12.02
  */
 public class Input {
 
+    /**
+     * Driver class constructor.
+     */
     public Input() {
-        // TODO Auto-generated constructor stub
+
+        //Left empty on purpose
     }
 
 
     /**
      * Driver code for the socialmediavisualization project.
      *
-     * @param args
-     *            is the array parameter containing an input file.
-     * @throws FileNotFoundException
+     * @param args is the array parameter containing an input file.
+     * @throws FileNotFoundException File not found Exception
      */
     public static void main(String[] args) throws FileNotFoundException {
-        DataReader man;
+        DataReader reader;
+
         if (args.length == 1) {
-            man = new DataReader(args[0]);
+
+            reader = new DataReader(args[0]);
         }
         else {
 
-            man = new DataReader("SampleInput1_2022.csv");
+            reader = new DataReader("SampleInput1_2022.csv");
         }
     }
-
 }

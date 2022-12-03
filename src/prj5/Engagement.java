@@ -10,6 +10,9 @@ package prj5;
 import java.text.DecimalFormat;
 
 /**
+ * Project: P5 Social Media Visualization
+ * Class: Engagement
+ *
  * Class to hold the Engagement data of Influencers for a certain month
  *
  * @author Lukyan Sukhachevskyi (lukyan)
@@ -59,6 +62,7 @@ public class Engagement {
      * @return String of month
      */
     public MonthEnum getMonth() {
+
         return month;
     }
 
@@ -69,6 +73,7 @@ public class Engagement {
      * @return number of likes
      */
     public int getNumLikes() {
+
         return numLikes;
     }
 
@@ -79,6 +84,7 @@ public class Engagement {
      * @return number of posts
      */
     public int getNumPosts() {
+
         return numPosts;
     }
 
@@ -89,6 +95,7 @@ public class Engagement {
      * @return number of followers
      */
     public int getNumFollowers() {
+
         return numFollowers;
     }
 
@@ -99,6 +106,7 @@ public class Engagement {
      * @return number of comments
      */
     public int getNumComments() {
+
         return numComments;
     }
 
@@ -109,6 +117,7 @@ public class Engagement {
      * @return number of views
      */
     public int getNumViews() {
+
         return numViews;
     }
 
@@ -125,7 +134,7 @@ public class Engagement {
 
             return -1.0;
         }
-       
+
         DecimalFormat df = new DecimalFormat("#.#");
         String engagementRate =
             df.format((getTotalEngagement() / numFollowers) * 100.0);

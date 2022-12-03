@@ -10,7 +10,10 @@ package prj5;
 import student.TestCase;
 
 /**
- * Class to test all methods within Engagement class
+ * Project: P5 Social Media Visualization
+ * Class: EngagementTest
+ *
+ * Tests the Engagement Class
  *
  * @author Antonio Balanzategui (antbalanzategui)
  * @author Lukyan Sukhachevskyi (lukyan)
@@ -22,10 +25,12 @@ public class EngagementTest extends TestCase {
     private Engagement eng2;
     private Engagement eng3;
 
+
     /**
      * Sets up objects that will be used
      */
     public void setUp() {
+
         eng1 = new Engagement(MonthEnum.JANUARY, 7, 9, 8, 100, 5);
         eng2 = new Engagement(MonthEnum.FEBRUARY, 6, 9, 80, 1000, 50);
         eng3 = new Engagement(MonthEnum.JANUARY, 233, 10, 0, 1000, 0);
@@ -36,6 +41,7 @@ public class EngagementTest extends TestCase {
      * Tests getMonth
      */
     public void testGetMonth() {
+
         assertEquals(MonthEnum.JANUARY, eng1.getMonth());
         assertEquals(MonthEnum.FEBRUARY, eng2.getMonth());
     }
@@ -45,6 +51,7 @@ public class EngagementTest extends TestCase {
      * Tests getNumLikes
      */
     public void testGetNumLikes() {
+
         assertEquals(7, eng1.getNumLikes());
         assertEquals(6, eng2.getNumLikes());
     }
@@ -54,6 +61,7 @@ public class EngagementTest extends TestCase {
      * Tests getNumPosts
      */
     public void testGetNumPosts() {
+
         assertEquals(9, eng1.getNumPosts());
         assertEquals(9, eng2.getNumPosts());
     }
@@ -63,6 +71,7 @@ public class EngagementTest extends TestCase {
      * Tests getNumFollowers
      */
     public void testGetNumFollowers() {
+
         assertEquals(8, eng1.getNumFollowers());
         assertEquals(80, eng2.getNumFollowers());
     }
@@ -72,6 +81,7 @@ public class EngagementTest extends TestCase {
      * Tests getNumComments
      */
     public void testGetNumComments() {
+
         assertEquals(100, eng1.getNumComments());
         assertEquals(1000, eng2.getNumComments());
     }
@@ -81,6 +91,7 @@ public class EngagementTest extends TestCase {
      * Tests getNumViews
      */
     public void testGetNumViews() {
+
         assertEquals(5, eng1.getNumViews());
         assertEquals(50, eng2.getNumViews());
     }
@@ -90,10 +101,10 @@ public class EngagementTest extends TestCase {
      * Tests getTradEngagementRate
      */
     public void testGetTradEngagementRate() {
+
         assertEquals(1337.5, eng1.getTradEngagementRate(), 0.0001);
         assertEquals(1257.5, eng2.getTradEngagementRate(), 0.0001);
         assertEquals(-1.0, eng3.getTradEngagementRate(), 0.001);
-
     }
 
 
@@ -101,6 +112,7 @@ public class EngagementTest extends TestCase {
      * Tests getReachEngagementRate
      */
     public void testGetReachEngagementRate() {
+
         assertEquals(2140.0, eng1.getReachEngagementRate(), 0.0001);
         assertEquals(2012.0, eng2.getReachEngagementRate(), 0.0001);
         assertEquals(-1.0, eng3.getReachEngagementRate(), 0.001);
@@ -156,6 +168,7 @@ public class EngagementTest extends TestCase {
      * Tests toString
      */
     public void testToString() {
+
         assertEquals("[JANUARY, 7, 9, 8, 100, 5]", eng1.toString());
     }
 }

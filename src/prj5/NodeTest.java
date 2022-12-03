@@ -10,16 +10,20 @@ package prj5;
 import student.TestCase;
 
 /**
- * Class to test Node class
+ * Project: P5 Social Media Visualization
+ * Class: NodeTest
+ *
+ * Tests the Node class
  *
  * @author Antonio Balanzategui (antbalanzategui)
- * @version 2022.11.18
+ * @version 2022.12.02
  */
 public class NodeTest extends TestCase {
 
     private Node<String> dn1;
     private Node<String> dn2;
     private Node<String> dn3;
+
 
     /**
      * Sets up
@@ -36,9 +40,10 @@ public class NodeTest extends TestCase {
      * Tests getData()
      */
     public void testGetData() {
-        assertEquals(dn1.getData(), "Do");
-        assertEquals(dn2.getData(), "Yo");
-        assertEquals(dn3.getData(), "Fo");
+
+        assertEquals("Do", dn1.getData());
+        assertEquals("Yo", dn2.getData());
+        assertEquals("Fo", dn3.getData());
     }
 
 
@@ -46,8 +51,9 @@ public class NodeTest extends TestCase {
      * Tests setData()
      */
     public void testSetData() {
+
         dn1.setData("Test");
-        assertEquals(dn1.getData(), "Test");
+        assertEquals("Test", dn1.getData());
     }
 
 
@@ -55,9 +61,10 @@ public class NodeTest extends TestCase {
      * Tests getNext()
      */
     public void testGetNext() {
+
         assertNull(dn1.getNext());
         assertNull(dn2.getNext());
-        assertEquals(dn3.getNext(), dn2);
+        assertEquals(dn2, dn3.getNext());
     }
 
 
@@ -65,9 +72,10 @@ public class NodeTest extends TestCase {
      * Tests setNext()
      */
     public void testSetNext() {
+
         dn1.setNext(dn2);
-        assertEquals(dn1.getNext(), dn2);
+        assertEquals(dn2, dn1.getNext());
         dn3.setNext(dn1);
-        assertEquals(dn3.getNext(), dn1);
+        assertEquals(dn1, dn3.getNext());
     }
 }

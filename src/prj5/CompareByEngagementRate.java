@@ -10,7 +10,7 @@ package prj5;
 import java.util.Comparator;
 
 /**
- * Project: socialmediavisualization
+ * Project: P5 Social Media Visualization
  * Class: CompareByEngagementRate
  *
  * @author Lukyan Sukhachevskyi (lukyan)
@@ -18,8 +18,9 @@ import java.util.Comparator;
  */
 public class CompareByEngagementRate implements Comparator<Influencer> {
 
-    private MonthEnum month;
-    private String engType;
+    private final MonthEnum month;
+    private final String engType;
+
 
     public CompareByEngagementRate(MonthEnum month, String engType) {
 
@@ -33,19 +34,15 @@ public class CompareByEngagementRate implements Comparator<Influencer> {
      * zero, or a positive integer as the first argument is less than, equal
      * to, or greater than the second.
      *
-     * @param o1
-     *            the first object to be compared.
-     * @param o2
-     *            the second object to be compared.
+     * @param o1 the first object to be compared.
+     * @param o2 the second object to be compared.
      * @return a negative integer, zero, or a positive integer as the
-     *         first argument is less than, equal to, or greater than the
-     *         second.
-     * @throws NullPointerException
-     *             if an argument is null and this
-     *             comparator does not permit null arguments
+     * first argument is less than, equal to, or greater than the
+     * second.
+     * @throws NullPointerException if an argument is null and this
+     *                              comparator does not permit null arguments
      */
-    @Override
-    public int compare(Influencer o1, Influencer o2) {
+    @Override public int compare(Influencer o1, Influencer o2) {
 
         if (o1 == null || o2 == null) {
 

@@ -12,27 +12,27 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Project: socialmediavisualization
+ * Project: P5 Social Media Visualization
  * Class: DataReader
+ *
  * The DataReader class will read the input files of influencers and store them
  * in our linked list. and begin the GUI Window.
  *
  * @author Lukyan Sukhachevskyi (lukyan)
  * @author Nana Yaw Barimah Oteng (nanayawo21)
- * @version 2022.11.14
+ * @version 2022.11.28
  */
 public class DataReader {
 
     private LinkedList list;
 
+
     /**
      * Instantiates a new Data reader.
      *
-     * @param fileName
-     *            the file name
-     * @throws FileNotFoundException
-     *             the file not found exception is thrown if the file is not
-     *             found.
+     * @param fileName the file name
+     * @throws FileNotFoundException the file not found exception is thrown if the file is not
+     *                               found.
      */
     public DataReader(String fileName) throws FileNotFoundException {
 
@@ -43,28 +43,13 @@ public class DataReader {
 
 
     /**
-     * Returns the list of influencers.
-     *
-     * @return Returns the list of influencers.
-     */
-    public LinkedList getList() {
-        return list;
-    }
-
-
-    /**
      * The file with fileName as a parameter is parsed to create influencers
      * with the data in the file. The influencers are then added to a linked
      * list.
      *
-     * 
-     * @param fileName
-     *            is the planet file being parsed.
-     * @throws FileNotFoundException
-     *             the planet file cannot be found.
-     * 
+     * @param fileName is the planet file being parsed.
      * @return returns the linked list of influencers.
-     * 
+     * @throws FileNotFoundException the planet file cannot be found.
      */
     private LinkedList readFile(String fileName) throws FileNotFoundException {
 
@@ -87,15 +72,17 @@ public class DataReader {
             if (getMonth(elements[0]) != null) {
 
                 // create the influencer for that line
-                Influencer influencer = new Influencer(elements[1], elements[2],
-                    elements[3], elements[4]);
+                Influencer influencer =
+                    new Influencer(elements[1], elements[2], elements[3],
+                        elements[4]);
 
                 // create engagement for that line
                 Engagement engagement = new Engagement(getMonth(elements[0]),
-                    Integer.parseInt(elements[5]), Integer.parseInt(
-                        elements[6]), Integer.parseInt(elements[7]), Integer
-                            .parseInt(elements[8]), Integer.parseInt(
-                                elements[9]));
+                    Integer.parseInt(elements[5]),
+                    Integer.parseInt(elements[6]),
+                    Integer.parseInt(elements[7]),
+                    Integer.parseInt(elements[8]),
+                    Integer.parseInt(elements[9]));
 
                 // if its a new influencer...
                 if (newInfluencer(influencer)) {
@@ -106,8 +93,8 @@ public class DataReader {
                     this.list.add(influencer);
                 }
                 else { // if its an influencer that already exists
-                    Influencer origInfluencer = this.list.getEntry(this.list
-                        .getIndex(influencer));
+                    Influencer origInfluencer =
+                        this.list.getEntry(this.list.getIndex(influencer));
 
                     // expand the capacity of the old influencer array
                     int newLen = origInfluencer.getEngagements().length + 1;
@@ -116,8 +103,8 @@ public class DataReader {
                     Engagement[] newEngagements = new Engagement[newLen];
 
                     // add the old entries to the new array
-                    for (int i = 0; i < origInfluencer
-                        .getEngagements().length; i++) {
+                    for (int i = 0;
+                         i < origInfluencer.getEngagements().length; i++) {
 
                         newEngagements[i] = origInfluencer.getEngagements()[i];
                     }
@@ -138,12 +125,10 @@ public class DataReader {
 
 
     /**
-     * 
-     * @param influencer
-     *            is the influencer being checked to see if the list contains
-     *            it.
-     * @return returns true/false depending on whether the list already contains
-     *         the influencer.
+     * @param influencer is the influencer being checked to
+     *                   see if the list contains it.
+     * @return returns true/false depending on whether the
+     * list already contains the influencer.
      */
     private boolean newInfluencer(Influencer influencer) {
 
@@ -154,9 +139,8 @@ public class DataReader {
     /**
      * Helper method for the readFile() method, to help locate the month for
      * which an Influencer's data is being added to.
-     * 
-     * @param is
-     *            the string of the month that data is being added for.
+     *
+     * @param month the month that data is being added for.
      * @return returns the month for which influencer data is being added to.
      */
     private MonthEnum getMonth(String month) {
