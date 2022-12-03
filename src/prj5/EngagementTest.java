@@ -93,7 +93,7 @@ public class EngagementTest extends TestCase {
     public void testGetTradEngagementRate() {
         assertEquals(1337.5, eng1.getTradEngagementRate(), 0.0001);
         assertEquals(1257.5, eng2.getTradEngagementRate(), 0.0001);
-        assertEquals(0.0, eng3.getTradEngagementRate(), 0.001);
+        assertEquals(-1.0, eng3.getTradEngagementRate(), 0.001);
 
     }
 
@@ -104,7 +104,7 @@ public class EngagementTest extends TestCase {
     public void testGetReachEngagementRate() {
         assertEquals(2140.0, eng1.getReachEngagementRate(), 0.0001);
         assertEquals(2012.0, eng2.getReachEngagementRate(), 0.0001);
-        assertEquals(0.0, eng3.getReachEngagementRate(), 0.001);
+        assertEquals(-1.0, eng3.getReachEngagementRate(), 0.001);
     }
 
 
