@@ -38,8 +38,6 @@ public class CompareByEngagementRate implements Comparator<Influencer> {
      * second.
      * @throws NullPointerException if an argument is null and this
      *                              comparator does not permit null arguments
-     * @throws ClassCastException   if the arguments' types prevent them from
-     *                              being compared by this comparator.
      */
     @Override public int compare(Influencer o1, Influencer o2) {
 
@@ -49,14 +47,9 @@ public class CompareByEngagementRate implements Comparator<Influencer> {
                 "The object being compared is null.");
         }
 
-        //type check
-        if (o1.getClass() != Influencer.class
-            || o2.getClass() != Influencer.class) {
-
-            throw new ClassCastException(
-                "The object being compared is not of type Influencer.");
-        }
-
+        System.out.println((int)(o1.getEngagementRate(month, engType)));
+        System.out.println((int)(o2.getEngagementRate(month, engType)));
+        
         return (int)(o1.getEngagementRate(month, engType)) -
               (int)((o2.getEngagementRate(month, engType)));
     }

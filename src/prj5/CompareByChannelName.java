@@ -30,23 +30,14 @@ public class CompareByChannelName implements Comparator<Influencer> {
      * second.
      * @throws NullPointerException if an argument is null and this
      *                              comparator does not permit null arguments
-     * @throws ClassCastException   if the arguments' types prevent them from
-     *                              being compared by this comparator.
      */
-    @Override public int compare(Influencer o1, Influencer o2) {
+    @Override 
+    public int compare(Influencer o1, Influencer o2) {
 
         if (o1 == null || o2 == null) {
 
             throw new NullPointerException(
                 "The object being compared is null.");
-        }
-
-        //type check
-        if (o1.getClass() != Influencer.class
-            || o2.getClass() != Influencer.class) {
-
-            throw new ClassCastException(
-                "The object being compared is not of type Influencer.");
         }
 
         return (o1.getChannelName()).compareToIgnoreCase(o2.getChannelName());
