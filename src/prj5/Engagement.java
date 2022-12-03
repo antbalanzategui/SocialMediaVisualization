@@ -10,11 +10,11 @@ package prj5;
 import java.text.DecimalFormat;
 
 /**
- * Class to hold data of Influencers for a certain month
+ * Class to hold the Engagement data of Influencers for a certain month
  *
  * @author Lukyan Sukhachevskyi (lukyan)
  * @author Antonio Balanzategui (antbalanzategui)
- * @version 2022.11.13
+ * @version 2022.12.02
  */
 
 public class Engagement {
