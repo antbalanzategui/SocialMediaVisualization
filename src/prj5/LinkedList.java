@@ -125,8 +125,8 @@ public class LinkedList
         }
 
         for (Influencer iterInfluencer : this) {
-            if (iterInfluencer.getChannelName()
-                .equals(influencer.getChannelName())) {
+            if (iterInfluencer.getChannelName().equals(influencer
+                .getChannelName())) {
 
                 return true;
             }
@@ -187,7 +187,8 @@ public class LinkedList
         if (isEmpty()) {
 
             head = tail = newNode;
-        } else {
+        }
+        else {
             tail.setNext(newNode);
         }
 
@@ -223,8 +224,8 @@ public class LinkedList
         int index = 0;
 
         for (Influencer iterInfluencer : this) {
-            if (iterInfluencer.getChannelName()
-                .equals(influencer.getChannelName())) {
+            if (iterInfluencer.getChannelName().equals(influencer
+                .getChannelName())) {
 
                 return index;
 
@@ -250,7 +251,7 @@ public class LinkedList
         }
 
         Influencer removeNode = null;
-        
+
         Node<Influencer> current = head;
         if (index == 0) {
             removeNode = head.getData();
@@ -258,24 +259,22 @@ public class LinkedList
             size--;
             return removeNode;
         }
-        
-        int currentIndex = 0;
-            while (current != null) {
-                
-                if ((currentIndex + 1) == index) {
-                    removeNode = current.getNext().getData();                   
-                    Node<Influencer> newNext = current.getNext().getNext();
-                    current.setNext(newNext);
-                    size--;
-                }
-                currentIndex++;
-                current = current.getNext();
-            }
-            return removeNode;
 
+        int currentIndex = 0;
+        while (current != null) {
+
+            if ((currentIndex + 1) == index) {
+                removeNode = current.getNext().getData();
+                Node<Influencer> newNext = current.getNext().getNext();
+                current.setNext(newNext);
+                size--;
+            }
+            currentIndex++;
+            current = current.getNext();
+        }
+        return removeNode;
 
     }
-
 
 
     /**
@@ -319,7 +318,8 @@ public class LinkedList
      * The insertion sort method that sorts Influencers using a comparator
      * provided.
      *
-     * @param c the comparator
+     * @param c
+     *            the comparator
      */
     public void sort(Comparator<Influencer> c) {
         // If zero or one item is in the chain, there is nothing to do

@@ -34,48 +34,11 @@ public class Input {
         DataReader man;
         if (args.length == 1) {
             man = new DataReader(args[0]);
-        }else{
+        }
+        else {
 
             man = new DataReader("SampleInput1_2022.csv");
         }
-        /*man.getList().sort(new CompareByChannelName());
-
-        for (int i = 0; i < man.getList().toArray().length; i++) {
-            double followers = man.getList().getEntry(i).getEngagementForMonth(
-                MonthEnum.MARCH).getNumFollowers();
-
-            if (followers != 0) {
-                System.out.println(man.getList().getEntry(i).getChannelName());
-                System.out.println("traditional: " + new DecimalFormat("#.#")
-                    .format(man.getList().getEntry(i).getFirstQuartEngagement()
-                        .getTradEngagementRate()));
-
-            }
-            else {
-                System.out.println(man.getList().getEntry(i).getChannelName());
-                System.out.println("traditional: N/A");
-
-            }
-            System.out.println("==========");
-        }
-        System.out.println("**********");
-        System.out.println("**********");
-
-        /*
-         * System.out.println(Arrays.toString(man.getList().toArray()));
-         * System.out.println(man.getList().getEntry(0).getEngagementForMonth(
-         * MonthEnum.MARCH));
-         */
-        
-        /*man.getList().sort(new CompareByEngagementRate(MonthEnum.FIRSTQUART, "Reach Engagement Rate"));
-        for (int i = 0; i < man.getList().toArray().length; i++) {
-
-            System.out.println(man.getList().getEntry(i).getChannelName());
-            System.out.println("reach: " + new DecimalFormat("#.#").format(
-                man.getList().getEntry(i).getFirstQuartEngagement().getReachEngagementRate()));
-            System.out.println("==========");
-
-        }*/
     }
 
 }

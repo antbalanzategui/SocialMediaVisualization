@@ -27,17 +27,23 @@ public class Influencer {
     private final String mainTopic;
     private Engagement[] engagements;
 
-
     /**
      * Constructor for the Influencer class
      *
-     * @param username    user name of influencer
-     * @param channelName channelName of influencer
-     * @param country     country of influencer
-     * @param mainTopic   mainTopic of influencer
+     * @param username
+     *            user name of influencer
+     * @param channelName
+     *            channelName of influencer
+     * @param country
+     *            country of influencer
+     * @param mainTopic
+     *            mainTopic of influencer
      */
     public Influencer(
-        String username, String channelName, String country, String mainTopic) {
+        String username,
+        String channelName,
+        String country,
+        String mainTopic) {
 
         this.username = username;
         this.channelName = channelName;
@@ -99,7 +105,8 @@ public class Influencer {
     /**
      * Setter for engagements
      *
-     * @param engagements the engagement data for influencer.
+     * @param engagements
+     *            the engagement data for influencer.
      */
     public void setEngagements(Engagement[] engagements) {
 
@@ -111,19 +118,20 @@ public class Influencer {
      * Method to find the engagment for a particular month
      * within our engagement array
      *
-     * @param month month requested
+     * @param month
+     *            month requested
      * @return the engagement of that particular month
-     * null if month is not found
+     *         null if month is not found
      */
     public Engagement getEngagementForMonth(MonthEnum month) {
 
-        //first quarter case
+        // first quarter case
         if (month == MonthEnum.FIRSTQUART) {
 
             return getFirstQuartEngagement();
         }
 
-        //all other cases
+        // all other cases
         for (Engagement engagement : engagements) {
 
             if (engagement.getMonth() == month) {
@@ -132,7 +140,7 @@ public class Influencer {
             }
         }
 
-        //null if not found
+        // null if not found
         return null;
     }
 
@@ -144,15 +152,15 @@ public class Influencer {
      */
     private Engagement getFirstQuartEngagement() {
 
-        //array representing the total stats of the influencer for first qtr
+        // array representing the total stats of the influencer for first qtr
         int[] totalStats = { 0, 0, 0, 0, 0 };
 
-        //for each of the first qtr months, sum the stats
+        // for each of the first qtr months, sum the stats
         for (Engagement engagement : engagements) {
 
-            if (engagement.getMonth().equals(MonthEnum.MARCH)
-                || engagement.getMonth().equals(MonthEnum.FEBRUARY)
-                || engagement.getMonth().equals(MonthEnum.JANUARY)) {
+            if (engagement.getMonth().equals(MonthEnum.MARCH) || engagement
+                .getMonth().equals(MonthEnum.FEBRUARY) || engagement.getMonth()
+                    .equals(MonthEnum.JANUARY)) {
 
                 totalStats[0] += engagement.getNumLikes();
                 totalStats[1] += engagement.getNumPosts();
@@ -162,8 +170,8 @@ public class Influencer {
 
             if (engagement.getMonth() == MonthEnum.MARCH) {
 
-                //for first qtr followers, its the num of followers at
-                //the end of March
+                // for first qtr followers, its the num of followers at
+                // the end of March
                 totalStats[2] = engagement.getNumFollowers();
             }
         }
@@ -176,13 +184,15 @@ public class Influencer {
     /**
      * Method used to get a specified type of engagement rate.
      *
-     * @param month   the month of the engagement
-     * @param engType the type of the engagement (Traditional or Reach)
+     * @param month
+     *            the month of the engagement
+     * @param engType
+     *            the type of the engagement (Traditional or Reach)
      * @return the specified engagement rate calculation for that month
      */
     public double getEngagementRate(MonthEnum month, String engType) {
 
-        if(this.getEngagementForMonth(month) == null){
+        if (this.getEngagementForMonth(month) == null) {
 
             return 0;
         }
@@ -201,40 +211,42 @@ public class Influencer {
     /**
      * Method to check equality of two influencer objects
      *
-     * @param obj object of comparison to "this"
+     * @param obj
+     *            object of comparison to "this"
      * @return true if equal,
-     * false otherwise
+     *         false otherwise
      */
-    @Override public boolean equals(Object obj) {
+    @Override
+    public boolean equals(Object obj) {
 
-        //null check
+        // null check
         if (obj == null) {
 
             return false;
         }
 
-        //self check
+        // self check
         if (this == obj) {
 
             return true;
         }
 
-        //type check
+        // type check
         if (obj.getClass() != this.getClass()) {
 
             return false;
         }
 
-        //cast
+        // cast
         Influencer inf = (Influencer)obj;
 
-        //engagement array check
+        // engagement array check
         if (inf.engagements.length != this.engagements.length) {
 
             return false;
         }
 
-        //elements in engagement check
+        // elements in engagement check
         for (int i = 0; i < engagements.length; i++) {
 
             if (!(engagements[i].equals(inf.engagements[i]))) {
@@ -243,11 +255,10 @@ public class Influencer {
             }
         }
 
-        //fields check
-        return (username.equals(inf.username)
-            && channelName.equals(inf.channelName)
-            && country.equals(inf.country)
-            && mainTopic.equals(inf.mainTopic));
+        // fields check
+        return (username.equals(inf.username) && channelName.equals(
+            inf.channelName) && country.equals(inf.country) && mainTopic.equals(
+                inf.mainTopic));
     }
 
 

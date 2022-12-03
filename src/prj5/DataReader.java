@@ -155,7 +155,8 @@ public class DataReader {
      * Helper method for the readFile() method, to help locate the month for
      * which an Influencer's data is being added to.
      * 
-     * @param  is the string of the month that data is being added for.
+     * @param is
+     *            the string of the month that data is being added for.
      * @return returns the month for which influencer data is being added to.
      */
     private MonthEnum getMonth(String month) {

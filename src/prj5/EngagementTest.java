@@ -22,7 +22,6 @@ public class EngagementTest extends TestCase {
     private Engagement eng2;
     private Engagement eng3;
 
-
     /**
      * Sets up objects that will be used
      */
@@ -113,41 +112,41 @@ public class EngagementTest extends TestCase {
      */
     public void testEquals() {
 
-        //null check
+        // null check
         assertFalse(eng1.equals(null));
-        //self check
+        // self check
         assertTrue(eng1.equals(eng1));
-        //type check
+        // type check
         assertFalse(eng1.equals("Do"));
-        //bad field check
+        // bad field check
         assertFalse(eng1.equals(eng2));
 
-        //true fields check
+        // true fields check
         eng3 = new Engagement(MonthEnum.JANUARY, 7, 9, 8, 100, 5);
         assertTrue(eng1.equals(eng3));
 
-        //field by field check
-        //unequal months
+        // field by field check
+        // unequal months
         eng3 = new Engagement(MonthEnum.FEBRUARY, 7, 8, 8, 100, 5);
         assertFalse(eng1.equals(eng3));
 
-        //unequal likes
+        // unequal likes
         eng3 = new Engagement(MonthEnum.JANUARY, 8, 9, 9, 100, 5);
         assertFalse(eng1.equals(eng3));
 
-        //unequal posts
+        // unequal posts
         eng3 = new Engagement(MonthEnum.JANUARY, 7, 10, 8, 101, 5);
         assertFalse(eng1.equals(eng3));
 
-        //unequal followers
+        // unequal followers
         eng3 = new Engagement(MonthEnum.JANUARY, 7, 9, 9, 100, 6);
         assertFalse(eng1.equals(eng3));
 
-        //unequal comments
+        // unequal comments
         eng3 = new Engagement(MonthEnum.FEBRUARY, 7, 9, 8, 101, 5);
         assertFalse(eng1.equals(eng3));
 
-        //unequal views
+        // unequal views
         eng3 = new Engagement(MonthEnum.FEBRUARY, 7, 9, 8, 100, 6);
         assertFalse(eng1.equals(eng3));
     }

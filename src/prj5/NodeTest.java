@@ -21,7 +21,6 @@ public class NodeTest extends TestCase {
     private Node<String> dn2;
     private Node<String> dn3;
 
-
     /**
      * Sets up
      */

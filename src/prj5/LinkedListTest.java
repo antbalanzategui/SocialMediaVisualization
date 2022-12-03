@@ -155,19 +155,15 @@ public class LinkedListTest extends TestCase {
         assertEquals("[" + inf.toString() + ", " + inf2.toString() + "]", list
             .toString());
         assertEquals(2, list.getLength());
-        
+
         list.clear();
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
-        
+
         assertEquals(inf, list.remove(0));
         list.add(inf3);
         assertEquals(inf3, list.remove(2));
-        
-        
-        
-        
 
     }
 
@@ -179,22 +175,22 @@ public class LinkedListTest extends TestCase {
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
-        
+
         IndexOutOfBoundsException exception = null;
         IndexOutOfBoundsException exception1 = null;
-        
+
         try {
             list.remove(4);
         }
-        catch(IndexOutOfBoundsException e) {
+        catch (IndexOutOfBoundsException e) {
             exception = e;
         }
         assertNotNull(exception);
-        
+
         try {
             list.remove(-1);
         }
-        catch(IndexOutOfBoundsException e) {
+        catch (IndexOutOfBoundsException e) {
             exception1 = e;
         }
         assertNotNull(exception1);
@@ -282,19 +278,19 @@ public class LinkedListTest extends TestCase {
         list.add(inf3);
         list.add(new Influencer("Test", "America", "Brazil", "Topic"));
         list.add(new Influencer("Test", "Baseball", "Brazil", "Topic"));
-        
+
         list.sort(new CompareByChannelName());
 
         assertTrue(list.getEntry(0).equals(inf3));
-        
+
         list.clear();
         list.sort(new CompareByChannelName());
-        
+
         list.clear();
         list.add(inf);
         list.sort(new CompareByChannelName());
         assertTrue(list.getEntry(0).equals(inf));
-       
+
     }
 
 
@@ -308,10 +304,10 @@ public class LinkedListTest extends TestCase {
         list.add(inf);
         list.add(inf1);
         list.add(inf2);
-        
+
         list.sort(new CompareByEngagementRate(MonthEnum.FIRSTQUART,
             "Traditional Engagement Rate"));
-        
+
         assertTrue(list.getEntry(0).equals(inf2));
     }
 

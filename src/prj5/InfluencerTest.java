@@ -25,19 +25,18 @@ public class InfluencerTest extends TestCase {
     private Engagement eng2;
     private Engagement eng3;
 
-
     /**
      * Sets up
      */
     public void setUp() {
 
-        //set up engagements
+        // set up engagements
         eng1 = new Engagement(MonthEnum.JANUARY, 5, 6, 4, 3, 5);
         eng2 = new Engagement(MonthEnum.FEBRUARY, 5, 8, 4, 3, 6);
         eng3 = new Engagement(MonthEnum.MARCH, 6, 6, 4, 1, 5);
         engArr = new Engagement[] { eng1, eng2, eng3 };
 
-        //set up influencer
+        // set up influencer
         inf = new Influencer("Test", "Channel", "Brazil", "Topic");
         inf.setEngagements(engArr);
     }
@@ -109,18 +108,18 @@ public class InfluencerTest extends TestCase {
      */
     public void testGetEngagementForMonth() {
 
-        //firstQuarter case
+        // firstQuarter case
         Engagement frstQrtEng = inf.getEngagementForMonth(MonthEnum.FIRSTQUART);
-        Engagement expected =
-            new Engagement(MonthEnum.FIRSTQUART, 16, 20, 4, 7, 16);
+        Engagement expected = new Engagement(MonthEnum.FIRSTQUART, 16, 20, 4, 7,
+            16);
         assertTrue(expected.equals(frstQrtEng));
 
-        //all other cases
+        // all other cases
         assertEquals(eng1, inf.getEngagementForMonth(MonthEnum.JANUARY));
         assertEquals(eng2, inf.getEngagementForMonth(MonthEnum.FEBRUARY));
         assertEquals(eng3, inf.getEngagementForMonth(MonthEnum.MARCH));
 
-        //engagement not found
+        // engagement not found
         assertNull(inf.getEngagementForMonth(MonthEnum.DECEMBER));
     }
 
@@ -130,52 +129,65 @@ public class InfluencerTest extends TestCase {
      */
     public void testEquals() {
 
-        //null check
+        // null check
         assertFalse(inf.equals(null));
 
-        //self check
+        // self check
         assertTrue(inf.equals(inf));
 
-        //type check
+        // type check
         assertFalse(inf.equals(engArr));
 
-        //setup for fields
+        // setup for fields
         inf = new Influencer("Test", "Channel", "Country", "Topic");
         inf.setEngagements(engArr);
         Influencer inf2 = new Influencer("Test", "Channel", "Country", "Topic");
         inf2.setEngagements(engArr);
 
-        //all fields true
+        // all fields true
         assertTrue(inf.equals(inf2));
 
-        //engagement length check
+        // engagement length check
         inf2.setEngagements(new Engagement[] { eng1, eng2 });
         assertFalse(inf.equals(inf2));
 
-        //engagement elements check
+        // engagement elements check
         inf2.setEngagements(new Engagement[] { eng1, eng2, eng2 });
         assertFalse(inf.equals(inf2));
 
-        //fields check
-        //unequal name
+        // fields check
+        // unequal name
         inf2 = new Influencer("Test1", "Channel", "Country", "Topic");
         inf2.setEngagements(engArr);
         assertFalse(inf.equals(inf2));
 
-        //unequal channel name
+        // unequal channel name
         inf2 = new Influencer("Test", "Channel1", "Country", "Topic");
         inf2.setEngagements(engArr);
         assertFalse(inf.equals(inf2));
 
-        //unequal country
+        // unequal country
         inf2 = new Influencer("Test", "Channel", "Country1", "Topic");
         inf2.setEngagements(engArr);
         assertFalse(inf.equals(inf2));
 
-        //unequal topic
+        // unequal topic
         inf2 = new Influencer("Test", "Channel", "Country", "Topic1");
         inf2.setEngagements(engArr);
         assertFalse(inf.equals(inf2));
+    }
+
+
+    /**
+     * Tests getEngagementRate(), to ensure it returns appropriate values.
+     */
+    public void testGetEngagementRate() {
+        assertEquals(0.00, inf.getEngagementRate(MonthEnum.APRIL,
+            "Traditional Engagement Rate"), 0.01);
+        assertEquals(200.0, inf.getEngagementRate(MonthEnum.FEBRUARY,
+            "Traditional Engagement Rate"), 0.01);
+        assertEquals(160, inf.getEngagementRate(MonthEnum.JANUARY,
+            "Reach Engagement Rate"), 0.01);
     }
 
 

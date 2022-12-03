@@ -125,7 +125,7 @@ public class Engagement {
 
             return -1.0;
         }
-
+       
         DecimalFormat df = new DecimalFormat("#.#");
         String engagementRate =
             df.format((getTotalEngagement() / numFollowers) * 100.0);

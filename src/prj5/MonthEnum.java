@@ -14,6 +14,17 @@ package prj5;
  * @version 2022.11.23
  */
 public enum MonthEnum {
-    JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER,
-    OCTOBER, NOVEMBER, DECEMBER, FIRSTQUART
+    JANUARY,
+    FEBRUARY,
+    MARCH,
+    APRIL,
+    MAY,
+    JUNE,
+    JULY,
+    AUGUST,
+    SEPTEMBER,
+    OCTOBER,
+    NOVEMBER,
+    DECEMBER,
+    FIRSTQUART
 }
