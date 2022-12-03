@@ -153,11 +153,10 @@ public class GUIWindow {
 
         //System.out.println(Arrays.toString(list.toArray()));
         //for loop determines max engagement rate based on sort type
-        for (int i = 0; i < list.getLength(); i++) {
+        for (Influencer iterInfluencer : list) {
 
-            Influencer influencer = list.getEntry(i);
             Engagement engagementForMonth =
-                influencer.getEngagementForMonth(month);
+                iterInfluencer.getEngagementForMonth(month);
 
             if (engagementForMonth != null) {
 
