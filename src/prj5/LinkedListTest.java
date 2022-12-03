@@ -31,10 +31,10 @@ public class LinkedListTest extends TestCase {
      */
     public void setUp() {
         list = new LinkedList();
-        inf = new Influencer("Test", "Channel", "Brazil", "Topic");
-        inf1 = new Influencer("Test1", "Channel1", "Ghana", "Topic1");
-        inf2 = new Influencer("Test2", "Channel2", "America", "Topic2");
-        inf3 = new Influencer("Test3", "Channel3", "America3", "Topic3");
+        inf = new Influencer("Test", "Attack", "Brazil", "Topic");
+        inf1 = new Influencer("Test1", "Banana", "Ghana", "Topic1");
+        inf2 = new Influencer("Test2", "Career", "America", "Topic2");
+        inf3 = new Influencer("Test3", "Domino", "America3", "Topic3");
 
         Engagement eng1 = new Engagement(MonthEnum.JANUARY, 5, 6, 4, 3, 5);
         Engagement eng2 = new Engagement(MonthEnum.FEBRUARY, 5, 8, 4, 3, 6);
@@ -237,6 +237,7 @@ public class LinkedListTest extends TestCase {
         list.add(inf1);
         list.add(inf2);
         list.sort(new CompareByChannelName());
+        
         assertTrue(list.getEntry(0).equals(inf));
     }
 

@@ -8,9 +8,9 @@
 package prj5;
 
 import java.util.Comparator;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import linkedlist.SinglyLinkedList.Node;
 
 // Import Statements
 
@@ -244,27 +244,39 @@ public class LinkedList
      */
     public Influencer remove(int index) {
         // if the index is invalid
-        if (index < 0 || head == null) {
-            throw new IndexOutOfBoundsException("Index is out of bounds");
+        if (index < 0 || index > getLength()) {
+            throw new IndexOutOfBoundsException("Index " + index
+                + " out of bounds");
         }
-        else {
-            Node<Influencer> current = head;
-            int currentIndex = 0;
 
-            while (current.getNext() != null) {
-                if ((currentIndex + 1) == index) {
-                    Node<Influencer> newNext = current.getNext().getNext();
-                    current.setNext(newNext);
-                    size--;
-                    return true;
-                }
-                currentIndex++;
-                current = current.getNext();
+        Influencer removeNode = null;
+        
+        Node<Influencer> current = head;
+        if (index == 0) {
+            removeNode = head.getData();
+            head = head.getNext();
+            size--;
+            return removeNode;
+        }
+        
+        int currentIndex = 0;
+
+        while (current.getNext() != null) {
+            if ((currentIndex + 1) == index) {
+                removeNode = current.getNext().getData();
+                Node<Influencer> newNext = current.getNext().getNext();
+                current.setNext(newNext);
+                size--;
+                return removeNode;
             }
-
-            // if the element was never found, this also handles empty case
-            throw new IndexOutOfBoundsException("Index is out of bounds");
+            current = current.getNext();
+            currentIndex++;
         }
+
+        // if the element was never found, this also handles empty case
+        throw new IndexOutOfBoundsException("Index " + index
+            + " out of bounds");
+
 
     }
 
