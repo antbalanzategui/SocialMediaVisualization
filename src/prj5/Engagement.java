@@ -19,33 +19,23 @@ import java.text.DecimalFormat;
 
 public class Engagement {
 
-    private MonthEnum month;
-    private int numLikes;
-    private int numPosts;
-    private int numFollowers;
-    private int numComments;
-    private int numViews;
+    private final MonthEnum month;
+    private final int numLikes;
+    private final int numPosts;
+    private final int numFollowers;
+    private final int numComments;
+    private final int numViews;
+
 
     /**
      * Constructor for Class
-     * 
-     * @param mon
-     *            month of engagement
-     * 
-     * @param likes
-     *            number of likes
-     * 
-     * @param posts
-     *            number of posts
-     * 
-     * @param followers
-     *            number of followers
-     * 
-     * @param comments
-     *            number of comments
-     * 
-     * @param views
-     *            number of views
+     *
+     * @param mon       month of engagement
+     * @param likes     number of likes
+     * @param posts     number of posts
+     * @param followers number of followers
+     * @param comments  number of comments
+     * @param views     number of views
      */
     public Engagement(
         MonthEnum mon,
@@ -65,7 +55,7 @@ public class Engagement {
 
     /**
      * Getter for month parameter
-     * 
+     *
      * @return String of month
      */
     public MonthEnum getMonth() {
@@ -75,7 +65,7 @@ public class Engagement {
 
     /**
      * Getter for numLikes
-     * 
+     *
      * @return number of likes
      */
     public int getNumLikes() {
@@ -85,7 +75,7 @@ public class Engagement {
 
     /**
      * Getter for numPosts
-     * 
+     *
      * @return number of posts
      */
     public int getNumPosts() {
@@ -95,7 +85,7 @@ public class Engagement {
 
     /**
      * Getter for numFollowers
-     * 
+     *
      * @return number of followers
      */
     public int getNumFollowers() {
@@ -105,7 +95,7 @@ public class Engagement {
 
     /**
      * Getter for numComments
-     * 
+     *
      * @return number of comments
      */
     public int getNumComments() {
@@ -115,7 +105,7 @@ public class Engagement {
 
     /**
      * Getter for numViews
-     * 
+     *
      * @return number of views
      */
     public int getNumViews() {
@@ -126,7 +116,7 @@ public class Engagement {
     /**
      * Calculates engagement rate based off of
      * number of likes, comments, and followers
-     * 
+     *
      * @return a percentage rounded to the first decimal
      */
     public double getTradEngagementRate() {
@@ -136,7 +126,8 @@ public class Engagement {
         }
 
         DecimalFormat df = new DecimalFormat("#.#");
-        String engagementRate = df.format((getTotalEngagement() / numFollowers) * 100.0);
+        String engagementRate =
+            df.format((getTotalEngagement() / numFollowers) * 100.0);
         return (Double.parseDouble(engagementRate));
     }
 
@@ -144,7 +135,7 @@ public class Engagement {
     /**
      * Calculates engagement rate based off of
      * number of likes, comments, and views
-     * 
+     *
      * @return a percentage rounded to the first decimal
      */
     public double getReachEngagementRate() {
@@ -154,7 +145,8 @@ public class Engagement {
         }
 
         DecimalFormat df = new DecimalFormat("#.#");
-        String engagementRate = df.format((getTotalEngagement() / numViews) * 100.0);
+        String engagementRate =
+            df.format((getTotalEngagement() / numViews) * 100.0);
         return (Double.parseDouble(engagementRate));
     }
 
@@ -173,13 +165,11 @@ public class Engagement {
     /**
      * Checks to see whether "this"
      * is equal to another object of Engagement
-     * 
+     *
      * @param obj object being compared to "this"
-     * 
      * @return true if they are equal, false otherwise
      */
-    @Override
-    public boolean equals(Object obj) {
+    @Override public boolean equals(Object obj) {
 
         //null check
         if (obj == null) {
@@ -203,19 +193,17 @@ public class Engagement {
         Engagement eng = (Engagement)obj;
 
         //fields check
-        return (this.numLikes == eng.getNumLikes()
-             && this.numPosts == eng.getNumPosts()
-             && this.numFollowers == eng.getNumFollowers()
-             && this.numComments == eng.getNumComments()
-             && this.numViews == eng.getNumViews()
-             && this.month.equals(eng.getMonth()));
+        return (this.numLikes == eng.getNumLikes() && this.numPosts == eng
+            .getNumPosts() && this.numFollowers == eng.getNumFollowers()
+            && this.numComments == eng.getNumComments() && this.numViews == eng
+            .getNumViews() && this.month.equals(eng.getMonth()));
 
     }
 
 
     /**
      * Method to convert data into a string
-     * 
+     *
      * @return Parameters as a String
      */
     public String toString() {
