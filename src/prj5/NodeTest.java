@@ -15,12 +15,12 @@ import student.TestCase;
  * @author Antonio Balanzategui (antbalanzategui)
  * @version 2022.11.18
  */
-
 public class NodeTest extends TestCase {
 
     private Node<String> dn1;
     private Node<String> dn2;
     private Node<String> dn3;
+
 
     /**
      * Sets up
@@ -31,6 +31,8 @@ public class NodeTest extends TestCase {
         dn2 = new Node<String>("Yo");
         dn3 = new Node<String>("Fo", dn2);
     }
+
+
     /**
      * Tests getData()
      */
@@ -39,6 +41,8 @@ public class NodeTest extends TestCase {
         assertEquals(dn2.getData(), "Yo");
         assertEquals(dn3.getData(), "Fo");
     }
+
+
     /**
      * Tests setData()
      */
@@ -46,6 +50,8 @@ public class NodeTest extends TestCase {
         dn1.setData("Test");
         assertEquals(dn1.getData(), "Test");
     }
+
+
     /**
      * Tests getNext()
      */
@@ -54,6 +60,8 @@ public class NodeTest extends TestCase {
         assertNull(dn2.getNext());
         assertEquals(dn3.getNext(), dn2);
     }
+
+
     /**
      * Tests setNext()
      */

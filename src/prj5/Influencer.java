@@ -17,7 +17,7 @@ package prj5;
  * @author Antonio Balanzategui (antbalanzategui)
  * @author Lukyan Sukhachevskyi (lukyan)
  * @author Nana Yaw Barimah Oteng (nanayawo21)
- * @version 2022.11.23
+ * @version 2022.12.02
  */
 public class Influencer {
 
@@ -142,7 +142,7 @@ public class Influencer {
      *
      * @return the engagement for the first quarter
      */
-    public Engagement getFirstQuartEngagement() {
+    private Engagement getFirstQuartEngagement() {
 
         //array representing the total stats of the influencer for first qtr
         int[] totalStats = { 0, 0, 0, 0, 0 };
@@ -173,20 +173,28 @@ public class Influencer {
     }
 
 
-    public double getEngagementRate(MonthEnum month, String engType){
+    /**
+     * Method used to get a specified type of engagement rate.
+     *
+     * @param month   the month of the engagement
+     * @param engType the type of the engagement (Traditional or Reach)
+     * @return the specified engagement rate calculation for that month
+     */
+    public double getEngagementRate(MonthEnum month, String engType) {
 
-        if(engType.equals("Traditional Engagement Rate")){
+        if (engType.equals("Traditional Engagement Rate")) {
 
             return this.getEngagementForMonth(month).getTradEngagementRate();
-        }else{
+        }
+        else {
 
             return this.getEngagementForMonth(month).getReachEngagementRate();
         }
     }
 
+
     /**
-     * Method to check equality of
-     * two influencer objects
+     * Method to check equality of two influencer objects
      *
      * @param obj object of comparison to "this"
      * @return true if equal,
@@ -247,14 +255,21 @@ public class Influencer {
     public String toString() {
 
         StringBuilder str = new StringBuilder();
-        str.append("Username: " + username + ", ");
-        str.append("Channel Name: " + channelName + ", ");
-        str.append("Country: " + country + ", ");
-        str.append("Main Topic: " + mainTopic + ", ");
-        for (int i = 0; i < this.engagements.length; i++) {
-            str.append(engagements[i].toString());
+        str.append("[");
+        str.append(username);
+        str.append(", ");
+        str.append(channelName);
+        str.append(", ");
+        str.append(country);
+        str.append(", ");
+        str.append(mainTopic);
+
+        for (Engagement engagement : this.engagements) {
+            str.append(", ");
+            str.append(engagement.toString());
         }
+
+        str.append("]");
         return str.toString();
     }
-
 }
