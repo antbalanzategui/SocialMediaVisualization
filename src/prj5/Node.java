@@ -35,8 +35,8 @@ public class Node<T> {
     /**
      * Instantiates a new Doubly Linked Node.
      *
-     * @param data     the data
-     * @param next     the next node
+     * @param data the data
+     * @param next the next node
      */
     public Node(T data, Node<T> next) {
 
