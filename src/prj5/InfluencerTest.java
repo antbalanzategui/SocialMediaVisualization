@@ -14,30 +14,32 @@ import student.TestCase;
  *
  * @author Antonio Balanzategui (antbalanzategui)
  * @author Nana Yaw Barimah Oteng (nanayawo21)
- * @version 2022.11.14
+ * @author Lukyan Sukhachevskyi (lukyan)
+ * @version 2022.12.02
  */
-
 public class InfluencerTest extends TestCase {
 
     private Influencer inf;
-    private Engagement[] eng;
+    private Engagement[] engArr;
     private Engagement eng1;
     private Engagement eng2;
     private Engagement eng3;
+
 
     /**
      * Sets up
      */
     public void setUp() {
+
+        //set up engagements
         eng1 = new Engagement(MonthEnum.JANUARY, 5, 6, 4, 3, 5);
         eng2 = new Engagement(MonthEnum.FEBRUARY, 5, 8, 4, 3, 6);
         eng3 = new Engagement(MonthEnum.MARCH, 6, 6, 4, 1, 5);
-        eng = new Engagement[3];
-        eng[0] = eng1;
-        eng[1] = eng2;
-        eng[2] = eng3;
+        engArr = new Engagement[] { eng1, eng2, eng3 };
+
+        //set up influencer
         inf = new Influencer("Test", "Channel", "Brazil", "Topic");
-        inf.setEngagements(eng);
+        inf.setEngagements(engArr);
     }
 
 
@@ -45,7 +47,8 @@ public class InfluencerTest extends TestCase {
      * Tests getUsername
      */
     public void testGetUsername() {
-        assertEquals(inf.getUsername(), "Test");
+
+        assertEquals("Test", inf.getUsername());
     }
 
 
@@ -53,7 +56,8 @@ public class InfluencerTest extends TestCase {
      * Tets getChannelName
      */
     public void testGetChannelName() {
-        assertEquals(inf.getChannelName(), "Channel");
+
+        assertEquals("Channel", inf.getChannelName());
     }
 
 
@@ -61,7 +65,8 @@ public class InfluencerTest extends TestCase {
      * Tests getCountry
      */
     public void testGetCountry() {
-        assertEquals(inf.getCountry(), "Brazil");
+
+        assertEquals("Brazil", inf.getCountry());
     }
 
 
@@ -69,7 +74,8 @@ public class InfluencerTest extends TestCase {
      * Tests getMainTopic
      */
     public void testGetMainTopic() {
-        assertEquals(inf.getMainTopic(), "Topic");
+
+        assertEquals("Topic", inf.getMainTopic());
     }
 
 
@@ -77,9 +83,24 @@ public class InfluencerTest extends TestCase {
      * Tests getEngagements
      */
     public void testGetEngagements() {
+
         for (int i = 0; i < 3; i++) {
-            assertTrue(eng[i].equals(inf.getEngagements()[i]));
+
+            assertTrue(engArr[i].equals(inf.getEngagements()[i]));
         }
+    }
+
+
+    /**
+     * Tests setEngagements
+     */
+    public void testSetEngagements() {
+
+        engArr = new Engagement[] { eng1 };
+        inf.setEngagements(engArr);
+
+        assertTrue(engArr[0].equals(inf.getEngagements()[0]));
+        assertEquals(1, inf.getEngagements().length);
     }
 
 
@@ -87,35 +108,20 @@ public class InfluencerTest extends TestCase {
      * Tests getEngagementForMonth()
      */
     public void testGetEngagementForMonth() {
-        assertTrue(eng1.equals(inf.getEngagementForMonth(MonthEnum.JANUARY)));
-        assertNotNull(inf.getEngagementForMonth(MonthEnum.FIRSTQUART));
+
+        //firstQuarter case
+        Engagement frstQrtEng = inf.getEngagementForMonth(MonthEnum.FIRSTQUART);
+        Engagement expected =
+            new Engagement(MonthEnum.FIRSTQUART, 16, 20, 4, 7, 16);
+        assertTrue(expected.equals(frstQrtEng));
+
+        //all other cases
+        assertEquals(eng1, inf.getEngagementForMonth(MonthEnum.JANUARY));
+        assertEquals(eng2, inf.getEngagementForMonth(MonthEnum.FEBRUARY));
+        assertEquals(eng3, inf.getEngagementForMonth(MonthEnum.MARCH));
+
+        //engagement not found
         assertNull(inf.getEngagementForMonth(MonthEnum.DECEMBER));
-    }
-
-
-    /**
-     * Tests getFirstQuartEngagement()
-     */
-    public void testGetFirstQuartEngagement() {
-        Engagement JanEng = new Engagement(MonthEnum.JANUARY, 5, 6, 4, 3, 5);
-        Engagement FebEng = new Engagement(MonthEnum.FEBRUARY, 5, 8, 4, 3, 6);
-        Engagement MarEng = new Engagement(MonthEnum.MARCH, 6, 6, 4, 1, 5);
-        Engagement[] EngArr = new Engagement[3];
-
-        EngArr[0] = JanEng;
-        EngArr[1] = FebEng;
-        EngArr[2] = MarEng;
-
-        Engagement firstQuartEng = new Engagement(MonthEnum.FIRSTQUART, 16, 20,
-            4, 7, 16);
-
-        Influencer influencer = new Influencer("Test1", "Channel1", "Ghana",
-            "Topic");
-        influencer.setEngagements(EngArr);
-        assertEquals(firstQuartEng, influencer.getFirstQuartEngagement());;
-        assertEquals(575.0, influencer.getFirstQuartEngagement()
-            .getTradEngagementRate(), 0.01);
-
     }
 
 
@@ -123,35 +129,52 @@ public class InfluencerTest extends TestCase {
      * Tests equals
      */
     public void testEquals() {
+
+        //null check
         assertFalse(inf.equals(null));
+
+        //self check
         assertTrue(inf.equals(inf));
-        assertFalse(inf.equals(eng));
-        assertTrue(inf.equals(inf));
-        Influencer inf2 = new Influencer("Test", "Channel", "Brazil", "Topic");
-        inf2.setEngagements(eng);
+
+        //type check
+        assertFalse(inf.equals(engArr));
+
+        //setup for fields
+        inf = new Influencer("Test", "Channel", "Country", "Topic");
+        inf.setEngagements(engArr);
+        Influencer inf2 = new Influencer("Test", "Channel", "Country", "Topic");
+        inf2.setEngagements(engArr);
+
+        //all fields true
         assertTrue(inf.equals(inf2));
-        Engagement[] engg2 = new Engagement[5];
-        inf2 = new Influencer("Test", "Channel", "Brazil", "Topic");
-        inf2.setEngagements(engg2);
+
+        //engagement length check
+        inf2.setEngagements(new Engagement[] { eng1, eng2 });
         assertFalse(inf.equals(inf2));
-        Engagement[] engg3 = new Engagement[3];
-        engg3[2] = eng1;
-        engg3[1] = eng2;
-        engg3[0] = eng3;
-        inf2 = new Influencer("Test", "Channel", "Brazil", "Topic");
-        inf2.setEngagements(engg3);
-        assertFalse(inf2.equals(inf));
-        inf2 = new Influencer("T", "Channel", "Brazil", "Topic");
-        inf2.setEngagements(eng);
+
+        //engagement elements check
+        inf2.setEngagements(new Engagement[] { eng1, eng2, eng2 });
         assertFalse(inf.equals(inf2));
-        inf2 = new Influencer("Test", "C", "Brazil", "Topic");
-        inf2.setEngagements(eng);
+
+        //fields check
+        //unequal name
+        inf2 = new Influencer("Test1", "Channel", "Country", "Topic");
+        inf2.setEngagements(engArr);
         assertFalse(inf.equals(inf2));
-        inf2 = new Influencer("Test", "Channel", "B", "Topic");
-        inf2.setEngagements(eng);
+
+        //unequal channel name
+        inf2 = new Influencer("Test", "Channel1", "Country", "Topic");
+        inf2.setEngagements(engArr);
         assertFalse(inf.equals(inf2));
-        inf2 = new Influencer("Test", "Channel", "Brazil", "T");
-        inf2.setEngagements(eng);
+
+        //unequal country
+        inf2 = new Influencer("Test", "Channel", "Country1", "Topic");
+        inf2.setEngagements(engArr);
+        assertFalse(inf.equals(inf2));
+
+        //unequal topic
+        inf2 = new Influencer("Test", "Channel", "Country", "Topic1");
+        inf2.setEngagements(engArr);
         assertFalse(inf.equals(inf2));
     }
 
@@ -160,27 +183,11 @@ public class InfluencerTest extends TestCase {
      * Tests toString
      */
     public void testToString() {
-        eng = new Engagement[1];
-        eng[0] = eng1;
-        inf = new Influencer("Test", "Channel", "Brazil", "Topic");
-        inf.setEngagements(eng);
-        assertEquals("Username: Test, Channel Name: Channel, Country: Brazil, "
-            + "Main Topic: Topic, Month: JANUARY, Number of Likes: 5, "
-            + "Number of " + "Posts: 6, "
-            + "Number of Followers: 4, Number of Comments: 3, Number of "
-            + "Views: 5", inf.toString());
+
+        engArr = new Engagement[] { eng1 };
+        inf.setEngagements(engArr);
+        String expected =
+            "[Test, Channel, Brazil, Topic, [JANUARY, 5, 6, 4, 3, 5]]";
+        assertEquals(expected, inf.toString());
     }
-
-
-//    /**
-//     * Tests compareTo()
-//     */
-//    public void testCompareTo() {
-//        Influencer inf1 = new Influencer("Test1", "Channel1", "Brazil1",
-//            "Topic1");
-//        Engagement[] engArr = { eng2, eng3 };
-//        inf1.setEngagements(engArr);
-//        assertTrue(inf.compareTo(inf1) > 0);
-//        assertEquals(0.0, inf.compareTo(inf), 0.01);
-//    }
 }
