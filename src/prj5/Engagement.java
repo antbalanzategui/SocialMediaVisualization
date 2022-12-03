@@ -121,15 +121,6 @@ public class Engagement {
     public int getNumViews() {
         return numViews;
     }
-    
-    /**
-     * Getter for total Engagement
-     * 
-     * @return number of views
-     */
-    public int getTotalEngagement() {
-        return this.numComments + this.numLikes;
-    }
 
 
     /**
@@ -139,16 +130,14 @@ public class Engagement {
      * @return a percentage rounded to the first decimal
      */
     public double getTradEngagementRate() {
+
         if (numFollowers == 0) {
-            return 0;
+            return 0.0;
         }
-        double nLikes = numLikes;
-        double nComments = numComments;
-        double nFollowers = numFollowers;
+
         DecimalFormat df = new DecimalFormat("#.#");
-        String engagementRate = df.format(((nLikes + nComments) / nFollowers)
-            * 100);
-        return (Double.valueOf(engagementRate));
+        String engagementRate = df.format((getTotalEngagement() / numFollowers) * 100.0);
+        return (Double.parseDouble(engagementRate));
     }
 
 
@@ -159,16 +148,25 @@ public class Engagement {
      * @return a percentage rounded to the first decimal
      */
     public double getReachEngagementRate() {
+
         if (numViews == 0) {
-            return 0;
+            return 0.0;
         }
-        double nLikes = numLikes;
-        double nComments = numComments;
-        double nViews = numViews;
+
         DecimalFormat df = new DecimalFormat("#.#");
-        String engagementRate = df.format(((nLikes + nComments) / nViews)
-            * 100);
-        return (Double.valueOf(engagementRate));
+        String engagementRate = df.format((getTotalEngagement() / numViews) * 100.0);
+        return (Double.parseDouble(engagementRate));
+    }
+
+
+    /**
+     * Helper method for calculation of EngagementRates
+     *
+     * @return totalEngagement (likes + comments)
+     */
+    private double getTotalEngagement() {
+
+        return this.numComments + this.numLikes;
     }
 
 
@@ -176,31 +174,42 @@ public class Engagement {
      * Checks to see whether "this"
      * is equal to another object of Engagement
      * 
-     * @param obj
-     *            object being compared to "this"
+     * @param obj object being compared to "this"
      * 
-     * @return true if they are equal
-     *         False otherwise
+     * @return true if they are equal, false otherwise
      */
     @Override
     public boolean equals(Object obj) {
+
+        //null check
         if (obj == null) {
+
             return false;
         }
-        else if (obj == this) {
+
+        //self check
+        if (this == obj) {
+
             return true;
         }
-        else if (obj.getClass() == this.getClass()) {
-            Engagement eng = (Engagement)obj;
-            return (this.numLikes == eng.getNumLikes() && this.numPosts == eng
-                .getNumPosts() && this.numFollowers == eng.getNumFollowers()
-                && this.numComments == eng.getNumComments()
-                && this.numViews == eng.getNumViews() && this.month.equals(eng
-                    .getMonth()));
-        }
-        else {
+
+        //type check
+        if (obj.getClass() != this.getClass()) {
+
             return false;
         }
+
+        //cast
+        Engagement eng = (Engagement)obj;
+
+        //fields check
+        return (this.numLikes == eng.getNumLikes()
+             && this.numPosts == eng.getNumPosts()
+             && this.numFollowers == eng.getNumFollowers()
+             && this.numComments == eng.getNumComments()
+             && this.numViews == eng.getNumViews()
+             && this.month.equals(eng.getMonth()));
+
     }
 
 
@@ -210,13 +219,21 @@ public class Engagement {
      * @return Parameters as a String
      */
     public String toString() {
+
         StringBuilder sb = new StringBuilder();
-        sb.append("Month: " + month + ", ");
-        sb.append("Number of Likes: " + numLikes + ", ");
-        sb.append("Number of Posts: " + numPosts + ", ");
-        sb.append("Number of Followers: " + numFollowers + ", ");
-        sb.append("Number of Comments: " + numComments + ", ");
-        sb.append("Number of Views: " + numViews);
+        sb.append("[");
+        sb.append(month);
+        sb.append(", ");
+        sb.append(numLikes);
+        sb.append(", ");
+        sb.append(numPosts);
+        sb.append(", ");
+        sb.append(numFollowers);
+        sb.append(", ");
+        sb.append(numComments);
+        sb.append(", ");
+        sb.append(numViews);
+        sb.append("]");
         return sb.toString();
     }
 }
