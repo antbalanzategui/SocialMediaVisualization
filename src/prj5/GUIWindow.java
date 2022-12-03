@@ -13,8 +13,10 @@ import cs2.Shape;
 import cs2.Window;
 
 import java.awt.*;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Project: P5 Social Media Visualization
@@ -216,7 +218,7 @@ public class GUIWindow {
                 / list.getLength())); // good
             int barY = gridShape.getY() + gridShape.getHeight() - barHeight;
 
-            Shape bar = new Shape(barX, barY, BAR_WIDTH, barHeight, getColor());
+            Shape bar = new Shape(barX, barY, BAR_WIDTH, barHeight, getColor(influencer.getChannelName()));
             window.addShape(bar);
             window.moveToFront(bar);
 
@@ -332,17 +334,27 @@ public class GUIWindow {
     }
 
 
-    private Color getColor() {
+    private Color getColor(String strSeed) {
 
-        int r = (int)(Math.random() * 256);
-        int g = (int)(Math.random() * 256);
-        int b = (int)(Math.random() * 256);
+        byte[] asciiArr = strSeed.getBytes();
+        int seed = 0;
+        for (byte ch : asciiArr) {
+
+            seed += ch;
+        }
+
+        Random gen = new Random();
+        gen.setSeed(seed);
+
+        int r = (int)(gen.nextDouble() * 256);
+        int g = (int)(gen.nextDouble() * 256);
+        int b = (int)(gen.nextDouble() * 256);
         double luma = (0.2126 * r) + (0.7152 * g) + (0.0722 * b);
 
         while (luma < 75) {
-            r = (int)(Math.random() * 256);
-            g = (int)(Math.random() * 256);
-            b = (int)(Math.random() * 256);
+            r = (int)(gen.nextDouble() * 256);
+            g = (int)(gen.nextDouble() * 256);
+            b = (int)(gen.nextDouble() * 256);
             luma = (0.2126 * r) + (0.7152 * g) + (0.0722 * b);
         }
         return new Color(r, g, b);
