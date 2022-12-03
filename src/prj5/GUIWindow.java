@@ -199,6 +199,9 @@ public class GUIWindow {
                     engagementRate =
                         engagementForMonth.getReachEngagementRate();
                 }
+            }else{
+
+                engagementRate = -1.0;
             }
 
             double range = drawScale(maxEngagementRate);
@@ -218,7 +221,8 @@ public class GUIWindow {
             window.addShape(userLbl);
 
             String engStr = engFmt.format(engagementRate);
-            if (engagementRate == 0) {
+            if (engagementRate == -1.0) {
+
                 engStr = "N/A";
             }
 
