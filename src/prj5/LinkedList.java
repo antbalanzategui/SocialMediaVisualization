@@ -36,6 +36,7 @@ public class LinkedList
      * Constructor for DLinkedList.
      */
     public LinkedList() {
+
         init();
     }
 
@@ -54,6 +55,7 @@ public class LinkedList
      * Removes all of the elements from the list
      */
     public void clear() {
+
         init();
     }
 
@@ -65,6 +67,7 @@ public class LinkedList
      */
     @Override
     public boolean isEmpty() {
+
         return size == 0;
     }
 
@@ -76,6 +79,7 @@ public class LinkedList
      */
     @Override
     public int getLength() {
+
         return size;
     }
 
@@ -111,6 +115,7 @@ public class LinkedList
      */
     @Override
     public boolean contains(Influencer influencer) {
+
         if (influencer == null) {
             return false;
         }
@@ -119,16 +124,11 @@ public class LinkedList
             return false;
         }
 
-        Iterator<Influencer> iter = this.iterator();
-
-        while (iter.hasNext()) {
-            Influencer iterInfluencer = iter.next();
-
-            if (iterInfluencer.getChannelName().equals(influencer
-                .getChannelName())) {
+        for (Influencer iterInfluencer : this) {
+            if (iterInfluencer.getChannelName()
+                .equals(influencer.getChannelName())) {
 
                 return true;
-
             }
         }
         return false;
@@ -143,15 +143,17 @@ public class LinkedList
      * @return returns node at index.
      */
     private Node<Influencer> getNodeAtIndex(int index) {
+
         if (index < 0 || size <= index) {
             throw new IndexOutOfBoundsException("No element exists at "
                 + index);
         }
-        Node<Influencer> current = head;
 
+        Node<Influencer> current = head;
         for (int i = 0; i < index; i++) {
             current = current.getNext();
         }
+
         return current;
     }
 
@@ -166,6 +168,7 @@ public class LinkedList
      */
     @Override
     public Influencer getEntry(int index) {
+
         return getNodeAtIndex(index).getData();
     }
 
@@ -179,14 +182,15 @@ public class LinkedList
      */
     @Override
     public void add(Influencer newEntry) {
+
         Node<Influencer> newNode = new Node<Influencer>(newEntry);
         if (isEmpty()) {
 
             head = tail = newNode;
-        }
-        else {
+        } else {
             tail.setNext(newNode);
         }
+
         tail = newNode;
         size++;
     } // end add
@@ -203,8 +207,8 @@ public class LinkedList
      */
     @Override
     public void add(int index, Influencer influencer) {
-        throw new IndexOutOfBoundsException();
 
+        throw new IndexOutOfBoundsException();
     }
 
 
@@ -218,13 +222,9 @@ public class LinkedList
     public int getIndex(Influencer influencer) {
         int index = 0;
 
-        Iterator<Influencer> iter = this.iterator();
-
-        while (iter.hasNext()) {
-            Influencer iterInfluencer = iter.next();
-
-            if (iterInfluencer.getChannelName().equals(influencer
-                .getChannelName())) {
+        for (Influencer iterInfluencer : this) {
+            if (iterInfluencer.getChannelName()
+                .equals(influencer.getChannelName())) {
 
                 return index;
 
@@ -249,6 +249,7 @@ public class LinkedList
                 + " out of bounds");
         }
 
+<<<<<<< HEAD
         Influencer removeNode = null;
         
         Node<Influencer> current = head;
@@ -268,6 +269,17 @@ public class LinkedList
                 current.setNext(newNext);
                 size--;
                 return removeNode;
+=======
+            while (current.getNext() != null) {
+                if ((currentIndex + 1) == index) {
+                    Node<Influencer> newNext = current.getNext().getNext();
+                    current.setNext(newNext);
+                    size--;
+                    return current.getData();
+                }
+                currentIndex++;
+                current = current.getNext();
+>>>>>>> 1dbcb4b23e636ede9268932b8b413ee7d922b413
             }
             current = current.getNext();
             currentIndex++;
@@ -318,6 +330,12 @@ public class LinkedList
     }
 
 
+    /**
+     * The insertion sort method that sorts Influencers using a comparator
+     * provided.
+     *
+     * @param c the comparator
+     */
     public void sort(Comparator<Influencer> c) {
         // If zero or one item is in the chain, there is nothing to do
         if (getLength() > 1) {
